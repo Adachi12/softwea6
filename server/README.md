@@ -1,7 +1,5 @@
 # server side README
 
-## todo list
-
 ### データベース構築
 
 * 表の作成
