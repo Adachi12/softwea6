@@ -3,12 +3,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <mysql/mysql.h>
+void calorie_update();
+void calorie_insert();
 int main(void){
    user_insert();
 }
 
 //更新
-int user_update(){
+void user_update(){
   MYSQL *conn     = NULL;
   MYSQL_RES *resp = NULL;
   MYSQL_ROW row;
@@ -46,12 +48,10 @@ int user_update(){
   // 後片づけ
   mysql_free_result(resp);
   mysql_close(conn);
-  return 0;
-
 }
 
 //追加
-int user_insert(){
+void user_insert(){
   MYSQL *conn     = NULL;
   MYSQL_RES *resp = NULL;
   MYSQL_ROW row;
@@ -88,6 +88,5 @@ int user_insert(){
   // 後片づけ
   mysql_free_result(resp);
   mysql_close(conn);
-  return 0;
 
 }

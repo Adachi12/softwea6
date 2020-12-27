@@ -9,7 +9,7 @@ int main(void){
 //書き換え不要
 
 //追加
-int usedlog_insert(){
+void usedlog_insert(){
   MYSQL *conn     = NULL;
   MYSQL_RES *resp = NULL;
   MYSQL_ROW row;
@@ -45,5 +45,4 @@ int usedlog_insert(){
   // 後片づけ
   mysql_free_result(resp);
   mysql_close(conn);
-  return 0;
 }
