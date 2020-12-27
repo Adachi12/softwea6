@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <mysql/mysql.h>
-void calorie_update();
-void calorie_insert();
+void user_update();
+void user_insert();
 int main(void){
    user_insert();
 }

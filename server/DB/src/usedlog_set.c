@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <mysql/mysql.h>
+void usedlog_update();
+void usedlog_insert();
 int main(void){
    usedlog_insert();
 }
