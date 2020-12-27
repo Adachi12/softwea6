@@ -72,7 +72,7 @@ void user_insert(){
 
   // クエリ実行
   snprintf( &sql_str[0] , sizeof(sql_str)-1 , "INSERT INTO USER_TABLE\
-  VALUES('00000001','gawayasu','Amaterasu','賭苦皮威愛遣酢',94.8,163.6,52,'牡',53.5,'1582/15/82','edobaku.ieyasu@edo.ed'");
+  VALUES('00000001','gawayasu','Amaterasu','賭苦皮威愛遣酢',94.8,163.6,52,'牡',53.5,'1582/15/82','edobaku.ieyasu@edo.ed')");
   if( mysql_query( conn , &sql_str[0] ) ){
     // error
     mysql_close(conn);
