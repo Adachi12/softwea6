@@ -53,8 +53,6 @@ void user_update(){
 //追加
 void user_insert(){
   MYSQL *conn     = NULL;
-  MYSQL_RES *resp = NULL;
-  MYSQL_ROW row;
   char sql_str[255];
   char *sql_serv  = "localhost";
   char *user      = "root";

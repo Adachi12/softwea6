@@ -13,8 +13,6 @@ int main(void){
 //追加
 void usedlog_insert(){
   MYSQL *conn     = NULL;
-  MYSQL_RES *resp = NULL;
-  MYSQL_ROW row;
   char sql_str[255];
   char *sql_serv  = "localhost";
   char *user      = "root";
