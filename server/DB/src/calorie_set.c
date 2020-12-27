@@ -10,7 +10,7 @@ int main(void){
   char *sql_serv  = "localhost";
   char *user      = "root";
   char *passwd    = "mariadb";
-  char *db_name   = "CAROLIE_TABLE";
+  char *db_name   = "jogging";
 
   memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
@@ -22,7 +22,7 @@ int main(void){
   }
 
   // クエリ実行
-  snprintf( &sql_str[0] , sizeof(sql_str)-1 , "show tables" );
+  snprintf( &sql_str[0] , sizeof(sql_str)-1 , "update CALORIE_TABLE SET food_calorie where food=1" );
   if( mysql_query( conn , &sql_str[0] ) ){
     // error
     mysql_close(conn);
@@ -32,7 +32,7 @@ int main(void){
   // レスポンス
   resp = mysql_use_result(conn);
   while((row = mysql_fetch_row(resp)) != NULL ){
-    printf( "%s\n" , atoi(row[0]));
+    printf( "%s\n" , row[0]);
   }
 
   // 後片づけ
