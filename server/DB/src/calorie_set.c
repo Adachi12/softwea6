@@ -8,7 +8,7 @@ void calorie_insert();
 
 int main(void){
     calorie_insert();
-
+    calorie_update();
     return 0;
 }
 
