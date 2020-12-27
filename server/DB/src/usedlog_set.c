@@ -23,7 +23,7 @@ int main(void){
   }
 
   // クエリ実行
-  snprintf( &sql_str[0] , sizeof(sql_str)-1 , "select * from USELOG_TABLE" );
+  snprintf( &sql_str[0] , sizeof(sql_str)-1 , "select * from USEDLOG_TABLE" );
   if( mysql_query( conn , &sql_str[0] ) ){
     // error
     mysql_close(conn);
