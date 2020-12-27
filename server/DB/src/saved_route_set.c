@@ -3,16 +3,16 @@
 #include <string.h>
 #include <mysql/mysql.h>
 
-void calorie_update();
-void calorie_insert();
+void saved_route_update();
+void saved_route_insert();
 
 int main(void){
-    calorie_insert();
-    calorie_update();
+    saved_route_insert();
+    saved_route_update();
     return 0;
 }
 
-void calorie_update() {
+void saved_route_update() {
     MYSQL *conn     = NULL;
     char sql_str[255];
     char *sql_serv  = "localhost";
@@ -40,7 +40,7 @@ void calorie_update() {
     mysql_close(conn);
 }
 
-void calorie_insert() {
+void saved_route_insert() {
     MYSQL *conn     = NULL;
     char sql_str[255];
     char *sql_serv  = "localhost";

@@ -2,11 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <mysql/mysql.h>
+
+void saved_route_select();
+
 int main(void){
-    calorie_select();
+    saved_route_select();
 }
 
-void calorie_select() {
+void saved_route_select() {
     MYSQL *conn     = NULL;
     MYSQL_RES *resp = NULL;
     MYSQL_ROW row;

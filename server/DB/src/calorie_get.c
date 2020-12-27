@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <mysql/mysql.h>
+
+void calorie_select() ;
+
 int main(void){
     calorie_select();
 }
