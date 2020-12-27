@@ -28,15 +28,6 @@ int main(void){
     mysql_close(conn);
     exit(-1);
   }
-
-  // レスポンス
-  resp = mysql_use_result(conn);
-  while((row = mysql_fetch_row(resp)) != NULL ){
-    printf( "%s\n" , row[0]);
-  }
-
-  // 後片づけ
-  mysql_free_result(resp);
   mysql_close(conn);
   return 0;
 }
