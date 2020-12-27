@@ -3,8 +3,8 @@ all:
 	gcc -Wall -o calorie_get calorie_get.c -lmysqlclient -L/usr/lib64/mysql
 	gcc -Wall -o saved_route_set saved_route_set.c -lmysqlclient -L/usr/lib64/mysql
 	gcc -Wall -o saved_route_get saved_route_get.c -lmysqlclient -L/usr/lib64/mysql
-	gcc -Wall -o uselog_set uselog_set.c -lmysqlclient -L/usr/lib64/mysql
-	gcc -Wall -o uselog_get uselog_get.c -lmysqlclient -L/usr/lib64/mysql
+	gcc -Wall -o usedlog_set usedlog_set.c -lmysqlclient -L/usr/lib64/mysql
+	gcc -Wall -o usedlog_get usedlog_get.c -lmysqlclient -L/usr/lib64/mysql
 	gcc -Wall -o user_set user_set.c -lmysqlclient -L/usr/lib64/mysql
 	gcc -Wall -o user_get user_get.c -lmysqlclient -L/usr/lib64/mysql
 
@@ -23,9 +23,9 @@ saved_route_get: saved_route_get.c
 
 # 利用履歴テーブル
 uselog_set: uselog_set.c
-	gcc -Wall -o uselog_set uselog_set.c -lmysqlclient -L/usr/lib64/mysql
+	gcc -Wall -o usedlog_set usedlog_set.c -lmysqlclient -L/usr/lib64/mysql
 uselog_get: uselog_get.c
-	gcc -Wall -o uselog_get uselog_get.c -lmysqlclient -L/usr/lib64/mysql
+	gcc -Wall -o usedlog_get usedslog_get.c -lmysqlclient -L/usr/lib64/mysql
 
 # ユーザテーブル
 user_set: user_set.c
