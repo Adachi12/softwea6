@@ -25,17 +25,18 @@ void calorie_update() {
     // mysql接続
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
-    // error
-    exit(-1);
+        // error
+        exit(-1);
     }
 
     // クエリ実行
     snprintf( &sql_str[0] , sizeof(sql_str)-1 , "update CALORIE_TABLE SET food_calorie=909 where food=1" );
     if( mysql_query( conn , &sql_str[0] ) ){
-    // error
-    mysql_close(conn);
-    exit(-1);
+        // error
+        mysql_close(conn);
+        exit(-1);
     }
+
     mysql_close(conn);
 }
 
@@ -51,17 +52,18 @@ void calorie_insert() {
 
     // mysql接続
     conn = mysql_init(NULL);
-    if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
-    // error
-    exit(-1);
+    if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ) {
+        // error
+        exit(-1);
     }
 
     // クエリ実行
-    snprintf( &sql_str[0] , sizeof(sql_str)-1 , "INSERT into CALORIE_TABLE values(1, 'ラーメン', 436)" );
+    snprintf( &sql_str[0] , sizeof(sql_str)-1 , "INSERT into CALORIE_TABLE values(2, 'ラーメン', 436)" );
     if( mysql_query( conn , &sql_str[0] ) ){
-    // error
-    mysql_close(conn);
-    exit(-1);
+        // error
+        mysql_close(conn);
+        exit(-1);
     }
+
     mysql_close(conn);
 }
