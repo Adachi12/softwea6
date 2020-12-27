@@ -79,14 +79,7 @@ void user_insert(){
     exit(-1);
   }
 
-  // レスポンス
-  resp = mysql_use_result(conn);
-  while((row = mysql_fetch_row(resp)) != NULL ){
-    printf( "%d : %s : %d\n" , atoi(row[0]) , row[1], atoi(row[2]));
-  }
-
   // 後片づけ
-  mysql_free_result(resp);
   mysql_close(conn);
 
 }
