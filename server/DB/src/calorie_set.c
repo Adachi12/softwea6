@@ -32,7 +32,7 @@ int main(void){
   // レスポンス
   resp = mysql_use_result(conn);
   while((row = mysql_fetch_row(resp)) != NULL ){
-    printf( "%d : %s\n" , atoi(row[0]) , row[1] );
+    printf( "%d : %s : %d\n" , atoi(row[0]) , row[1] , atoi(row[2]) );
   }
 
   // 後片づけ
