@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <mysql/mysql.h>
+
+void calorie_update();
+void calorie_insert();
+
 int main(void){
     calorie_insert();
 
@@ -10,8 +14,6 @@ int main(void){
 
 void calorie_update() {
     MYSQL *conn     = NULL;
-    MYSQL_RES *resp = NULL;
-    MYSQL_ROW row;
     char sql_str[255];
     char *sql_serv  = "localhost";
     char *user      = "root";
@@ -39,8 +41,6 @@ void calorie_update() {
 
 void calorie_insert() {
     MYSQL *conn     = NULL;
-    MYSQL_RES *resp = NULL;
-    MYSQL_ROW row;
     char sql_str[255];
     char *sql_serv  = "localhost";
     char *user      = "root";
