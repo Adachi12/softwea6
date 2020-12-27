@@ -22,7 +22,7 @@ int main(void){
   }
 
   // クエリ実行
-  snprintf( &sql_str[0] , sizeof(sql_str)-1 , "select * from CAROLIE_TABLE" );
+  snprintf( &sql_str[0] , sizeof(sql_str)-1 , "show tables" );
   if( mysql_query( conn , &sql_str[0] ) ){
     // error
     mysql_close(conn);
@@ -32,7 +32,7 @@ int main(void){
   // レスポンス
   resp = mysql_use_result(conn);
   while((row = mysql_fetch_row(resp)) != NULL ){
-    printf( "%d : %s : %d\n" , atoi(row[0]) , row[1] , atoi(row[2]) );
+    printf( "%s\n" , atoi(row[0]));
   }
 
   // 後片づけ
