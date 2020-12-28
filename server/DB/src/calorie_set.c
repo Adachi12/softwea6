@@ -3,18 +3,11 @@
 #include <string.h>
 #include <mysql/mysql.h>
 
-void calorie_update();
-void calorie_insert();
+void calorie_insert(int id, char name[], int cal, char sql_str[511]);
 
 int main(void){
-    calorie_insert();
-    // calorie_update();
-    return 0;
-}
-
-void calorie_update() {
     MYSQL *conn     = NULL;
-    char sql_str[255];
+    char sql_str[511];
     char *sql_serv  = "localhost";
     char *user      = "root";
     char *passwd    = "mariadb";
@@ -30,40 +23,28 @@ void calorie_update() {
     }
 
     // クエリ実行
-    snprintf( &sql_str[0] , sizeof(sql_str)-1 , "update CALORIE_TABLE SET food_calorie=909 where food=1" );
-    if( mysql_query( conn , &sql_str[0] ) ){
+    calorie_insert(5, "ペヤング大盛り", 1081, &sql_str[0]);
+    printf("%s\n", sql_str);
+    if( mysql_query( conn , &sql_str[0] ) ) {
         // error
+        printf("error\n");
         mysql_close(conn);
         exit(-1);
     }
 
     mysql_close(conn);
+
+    return 0;
 }
 
-void calorie_insert() {
-    MYSQL *conn     = NULL;
-    char sql_str[255];
-    char *sql_serv  = "localhost";
-    char *user      = "root";
-    char *passwd    = "mariadb";
-    char *db_name   = "jogging";
+// 挿入するデータと
+void calorie_insert(int id, char name[], int cal, char sql_str[511]) {
+    char id_buf[9];
+    snprintf(id_buf, 9, "%08d", id);
+    
+    char cal_buf[5];
+    snprintf(cal_buf, 5, "%d", cal);
 
-    memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
-
-    // mysql接続
-    conn = mysql_init(NULL);
-    if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ) {
-        // error
-        exit(-1);
-    }
-
-    // クエリ実行
-    snprintf( &sql_str[0] , sizeof(sql_str)-1 , "INSERT into CALORIE_TABLE values(2, '回鍋肉', 249)" );
-    if( mysql_query( conn , &sql_str[0] ) ){
-        // error
-        mysql_close(conn);
-        exit(-1);
-    }
-
-    mysql_close(conn);
+    sprintf(sql_str, "INSERT INTO CALORIE_TABLE values('%s', '%s', %s)",\
+        id_buf, name, cal_buf);
 }
