@@ -8,7 +8,7 @@ void calorie_insert();
 
 int main(void){
     calorie_insert();
-    calorie_update();
+    // calorie_update();
     return 0;
 }
 
@@ -58,7 +58,7 @@ void calorie_insert() {
     }
 
     // クエリ実行
-    snprintf( &sql_str[0] , sizeof(sql_str)-1 , "INSERT into CALORIE_TABLE values(2, 'ラーメン', 436)" );
+    snprintf( &sql_str[0] , sizeof(sql_str)-1 , "INSERT into CALORIE_TABLE values(2, '回鍋肉', 249)" );
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
         mysql_close(conn);
