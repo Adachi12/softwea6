@@ -22,9 +22,9 @@ saved_route_get: saved_route_get.c
 	gcc -Wall -o ../bin/saved_route_get saved_route_get.c -lmysqlclient -L/usr/lib64/mysql
 
 # 利用履歴テーブル
-uselog_set: uselog_set.c
+usedlog_set: usedlog_set.c
 	gcc -Wall -o ../bin/usedlog_set usedlog_set.c -lmysqlclient -L/usr/lib64/mysql
-uselog_get: uselog_get.c
+usedlog_get: usedlog_get.c
 	gcc -Wall -o ../bin/usedlog_get usedslog_get.c -lmysqlclient -L/usr/lib64/mysql
 
 # ユーザテーブル
