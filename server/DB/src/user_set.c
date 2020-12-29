@@ -5,6 +5,20 @@
 #include <mysql/mysql.h>
 void user_update();
 
+typedef struct {
+   int id;
+   char logonname[10];
+   char pass[32];
+   char name[96];      
+   float weight;
+   float height;
+   int age;
+   char sex[8];
+   float gweight;
+   char term[10];
+   char mail[30];
+   } UT;
+
 //更新
 void user_update(){
   MYSQL *conn     = NULL;
@@ -46,25 +60,26 @@ void user_update(){
   mysql_close(conn);
 }
 //追加
-void user_insert(int id, char logonname[10], char pass[32], char name[], float weight, float height, int age, char sex[], float gweight, char term[10], char mail[30], char sql_str[255]) {
+//void user_insert(int id, char logonname[10], char pass[32], char name[], float weight, float height, int age, char sex[], float gweight, char term[10], char mail[30], char sql_str[255]) {
+void user_insert(UT ut, char sql_str[255]) {
    
    char id_buf[9];
-   snprintf(id_buf, 9, "%08d", id);
+   snprintf(id_buf, 9, "%08d", ut.id);
    
    char weight_buf[6];
-   snprintf(weight_buf, 6, "%3.1f", weight);
+   snprintf(weight_buf, 6, "%3.1f", ut.weight);
    
    char height_buf[6];
-   snprintf(height_buf, 6, "%3.1f", height);
+   snprintf(height_buf, 6, "%3.1f", ut.height);
    
    char age_buf[4];
-   snprintf(age_buf, 4, "%d", age);
+   snprintf(age_buf, 4, "%d", ut.age);
    
    char gweight_buf[6];
-   snprintf(gweight_buf, 6, "%3.1f", gweight);
+   snprintf(gweight_buf, 6, "%3.1f", ut.gweight);
    
    sprintf(sql_str, "INSERT INTO USER_TABLE VALUES('%s', '%s', '%s', '%s', %s, %s, %s, '%s', %s, '%s', '%s')"\
-          , id_buf, logonname, pass, name, weight_buf, height_buf, age_buf, sex, gweight_buf, term, mail);
+          , id_buf, ut.logonname, ut.pass, ut.name, weight_buf, height_buf, age_buf, ut.sex, gweight_buf, ut.term, ut.mail);
 }
 
 //追加
@@ -86,14 +101,15 @@ int main(){
   }
 
   // クエリ実行
-  user_insert(5, "mazohist", "MMMMM", "馬鹿信天翁", 67.5, 148.3, 23, "牝", 45.0, "2021/04/01", "hentai-doemu@sm.jp", &sql_str[0]);
-  if( mysql_query( conn , &sql_str[0] ) ){
-     // error
-     printf("error!");
-     printf("%s\n", sql_str);
-     mysql_close(conn);
-     exit(-1);
-  }
+   UT ut = {6, "NPC", "murabito", "翼鋳人", 64.0, 168.7, 45, "男", 45.0, "2021/04/01", "heibon-arikitari@npc.jp"};
+   user_insert(ut, sql_str);
+   if( mysql_query( conn , &sql_str[0] ) ){
+      // error
+      printf("error!");
+      printf("%s\n", sql_str);
+      mysql_close(conn);
+      exit(-1);
+   }
 
   // 後片づけ
   mysql_close(conn);
