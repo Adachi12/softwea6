@@ -4,10 +4,6 @@
 #include <string.h>
 #include <mysql/mysql.h>
 void user_update();
-void user_insert();
-int main(void){
-   user_insert();
-}
 
 //更新
 void user_update(){
@@ -49,9 +45,30 @@ void user_update(){
   mysql_free_result(resp);
   mysql_close(conn);
 }
+//追加
+void user_insert(int id, char logonname[10], char pass[32], char name[], float weight, float height, int age, char sex[], float gweight, char term[10], char mail[30], char sql_str[255]) {
+   
+   char id_buf[9];
+   snprintf(id_buf, 9, "%08d", id);
+   
+   char weight_buf[6];
+   snprintf(weight_buf, 6, "%3.1f", weight);
+   
+   char height_buf[6];
+   snprintf(height_buf, 6, "%3.1f", height);
+   
+   char age_buf[4];
+   snprintf(age_buf, 4, "%d", age);
+   
+   char gweight_buf[6];
+   snprintf(gweight_buf, 6, "%3.1f", gweight);
+   
+   sprintf(sql_str, "INSERT INTO USER_TABLE VALUES('%s', '%s', '%s', '%s', %s, %s, %s, '%s', %s, '%s', '%s')"\
+          , id_buf, logonname, pass, name, weight_buf, height_buf, age_buf, sex, gweight_buf, term, mail);
+}
 
 //追加
-void user_insert(){
+int main(){
   MYSQL *conn     = NULL;
   char sql_str[255];
   char *sql_serv  = "localhost";
@@ -69,12 +86,13 @@ void user_insert(){
   }
 
   // クエリ実行
-  snprintf( &sql_str[0] , sizeof(sql_str)-1 , "INSERT INTO USER_TABLE\
-  VALUES('00000001','gawayasu','Amaterasu','賭苦皮威愛遣酢',94.8,163.6,52,'牡',53.5,'1582/15/82','edobaku.ieyasu@edo.ed')");
+  user_insert(5, "mazohist", "MMMMM", "馬鹿信天翁", 67.5, 148.3, 23, "牝", 45.0, "2021/04/01", "hentai-doemu@sm.jp", &sql_str[0]);
   if( mysql_query( conn , &sql_str[0] ) ){
-    // error
-    mysql_close(conn);
-    exit(-1);
+     // error
+     printf("error!");
+     printf("%s\n", sql_str);
+     mysql_close(conn);
+     exit(-1);
   }
 
   // 後片づけ
