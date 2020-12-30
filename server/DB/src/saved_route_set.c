@@ -5,7 +5,6 @@
 
 typedef struct {
     int id;
-    char half_p[30];
     char saved_r1[30];
     char saved_r2[30];
     char saved_r3[30];
@@ -15,19 +14,16 @@ typedef struct {
 
 void saved_route_update();
 void saved_route_insert(SRT srt);
-void saved_route_select(int id);
+SRT saved_route_select(int id);
 
 int main(void){
-    // insertするデータを設定
-    SRT srt = {1, "half_p", "sr1", "sr2", "sr3", "sr4", "sr5"};
-
-    // insert文実行
-    saved_route_insert(srt);
-    saved_route_select(5);
+    saved_route_select(0);
+    // saved_route_select(1);
+    // saved_route_select(3);
+    // saved_route_select(2);
 }
 
 void saved_route_update() {
-
 }
 
 void saved_route_insert(SRT srt) {
@@ -44,8 +40,8 @@ void saved_route_insert(SRT srt) {
     char id_buf[9];
     snprintf(id_buf, 9, "%08d", srt.id);
     sprintf(sql_str, "INSERT INTO SAVED_ROUTE_TABLE \
-        values('%s', '%s', '%s', '%s', '%s', '%s', '%s')",\
-        id_buf, srt.half_p, srt.saved_r1, srt.saved_r2,\
+        values('%s', %s', '%s', '%s', '%s', '%s')",\
+        id_buf, srt.saved_r1, srt.saved_r2,\
         srt.saved_r3, srt.saved_r4, srt.saved_r5);
 
     // mysql接続
@@ -66,7 +62,7 @@ void saved_route_insert(SRT srt) {
 }
 
 
-void saved_route_select(int id) {
+SRT saved_route_select(int id) {
     MYSQL *conn     = NULL;
     MYSQL_RES *resp = NULL;
     MYSQL_ROW row;
@@ -84,7 +80,7 @@ void saved_route_select(int id) {
     // SQL発行
     char id_buf[9];
     snprintf(id_buf, 9, "%08d", id);
-    sprintf(sql_str, "SELECT * FROM SAVED_ROUTE_TABLE where user_id=%s", id_buf);
+    sprintf(sql_str, "SELECT * FROM SAVED_ROUTE_TABLE where id='%s'", id_buf);
 
     // mysql接続
     conn = mysql_init(NULL);
@@ -104,26 +100,16 @@ void saved_route_select(int id) {
     // レスポンス
     resp = mysql_use_result(conn);
     while((row = mysql_fetch_row(resp)) != NULL ){
-        // printf( "%s : %s : %s : %s : %s : %s : %s\n",\
-        //     row[0], row[1], row[2], row[3], row[4], row[5], row[6]);
         res_data.id = atoi(row[0]);
-        sprintf(res_data.half_p, "%s", row[1]);
-        sprintf(res_data.saved_r1, "%s", row[2]);
-        sprintf(res_data.saved_r2, "%s", row[3]);
-        sprintf(res_data.saved_r3, "%s", row[4]);
-        sprintf(res_data.saved_r4, "%s", row[5]);
-        sprintf(res_data.saved_r5, "%s", row[6]);
+        sprintf(res_data.saved_r1, "%s", row[1]);
+        sprintf(res_data.saved_r2, "%s", row[2]);
+        sprintf(res_data.saved_r3, "%s", row[3]);
+        sprintf(res_data.saved_r4, "%s", row[4]);
+        sprintf(res_data.saved_r5, "%s", row[5]);
     }
 
     mysql_free_result(resp);
     mysql_close(conn);
 
-    // test
-    printf("id: %d\n", res_data.id);
-    printf("    half_p: %s\n", res_data.half_p);
-    printf("    sr1: %s\n", res_data.saved_r1);
-    printf("    sr2: %s\n", res_data.saved_r2);
-    printf("    sr3: %s\n", res_data.saved_r3);
-    printf("    sr4: %s\n", res_data.saved_r4);
-    printf("    sr5: %s\n", res_data.saved_r5);
+    return res_data;
 }
