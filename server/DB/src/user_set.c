@@ -6,17 +6,18 @@
 void user_update();
 
 typedef struct {
-   int id;
-   char logonname[10];
-   char pass[32];
-   char name[96];      
-   float weight;
-   float height;
-   int age;
-   char sex[8];
-   float gweight;
-   char term[10];
-   char mail[30];
+    int id;
+    char loginname[10];
+    char pass[32];
+    char name[96];
+    float weight;
+    float height;
+    int age;
+    int sex;
+    char birth[11];
+    float gweight;
+    char term[11];
+    char mail[30];
    } UT;
 
 //更新
@@ -60,7 +61,7 @@ void user_update(){
   mysql_close(conn);
 }
 //追加
-//void user_insert(int id, char logonname[10], char pass[32], char name[], float weight, float height, int age, char sex[], float gweight, char term[10], char mail[30], char sql_str[255]) {
+//void user_insert(int id, char loginname[10], char pass[32], char name[], float weight, float height, int age, char sex[], float gweight, char term[10], char mail[30], char sql_str[255]) {
 void user_insert(UT ut, char sql_str[255]) {
    
    char id_buf[9];
@@ -74,12 +75,15 @@ void user_insert(UT ut, char sql_str[255]) {
    
    char age_buf[4];
    snprintf(age_buf, 4, "%d", ut.age);
+    
+    char sex_buf[2];
+    snprintf(sex_buf, 2, "%d", ut.sex);
    
    char gweight_buf[6];
    snprintf(gweight_buf, 6, "%3.1f", ut.gweight);
    
-   sprintf(sql_str, "INSERT INTO USER_TABLE VALUES('%s', '%s', '%s', '%s', %s, %s, %s, '%s', %s, '%s', '%s')"\
-          , id_buf, ut.logonname, ut.pass, ut.name, weight_buf, height_buf, age_buf, ut.sex, gweight_buf, ut.term, ut.mail);
+   sprintf(sql_str, "INSERT INTO USER_TABLE VALUES('%s', '%s', '%s', '%s', %s, %s, %s, %s, '%s', %s, '%s', '%s')"\
+          , id_buf, ut.loginname, ut.pass, ut.name, weight_buf, height_buf, age_buf, sex_buf, ut.birth, gweight_buf, ut.term, ut.mail);
 }
 
 //追加
@@ -101,7 +105,7 @@ int main(){
   }
 
   // クエリ実行
-   UT ut = {6, "NPC", "murabito", "翼鋳人", 64.0, 168.7, 45, "男", 45.0, "2021/04/01", "heibon-arikitari@npc.jp"};
+   UT ut = {3, "MJ", "makeinu", "マケイヌ・ジャクサン", 64.0, 168.7, 45, 1, "2009-06-25", 45.0, "2021/04/01", "goodloser@goodluck.hg"};
    user_insert(ut, sql_str);
    if( mysql_query( conn , &sql_str[0] ) ){
       // error

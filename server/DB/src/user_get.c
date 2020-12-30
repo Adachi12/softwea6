@@ -6,22 +6,19 @@
 
 typedef struct {
     int id;
-    char logonname[10];
+    char loginname[10];
     char pass[32];
     char name[96];
     double weight;
     double height;
     int age;
-    char sex[8];
+    int sex;
+    char birth[11];
     double gweight;
-    char term[10];
+    char term[11];
     char mail[30];
 } UT;
 
-
-int main(void){
-    user_select(0);
-}
 
 void user_select(int id){
     MYSQL *conn     = NULL;
@@ -41,8 +38,8 @@ void user_select(int id){
     char id_buf[9];
     snprintf(id_buf, 9, "%08d", id);
     snprintf( &sql_str[0] , sizeof(sql_str)-1 ,\
-    "SELECT user_weight, user_height, user_age, user_sex, goal_weight, goal_term\
-    from USER_TABLE where user_id = %s", id_buf );
+    "SELECT weight, height, age, sex, birth, goal_weight, goal_term\
+    from USER_TABLE where 'id' = %s", id_buf );
 
     // mysql接続
     conn = mysql_init(NULL);
@@ -68,9 +65,10 @@ void user_select(int id){
         res_data.weight = atof(row[0]);
         res_data.height = atof(row[1]);
         res_data.age = atoi(row[2]);
-        sprintf(res_data.sex, "%s", row[3]);
-        res_data.gweight = atof(row[4]);
-        sprintf(res_data.term, "%s", row[5]);
+        res_data.sex = atoi(row[3]);
+        sprintf(res_data.birth, "%s", row[4]); 
+        res_data.gweight = atof(row[5]);
+        sprintf(res_data.term, "%s", row[6]);
     }
 
     // 後片づけ
@@ -81,7 +79,14 @@ void user_select(int id){
     printf("体重：%f\n", res_data.weight);
     printf("身長：%f\n", res_data.height);
     printf("年齢：%d\n", res_data.age);
-    printf("性別：%s\n", res_data.sex);
+    printf("性別：%d\n", res_data.sex);
+    printf("生年月日：%s\n", res_data.birth);
     printf("目標体重：%f\n", res_data.gweight);
     printf("目標期間：%s\n", res_data.term);
+    
+}
+
+
+int main(void){
+    user_select(0);
 }

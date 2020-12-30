@@ -101,4 +101,39 @@ void usedlog_select(int id) {
         mysql_close(conn);
         exit(-1);
     }
+   
+   //レスポンス
+   resp = mysql_use_result(conn);
+   while((row = mysql_fetch_row(resp)) != NULL ){
+      sprintf(res_data.date, "%s", row[3]);
+      sprintf(res_data.time, "%s", row[3]);
+      sprintf(res_data.distance, "%s", row[3]);
+      sprintf(res_data.jogtime, "%s", row[3]);
+   }
+      
 }
+
+//DELETE文の発行
+void usedlog_delete(int id, char date, char time) {
+    MYSQL *conn     = NULL;
+    MYSQL_RES *resp = NULL;
+    MYSQL_ROW row;
+    char sql_str[511];
+    char *sql_serv  = "localhost";
+    char *user      = "root";
+    char *passwd    = "mariadb";
+    char *db_name   = "jogging";
+    
+    memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
+
+    // SQL発行
+    char id_buf[9];
+    snprintf(id_buf, 9, "%08d", id);
+    sprintf(sql_str, "DELETE FROM USEDLOG_TABLE where user_id=%s", id_buf);
+
+    // mysql接続
+    conn = mysql_init(NULL);
+    if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
+        // error
+        exit(-1);
+    }
