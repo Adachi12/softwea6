@@ -17,13 +17,45 @@ void saved_route_insert(SRT srt);
 SRT saved_route_select(int id);
 
 int main(void){
-    saved_route_select(0);
-    // saved_route_select(1);
-    // saved_route_select(3);
-    // saved_route_select(2);
+    SRT data = {1, "route1_1", "route2_1", "", "", ""};
+    saved_route_update(data);
 }
 
-void saved_route_update() {
+void saved_route_update(SRT srt) {
+    MYSQL *conn     = NULL;
+    char sql_str[511];
+    char *sql_serv  = "localhost";
+    char *user      = "root";
+    char *passwd    = "mariadb";
+    char *db_name   = "jogging";
+
+    memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
+
+    // SQL発行
+    char id_buf[9];
+    snprintf(id_buf, 9, "%08d", srt.id);
+    sprintf(sql_str, "UPDATE SAVED_ROUTE_TABLE SET \
+        saved_route1='%s', saved_route2='%s', saved_route3='%s', \
+        saved_route4='%s', saved_route5='%s' where id=%s",\
+        srt.saved_r1, srt.saved_r2, srt.saved_r3, \
+        srt.saved_r4, srt.saved_r5, id_buf);
+
+    // mysql接続
+    conn = mysql_init(NULL);
+    if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ) {
+        // error
+        exit(-1);
+    }
+    // 実行
+    if( mysql_query( conn , &sql_str[0] ) ){
+        // error
+        printf("error!\n");
+        mysql_close(conn);
+        exit(-1);
+    }
+
+    mysql_close(conn);
+
 }
 
 void saved_route_insert(SRT srt) {
