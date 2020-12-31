@@ -10,7 +10,7 @@
 typedef struct {
    int id;
    char datetime[20];
-   float distance;
+   double distance;
    char jogtime[9];
    int calorie;
 } ULT;
@@ -27,14 +27,13 @@ void month_ago();
 int usedlog_delete(int id);
 
 int main() {
-    // usedlog_select(0);
-    // ULT insert_data = {1, "2020-02-02 20:30:20", 222, "00:20:20", 222};
-    // printf("%d\n", usedlog_insert(insert_data));
-
-    usedlog_delete(0);
-    usedlog_select(0);
+    ULT insert_data = {1, "2020-02-02 20:30:20", 222, "00:20:20", 222};
+    usedlog_delete(1);
+    usedlog_insert(insert_data);
+    usedlog_select(1);
+    usedlog_delete(1);
 }
-   
+
 //追加
 int usedlog_insert(ULT ult){
     MYSQL *conn     = NULL;
@@ -45,23 +44,15 @@ int usedlog_insert(ULT ult){
     char *db_name   = "jogging";
 
     // SQL発行
-    // cast
-    char id_buf[9];
-    snprintf(id_buf, 9, "%08d", ult.id);
-    char distance_buf[7];
-    snprintf(distance_buf, 7, "%4.1f", ult.distance);
-    char calorie_buf[5];
-    snprintf(calorie_buf, 5, "%d", ult.calorie);
-    
-    // write to buffer
-    sprintf(sql_str, "INSERT INTO USEDLOG_TABLE VALUES('%8s', '%19s', %s, '%s', %s)", \
-            id_buf, ult.datetime, distance_buf, ult.jogtime, calorie_buf);
+    sprintf(sql_str, "INSERT INTO USEDLOG_TABLE \
+        VALUES('%08d', '%19s', %lf, '%s', %d)", \
+        ult.id, ult.datetime, ult.distance, ult.jogtime, ult.calorie);
     
     // mysql接続
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
         // error
-        return 1;""
+        return 1;
     }
 
     // クエリ実行
@@ -97,10 +88,6 @@ void usedlog_select(int id) {
     // 1ヶ月以前のデータ削除
     usedlog_delete(id);
 
-    // SQL発行
-    char id_buf[9];
-    snprintf(id_buf, 9, "%08d", id);
-
     // mysql接続
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
@@ -109,7 +96,7 @@ void usedlog_select(int id) {
     }
 
     // count
-    sprintf(sql_str, "SELECT count(*) FROM USEDLOG_TABLE where id='%s'", id_buf);
+    sprintf(sql_str, "SELECT count(*) FROM USEDLOG_TABLE where id='%08d'", id);
     // 実行
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
@@ -127,7 +114,7 @@ void usedlog_select(int id) {
     res_data = (ULT *)malloc(sizeof(ULT) * n);
 
     // アクセスSQL文
-    sprintf(sql_str, "SELECT * FROM USEDLOG_TABLE where id='%s'", id_buf);
+    sprintf(sql_str, "SELECT * FROM USEDLOG_TABLE where id='%08d'", id);
 
     // 実行
     if( mysql_query( conn , &sql_str[0] ) ){

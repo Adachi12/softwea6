@@ -32,13 +32,11 @@ void saved_route_update(SRT srt) {
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
     // SQL発行
-    char id_buf[9];
-    snprintf(id_buf, 9, "%08d", srt.id);
     sprintf(sql_str, "UPDATE SAVED_ROUTE_TABLE SET \
         saved_route1='%s', saved_route2='%s', saved_route3='%s', \
-        saved_route4='%s', saved_route5='%s' where id=%s",\
+        saved_route4='%s', saved_route5='%s' where id=%08d",\
         srt.saved_r1, srt.saved_r2, srt.saved_r3, \
-        srt.saved_r4, srt.saved_r5, id_buf);
+        srt.saved_r4, srt.saved_r5, srt.id);
 
     // mysql接続
     conn = mysql_init(NULL);
@@ -110,9 +108,7 @@ SRT saved_route_select(int id) {
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
     // SQL発行
-    char id_buf[9];
-    snprintf(id_buf, 9, "%08d", id);
-    sprintf(sql_str, "SELECT * FROM SAVED_ROUTE_TABLE where id='%s'", id_buf);
+    sprintf(sql_str, "SELECT * FROM SAVED_ROUTE_TABLE where id='%08d'", id);
 
     // mysql接続
     conn = mysql_init(NULL);
