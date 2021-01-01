@@ -1,6 +1,4 @@
-#include<stdio.h>
 #include"jogging.h"
-
 
 void print_srt(SAVED_ROUTE_TABLE srt);
 int  select_test();

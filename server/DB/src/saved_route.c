@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "jogging.h"
 
 int saved_route_update(SAVED_ROUTE_TABLE srt) {
@@ -85,7 +82,8 @@ SAVED_ROUTE_TABLE saved_route_select(int id) {
     char *db_name   = "jogging";
 
     // 返信用のデータ
-    SAVED_ROUTE_TABLE resp_data;
+    SAVED_ROUTE_TABLE resp_data = \
+        {1, "", "", "", "", ""};
 
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
@@ -96,20 +94,20 @@ SAVED_ROUTE_TABLE saved_route_select(int id) {
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
         // error
-        exit(-1);
+        return resp_data;
     }
 
     // 実行
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
-        printf("error!\n");
         mysql_close(conn);
-        exit(-1);
+        return resp_data;
     }
 
     // レスポンス
     resp = mysql_use_result(conn);
     while((row = mysql_fetch_row(resp)) != NULL ){
+        resp_data.error = 0;
         resp_data.id = atoi(row[0]);
         sprintf(resp_data.saved_route1, "%s", row[1]);
         sprintf(resp_data.saved_route2, "%s", row[2]);

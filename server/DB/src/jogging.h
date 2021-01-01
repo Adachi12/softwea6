@@ -1,3 +1,7 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<time.h>
 #include<mysql/mysql.h>
 
 #ifndef jog_h
