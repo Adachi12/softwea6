@@ -5,6 +5,7 @@
 
 // 型定義
 typedef struct {
+    int     error;
     int     id;
     char    saved_route1[31];
     char    saved_route2[31];
@@ -14,6 +15,7 @@ typedef struct {
 } SAVED_ROUTE_TABLE;
 
 typedef struct {
+    int     error;
     int     food;
     char    food_name[256];
     int     food_calorie;
