@@ -1,3 +1,5 @@
+#include<mysql/mysql.h>
+
 #ifndef jog_h
 #define jog_h
 
@@ -59,5 +61,9 @@ SAVED_ROUTE_TABLE saved_route_select(int  id);
 
 // CALORIE_TABLE random access
 CALORIE_TABLE calorie_select();
+
+
+// db_access
+MYSQL_RES db_access(char *sql_str[511]);
 
 #endif
