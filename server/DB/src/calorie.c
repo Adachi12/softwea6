@@ -1,6 +1,3 @@
-#include<stdio.h>
-#include<time.h>
-#include<stdlib.h>
 #include "jogging.h"
 
 CALORIE_TABLE calorie_select() {
