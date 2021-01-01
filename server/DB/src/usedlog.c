@@ -50,7 +50,7 @@ int usedlog_insert(USEDLOG_TABLE ult){
     return 0;
 }
 
-USEDLOG_TABLE *usedlog_select(int id) {
+USEDLOG_TABLE *usedlog_select(int id, int *n) {
     MYSQL *conn     = NULL;
     MYSQL_RES *resp = NULL;
     MYSQL_ROW row;
@@ -60,8 +60,8 @@ USEDLOG_TABLE *usedlog_select(int id) {
     char *passwd    = "mariadb";
     char *db_name   = "jogging";
 
-    // 該当データ数
-    int n = 0, i;
+    // レスポンスのループインデックス
+    int i;
 
     // 返信用のデータ
     USEDLOG_TABLE *res_data;
@@ -75,7 +75,8 @@ USEDLOG_TABLE *usedlog_select(int id) {
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
         // error
-        exit(-1);
+        res_date.error = 1;
+        return res_data;
     }
 
     // count
@@ -85,16 +86,17 @@ USEDLOG_TABLE *usedlog_select(int id) {
         // error
         printf("error!\n%s\n", sql_str);
         mysql_close(conn);
-        exit(-1);
+        res_date.error = 1;
+        return res_data;
     }
     // レスポンス
     resp = mysql_use_result(conn);
     while((row = mysql_fetch_row(resp)) != NULL ){
-        n = atoi(row[0]);
+        *n = atoi(row[0]);
     }
     mysql_free_result(resp);
 
-    res_data = (USEDLOG_TABLE *)malloc(sizeof(USEDLOG_TABLE) * n);
+    res_data = (USEDLOG_TABLE *)malloc(sizeof(USEDLOG_TABLE) * (*n));
 
     // アクセスSQL文
     sprintf(sql_str, "SELECT * FROM USEDLOG_TABLE where id='%08d'", id);
@@ -104,13 +106,15 @@ USEDLOG_TABLE *usedlog_select(int id) {
         // error
         printf("error!\n%s\n", sql_str);
         mysql_close(conn);
-        exit(-1);
+        res_date.error = 1;
+        return res_data;
     }
 
     // レスポンス
     resp = mysql_use_result(conn);
     i = 0;
     while((row = mysql_fetch_row(resp)) != NULL ) {
+        res_data[i].error = 0;
         res_data[i].id = atoi(row[0]);
         sprintf(res_data[i].jog_datetime, "%s", row[1]);
         res_data[i].jog_distance = atof(row[2]);
@@ -120,7 +124,7 @@ USEDLOG_TABLE *usedlog_select(int id) {
     }
     mysql_free_result(resp);
 
-    print_ult(res_data, n);
+    //print_ult(res_data, n);
     return res_data;
 }
 
