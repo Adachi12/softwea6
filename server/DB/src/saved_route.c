@@ -17,8 +17,8 @@ int saved_route_update(SAVED_ROUTE_TABLE srt) {
     sprintf(sql_str, "UPDATE SAVED_ROUTE_TABLE SET \
         saved_route1='%s', saved_route2='%s', saved_route3='%s', \
         saved_route4='%s', saved_route5='%s' where id=%08d",\
-        srt.saved_r1, srt.saved_r2, srt.saved_r3, \
-        srt.saved_r4, srt.saved_r5, srt.id);
+        srt.saved_route1, srt.saved_route2, srt.saved_route3, \
+        srt.saved_route4, srt.saved_route5, srt.id);
 
     // mysql接続
     conn = mysql_init(NULL);
@@ -49,12 +49,10 @@ int saved_route_insert(SAVED_ROUTE_TABLE srt) {
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
     // SQL発行
-    char id_buf[9];
-    snprintf(id_buf, 9, "%08d", srt.id);
     sprintf(sql_str, "INSERT INTO SAVED_ROUTE_TABLE \
-        values('%s', %s', '%s', '%s', '%s', '%s')",\
-        id_buf, srt.saved_r1, srt.saved_r2,\
-        srt.saved_r3, srt.saved_r4, srt.saved_r5);
+        values('%08d', %s', '%s', '%s', '%s', '%s')",\
+        srt.id, srt.saved_route1, srt.saved_route2,\
+        srt.saved_route3, srt.saved_route4, srt.saved_route5);
 
     // mysql接続
     conn = mysql_init(NULL);
@@ -87,7 +85,7 @@ SAVED_ROUTE_TABLE saved_route_select(int id) {
     char *db_name   = "jogging";
 
     // 返信用のデータ
-    SRT resp_data;
+    SAVED_ROUTE_TABLE resp_data;
 
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
@@ -113,11 +111,11 @@ SAVED_ROUTE_TABLE saved_route_select(int id) {
     resp = mysql_use_result(conn);
     while((row = mysql_fetch_row(resp)) != NULL ){
         resp_data.id = atoi(row[0]);
-        sprintf(resp_data.saved_r1, "%s", row[1]);
-        sprintf(resp_data.saved_r2, "%s", row[2]);
-        sprintf(resp_data.saved_r3, "%s", row[3]);
-        sprintf(resp_data.saved_r4, "%s", row[4]);
-        sprintf(resp_data.saved_r5, "%s", row[5]);
+        sprintf(resp_data.saved_route1, "%s", row[1]);
+        sprintf(resp_data.saved_route2, "%s", row[2]);
+        sprintf(resp_data.saved_route3, "%s", row[3]);
+        sprintf(resp_data.saved_route4, "%s", row[4]);
+        sprintf(resp_data.saved_route5, "%s", row[5]);
     }
 
     mysql_free_result(resp);

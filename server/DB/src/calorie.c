@@ -37,14 +37,14 @@ CALORIE_TABLE calorie_select() {
     // レスポンス
     resp = mysql_use_result(conn);
     while((row = mysql_fetch_row(resp)) != NULL ){
-        resp_data.food = row[0];
-        resp_data.food_name = row[1];
-        resp_data.food_calorie = row[2];
+        resp_data.food = atoi(row[0]);
+        sprintf(resp_data.food_name, "%s", row[1]);
+        resp_data.food_calorie = atoi(row[2]);
     }
 
     // 後片づけ
     mysql_free_result(resp);
     mysql_close(conn);
     
-    return res_data;
+    return resp_data;
 }
