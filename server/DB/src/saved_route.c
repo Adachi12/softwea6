@@ -1,27 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <mysql/mysql.h>
+#include "jogging.h"
 
-typedef struct {
-    int id;
-    char saved_r1[30];
-    char saved_r2[30];
-    char saved_r3[30];
-    char saved_r4[30];
-    char saved_r5[30];
-} SRT ;
-
-void saved_route_update();
-void saved_route_insert(SRT srt);
-SRT saved_route_select(int id);
-
-int main(void){
-    SRT data = {1, "route1_1", "route2_1", "", "", ""};
-    saved_route_update(data);
-}
-
-void saved_route_update(SRT srt) {
+int saved_route_update(SAVED_ROUTE_TABLE srt) {
     MYSQL *conn     = NULL;
     char sql_str[511];
     char *sql_serv  = "localhost";
@@ -42,21 +24,21 @@ void saved_route_update(SRT srt) {
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ) {
         // error
-        exit(-1);
+        return 1;
     }
     // 実行
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
-        printf("error!\n");
         mysql_close(conn);
-        exit(-1);
+        return 1;
     }
 
     mysql_close(conn);
 
+    return 0;
 }
 
-void saved_route_insert(SRT srt) {
+int saved_route_insert(SAVED_ROUTE_TABLE srt) {
     MYSQL *conn     = NULL;
     char sql_str[511];
     char *sql_serv  = "localhost";
@@ -78,21 +60,23 @@ void saved_route_insert(SRT srt) {
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ) {
         // error
-        exit(-1);
+        return 1;
     }
     // 実行
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
         printf("error!\n");
         mysql_close(conn);
-        exit(-1);
+        return 1;
     }
 
     mysql_close(conn);
+
+    return 0;
 }
 
 
-SRT saved_route_select(int id) {
+SAVED_ROUTE_TABLE saved_route_select(int id) {
     MYSQL *conn     = NULL;
     MYSQL_RES *resp = NULL;
     MYSQL_ROW row;
@@ -103,7 +87,7 @@ SRT saved_route_select(int id) {
     char *db_name   = "jogging";
 
     // 返信用のデータ
-    SRT res_data;
+    SRT resp_data;
 
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
@@ -128,16 +112,16 @@ SRT saved_route_select(int id) {
     // レスポンス
     resp = mysql_use_result(conn);
     while((row = mysql_fetch_row(resp)) != NULL ){
-        res_data.id = atoi(row[0]);
-        sprintf(res_data.saved_r1, "%s", row[1]);
-        sprintf(res_data.saved_r2, "%s", row[2]);
-        sprintf(res_data.saved_r3, "%s", row[3]);
-        sprintf(res_data.saved_r4, "%s", row[4]);
-        sprintf(res_data.saved_r5, "%s", row[5]);
+        resp_data.id = atoi(row[0]);
+        sprintf(resp_data.saved_r1, "%s", row[1]);
+        sprintf(resp_data.saved_r2, "%s", row[2]);
+        sprintf(resp_data.saved_r3, "%s", row[3]);
+        sprintf(resp_data.saved_r4, "%s", row[4]);
+        sprintf(resp_data.saved_r5, "%s", row[5]);
     }
 
     mysql_free_result(resp);
     mysql_close(conn);
 
-    return res_data;
+    return resp_data;
 }
