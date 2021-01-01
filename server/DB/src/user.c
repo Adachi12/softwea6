@@ -31,7 +31,7 @@ USER_TABLE user_select(int id) {
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
         // error
         printf("error!");
-        res_date.error = 1;
+        res_data.error = 1;
         return res_data;
     }
 
@@ -39,7 +39,7 @@ USER_TABLE user_select(int id) {
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
         mysql_close(conn);
-        res_date.error = 1;
+        res_data.error = 1;
         return res_data;
     }
 
