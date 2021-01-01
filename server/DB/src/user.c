@@ -50,7 +50,7 @@ USER_TABLE user_select(int id) {
         res_data.age = atoi(row[2]);
         res_data.sex = atoi(row[3]);
         sprintf(res_data.birth, "%s", row[4]); 
-        res_data.gwoal_eight = atof(row[5]);
+        res_data.goal_weight = atof(row[5]);
         sprintf(res_data.goal_term, "%s", row[6]);
     }
 
@@ -76,7 +76,7 @@ int user_update(USER_TABLE ut){
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
         // error
-        retrun 1;
+        return 1;
     }
 
     // クエリ実行
@@ -112,21 +112,21 @@ int user_insert(USER_TABLE ut) {
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
         // error
-        exit(-1);
+        return 1;
     }
 
     char id_buf[9];
     snprintf(id_buf, 9, "%08d", ut.id);
     sprintf(sql_str, "INSERT INTO USER_TABLE VALUES('%08d', '%s', '%s', '%s', %lf, %lf, %d, %d, '%s', %lf, '%s', '%s')"\
-          , ut.id, ut.loginname, ut.pass, ut.name, ut.weight, ut.height, ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
+          , ut.id, ut.login_name, ut.pass, ut.name, ut.weight, ut.height, ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
         mysql_close(conn);
-        exit(-1);
+        return 1;
     }
     //後片付け
     mysql_close(conn);
-    return res_data;
+    return 0;
 }
 
 /*

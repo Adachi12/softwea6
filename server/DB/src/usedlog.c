@@ -18,7 +18,7 @@ int main() {
 */
     
 //追加
-int usedlog_insert(ULT ult){
+int usedlog_insert(USEDLOG_TABLE ult){
     MYSQL *conn     = NULL;
     char sql_str[511];
     char *sql_serv  = "localhost";
@@ -29,7 +29,7 @@ int usedlog_insert(ULT ult){
     // SQL発行
     sprintf(sql_str, "INSERT INTO USEDLOG_TABLE \
         VALUES('%08d', '%19s', %lf, '%s', %d)", \
-        ult.id, ult.jog_datetime, ult.jog_distance, ult.jog_time, ult.burnd_calorie);
+        ult.id, ult.jog_datetime, ult.jog_distance, ult.jog_time, ult.burned_calorie);
     
     // mysql接続
     conn = mysql_init(NULL);
@@ -50,7 +50,7 @@ int usedlog_insert(ULT ult){
     return 0;
 }
 
-USEDLOG_TABLE usedlog_select(int id) {
+USEDLOG_TABLE *usedlog_select(int id) {
     MYSQL *conn     = NULL;
     MYSQL_RES *resp = NULL;
     MYSQL_ROW row;
@@ -112,15 +112,16 @@ USEDLOG_TABLE usedlog_select(int id) {
     i = 0;
     while((row = mysql_fetch_row(resp)) != NULL ) {
         res_data[i].id = atoi(row[0]);
-        sprintf(res_data[i].datetime, "%s", row[1]);
-        res_data[i].distance = atof(row[2]);
-        sprintf(res_data[i].jogtime, "%s", row[3]);
-        res_data[i].calorie = atoi(row[4]);
+        sprintf(res_data[i].jog_datetime, "%s", row[1]);
+        res_data[i].jog_distance = atof(row[2]);
+        sprintf(res_data[i].jog_time, "%s", row[3]);
+        res_data[i].burned_calorie = atoi(row[4]);
         i++;
     }
     mysql_free_result(resp);
 
     print_ult(res_data, n);
+    return res_data;
 }
 
 int usedlog_delete(int id) {
@@ -190,8 +191,8 @@ void print_ult(USEDLOG_TABLE *ult, int n) {
     int i = 0;
     for(i = 0; i < n; i++) {
         printf("    datetime : %s\n", ult[i].jog_datetime);
-        printf("    distance : %1.2f\n", ult[i]jog_.distance);
-        printf("    jogtime  : %8s\n", ult[i].jogtime);
+        printf("    distance : %1.2f\n", ult[i].jog_distance);
+        printf("    jogtime  : %8s\n", ult[i].jog_time);
         printf("    calorie  : %d\n", ult[i].burned_calorie);
         printf("\n");
     }
