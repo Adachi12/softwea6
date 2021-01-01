@@ -75,7 +75,8 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
         // error
-        exit(-1);
+        res_date.error = 1;
+        return res_data;
     }
 
     // count
@@ -85,7 +86,8 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
         // error
         printf("error!\n%s\n", sql_str);
         mysql_close(conn);
-        exit(-1);
+        res_date.error = 1;
+        return res_data;
     }
     // レスポンス
     resp = mysql_use_result(conn);
@@ -104,13 +106,15 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
         // error
         printf("error!\n%s\n", sql_str);
         mysql_close(conn);
-        exit(-1);
+        res_date.error = 1;
+        return res_data;
     }
 
     // レスポンス
     resp = mysql_use_result(conn);
     i = 0;
     while((row = mysql_fetch_row(resp)) != NULL ) {
+        res_data[i].error = 0;
         res_data[i].id = atoi(row[0]);
         sprintf(res_data[i].jog_datetime, "%s", row[1]);
         res_data[i].jog_distance = atof(row[2]);
