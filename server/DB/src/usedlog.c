@@ -65,6 +65,7 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
 
     // 返信用のデータ
     USEDLOG_TABLE *res_data;
+    res_data = (USEDLOG_TABLE *)malloc(sizeof(USEDLOG_TABLE));
 
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
@@ -75,7 +76,7 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
         // error
-        res_date.error = 1;
+        res_data[0].error = 1;
         return res_data;
     }
 
@@ -86,7 +87,7 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
         // error
         printf("error!\n%s\n", sql_str);
         mysql_close(conn);
-        res_date.error = 1;
+        res_data[0].error = 1;
         return res_data;
     }
     // レスポンス
@@ -95,8 +96,9 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
         *n = atoi(row[0]);
     }
     mysql_free_result(resp);
+    
+    res_data = (USEDLOG_TABLE *)realloc(res_data, sizeof(USEDLOG_TABLE) * (*n));
 
-    res_data = (USEDLOG_TABLE *)malloc(sizeof(USEDLOG_TABLE) * (*n));
 
     // アクセスSQL文
     sprintf(sql_str, "SELECT * FROM USEDLOG_TABLE where id='%08d'", id);
@@ -106,7 +108,7 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
         // error
         printf("error!\n%s\n", sql_str);
         mysql_close(conn);
-        res_date.error = 1;
+        res_data[0].error = 1;
         return res_data;
     }
 

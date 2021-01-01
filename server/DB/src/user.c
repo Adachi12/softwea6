@@ -20,11 +20,9 @@ USER_TABLE user_select(int id) {
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
     //SQL発行
-    char id_buf[9];
-    snprintf(id_buf, 9, "%08d", id);
     snprintf( &sql_str[0] , sizeof(sql_str)-1 ,\
     "SELECT weight, height, age, sex, birth, goal_weight, goal_term\
-    from USER_TABLE where 'id' = %s", id_buf );
+    from USER_TABLE where id = '%08d'", id);
 
     // mysql接続
     conn = mysql_init(NULL);
