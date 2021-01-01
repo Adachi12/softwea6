@@ -22,6 +22,7 @@ typedef struct {
 } CALORIE_TABLE;
 
 typedef struct {
+    int     error;
     int     id;
     char    jog_datetime[20];
     double  jog_distance;
@@ -30,6 +31,7 @@ typedef struct {
 } USEDLOG_TABLE;
 
 typedef struct {
+    int     error;
     int     id;
     char    login_name[11];
     char    pass[33];
@@ -57,7 +59,7 @@ int usedlog_update(USEDLOG_TABLE ult);
 int usedlog_delete(int id);
 void month_ago(char *buf);
 void print_ult(USEDLOG_TABLE *ult, int n);
-USEDLOG_TABLE *usedlog_select(int  id);
+USEDLOG_TABLE *usedlog_select(int id, int *n);
 
 // SAVED_ROUTE_TABLE access
 int saved_route_insert(SAVED_ROUTE_TABLE srt);

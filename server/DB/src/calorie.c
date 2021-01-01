@@ -30,7 +30,6 @@ CALORIE_TABLE calorie_select() {
     }
 
     // クエリ実行
-    printf("%s\n", sql_str);
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
         mysql_close(conn);
