@@ -4,7 +4,7 @@
 #include <string.h>
 #include <time.h>
 //#include <mysql/mysql.h>
-#include <jogging.h>
+#include "jogging.h"
 //書き換え不要
 
 /*
