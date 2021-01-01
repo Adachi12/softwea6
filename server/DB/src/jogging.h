@@ -52,7 +52,10 @@ USER_TABLE user_select(int id);
 // USEDLOG_TABLE access
 int usedlog_insert(USEDLOG_TABLE ult);
 int usedlog_update(USEDLOG_TABLE ult);
-USEDLOG_TABLE usedlog_select(int  id);
+int usedlog_delete(int id);
+void month_ago(char *buf);
+void print_ult(USEDLOG_TABLE *ult, int n);
+USEDLOG_TABLE *usedlog_select(int  id);
 
 // SAVED_ROUTE_TABLE access
 int saved_route_insert(SAVED_ROUTE_TABLE srt);

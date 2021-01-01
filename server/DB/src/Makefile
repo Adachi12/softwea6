@@ -3,7 +3,7 @@ submain:
 	gcc -Wall -o ../bin/saved_route.o -c saved_route.c -lmysqlclient -L/usr/lib64/mysql
 	gcc -Wall -o ../bin/usedlog.o usedlog.c -c -lmysqlclient -L/usr/lib64/mysql
 	gcc -Wall -o ../bin/user.o user.c -c -lmysqlclient -L/usr/lib64/mysql
-	gcc -Wall -o ../bin/submain1 submain1.c
+	gcc -Wall -o ../bin/submain1 submain1.c 
 	gcc -Wall -o ../bin/submain2 submain2.c
 
 # カロリーテーブル
