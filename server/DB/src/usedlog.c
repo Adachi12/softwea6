@@ -3,41 +3,24 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <mysql/mysql.h>
-//void usedlog_update();
+//#include <mysql/mysql.h>
+#include <jogging.h>
 //書き換え不要
 
-typedef struct {
-   int id;
-   char datetime[20];
-   double distance;
-   char jogtime[9];
-   int calorie;
-} ULT;
-
-// 引数のデータをデータベースへinsert
-int usedlog_insert(ULT ult);
-// 引数のidに該当するデータを取得
-void usedlog_select(int id);
-// mallocしたデータを出力
-void print_ult(ULT *ult, int n);
-// 1ヶ月以上前の日付を文字列で取得
-void month_ago();
-// 1ヶ月以上前のデータを全て削除
-int usedlog_delete(int id);
-
+/*
 int main() {
-    ULT insert_data = {1, "2020-02-02 20:30:20", 222, "00:20:20", 222};
+    USEDLOG_TABLE insert_data = {1, "2020-02-02 20:30:20", 222, "00:20:20", 222};
     usedlog_delete(1);
     usedlog_insert(insert_data);
     usedlog_select(1);
     usedlog_delete(1);
 }
-
+*/
+    
 //追加
 int usedlog_insert(ULT ult){
     MYSQL *conn     = NULL;
-    char sql_str[255];
+    char sql_str[511];
     char *sql_serv  = "localhost";
     char *user      = "root";
     char *passwd    = "mariadb";
@@ -46,7 +29,7 @@ int usedlog_insert(ULT ult){
     // SQL発行
     sprintf(sql_str, "INSERT INTO USEDLOG_TABLE \
         VALUES('%08d', '%19s', %lf, '%s', %d)", \
-        ult.id, ult.datetime, ult.distance, ult.jogtime, ult.calorie);
+        ult.id, ult.jog_datetime, ult.jog_distance, ult.jog_time, ult.burnd_calorie);
     
     // mysql接続
     conn = mysql_init(NULL);
@@ -67,7 +50,7 @@ int usedlog_insert(ULT ult){
     return 0;
 }
 
-void usedlog_select(int id) {
+USEDLOG_TABLE usedlog_select(int id) {
     MYSQL *conn     = NULL;
     MYSQL_RES *resp = NULL;
     MYSQL_ROW row;
@@ -81,7 +64,7 @@ void usedlog_select(int id) {
     int n = 0, i;
 
     // 返信用のデータ
-    ULT *res_data;
+    USEDLOG_TABLE *res_data;
 
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
@@ -111,7 +94,7 @@ void usedlog_select(int id) {
     }
     mysql_free_result(resp);
 
-    res_data = (ULT *)malloc(sizeof(ULT) * n);
+    res_data = (USEDLOG_TABLE *)malloc(sizeof(USEDLOG_TABLE) * n);
 
     // アクセスSQL文
     sprintf(sql_str, "SELECT * FROM USEDLOG_TABLE where id='%08d'", id);
@@ -142,7 +125,7 @@ void usedlog_select(int id) {
 
 int usedlog_delete(int id) {
     MYSQL *conn     = NULL;
-    char sql_str[255];
+    char sql_str[511];
     char *sql_serv  = "localhost";
     char *user      = "root";
     char *passwd    = "mariadb";
@@ -201,15 +184,15 @@ void month_ago(char *buf) {
         tm.tm_hour, tm.tm_min, tm.tm_sec);
 }
 
-void print_ult(ULT *ult, int n) {
+void print_ult(USEDLOG_TABLE *ult, int n) {
     printf("id : %d\n", ult[0].id);
 
     int i = 0;
     for(i = 0; i < n; i++) {
-        printf("    datetime : %s\n", ult[i].datetime);
-        printf("    distance : %1.2f\n", ult[i].distance);
+        printf("    datetime : %s\n", ult[i].jog_datetime);
+        printf("    distance : %1.2f\n", ult[i]jog_.distance);
         printf("    jogtime  : %8s\n", ult[i].jogtime);
-        printf("    calorie  : %d\n", ult[i].calorie);
+        printf("    calorie  : %d\n", ult[i].burned_calorie);
         printf("\n");
     }
 }
