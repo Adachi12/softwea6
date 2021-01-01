@@ -83,7 +83,7 @@ SAVED_ROUTE_TABLE saved_route_select(int id) {
 
     // 返信用のデータ
     SAVED_ROUTE_TABLE resp_data = \
-        {1, "", "", "", "", ""};
+        {1, id, "", "", "", "", ""};
 
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
