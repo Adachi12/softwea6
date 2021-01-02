@@ -33,10 +33,13 @@ request dequeue_request() {
     request resp = {-1, -1, -1};
 
     // データがひとつもない場合
-    if (request_queue_element_n == 0)
+    if (request_queue_element_n == 0) {
+        print_request_elem(resp);
         return resp;
+    }
 
     // 正常な値を返す
+    request_queue_element_n--;
     resp = *request_queue_ahead++;
     print_request_elem(resp);
 
