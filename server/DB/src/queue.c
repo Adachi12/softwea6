@@ -1,4 +1,5 @@
 #include<stdlib.h>
+#include<stdio.h>
 #include "queue.h"
 
 request *request_queue_init() {
@@ -22,8 +23,9 @@ int enqueue_request(request elem) {
         request_queue_tail = request_queue;
     }
 
+    *request_queue_tail = elem;
+    request_queue_tail++;
     request_queue_element_n++;
-    request_queue[request_queue_element_n] = elem;
     return 0;
 }
 
@@ -35,12 +37,18 @@ request dequeue_request() {
         return resp;
 
     // 正常な値を返す
-    resp = *request_queue_ahead;
+    resp = *request_queue_ahead++;
+    print_request_elem(resp);
 
     if (request_queue_ahead == request_queue + QUEUE_SIZE) {
         // 先頭に帰ってくる
         request_queue_ahead = request_queue;
     }
-    request_queue_ahead++;
     return resp;
+}
+
+void print_request_elem(request r) {
+    printf("IP address    : %x\n", r.ip);
+    printf("\tAccess target : %d\n", r.access_target);
+    printf("\tOperation     : %d\n", r.op);
 }

@@ -4,15 +4,15 @@
 #define QUEUE_SIZE 100
 typedef struct {
     int ip;
-    int a_t;
+    int access_target;
     int op;
 } request ;
 
 enum access_target {
-    CALORIE_TABLE,
-    SAVED_ROUTE_TABLE,
-    USEDLOG_TABLE,
-    USER_TABLE
+    calorie_table,
+    saved_route_table,
+    usedlog_table,
+    user_table
 } ;
 
 enum operation {
@@ -29,5 +29,6 @@ int request_queue_element_n;
 request *request_queue_init();
 int enqueue_request(request elem);
 request dequeue_request();
+void print_request_elem(request elem);
 
 #endif
