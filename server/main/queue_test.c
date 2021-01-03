@@ -16,6 +16,7 @@ int main() {
     dequeue_request();
     dequeue_request();
     dequeue_request();
+    dequeue_request();
 
     return 0;
 }
