@@ -2,7 +2,7 @@ submain:
 	gcc -Wall -o ../../bin/calorie.o -c calorie.c
 	gcc -Wall -o ../../bin/saved_route.o -c saved_route.c
 	gcc -Wall -o ../../bin/usedlog.o -c usedlog.c
-	gcc -Wall -o ../../user.o -c user.c
+	gcc -Wall -o ../../bin/user.o -c user.c
 
 # カロリーテーブル
 calorie.o: calorie.c
