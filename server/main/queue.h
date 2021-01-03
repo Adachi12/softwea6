@@ -16,9 +16,9 @@ enum access_target {
 } ;
 
 enum operation {
-    select,
-    update,
-    insert
+    select_t,
+    update_t,
+    insert_t
 } ;
 
 request *request_queue;

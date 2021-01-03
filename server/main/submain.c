@@ -1,20 +1,18 @@
-#include<stdio.h>
 #include<unistd.h>
 #include<sys/wait.h>
-#include<stdlib.h>
+#include "queue.h"
+#include "../DB/src/jogging.h"
 
 int main() {
 
 }
 
-#include "queue.h"
-#include "jogging.h"
 
 void *access_table(request r) {
     switch (r.access_target) {
         calorie_table:
             switch (r.op) {
-                select:
+                select_t:
                     CALORIE_TABLE *resp_data;
                     resp_data = calorie_select();
                     return resp_data;
@@ -27,13 +25,13 @@ void *access_table(request r) {
                 "", "", "", "", ""
             };
             switch (r.op) {
-                select:
+                select_t:
                     SAVED_ROUTE_TABLE *resp_data;
                     resp_data = saved_route_select();
                     return resp_data;
-                insert:
+                insert_t:
                     return saved_route_insert(test_data);
-                update:
+                update_t:
                     return saved_route_update(test_data);
                 default:
                     break;
@@ -44,13 +42,13 @@ void *access_table(request r) {
                 0, "00:00:00", 0
             };
             switch (r.op) {
-                select:
+                select_t:
                     USEDLOG_TABLE *resp_data;
                     resp_data = usedlog_select();
                     return resp_data;
-                insert:
+                insert_t:
                     return usedlog_insert(test_data);
-                update:
+                update_t:
                     return usedlog_update(test_data);
                 default:
                     break;
@@ -61,13 +59,13 @@ void *access_table(request r) {
                 0, 0, "", 0.0, "", ""
             };
             switch (r.op) {
-                select:
+                select_t:
                     USER_TABLE *resp_data;
                     resp_data = user_select();
                     return resp_data;
-                insert:
+                insert_t:
                     return user_insert(test_data);
-                update:
+                update_t:
                     return user_update(test_data);
                 default:
                     break;
