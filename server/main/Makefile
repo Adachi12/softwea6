@@ -4,3 +4,8 @@ submain.o: submain.c
 
 queue.o: queue.c
 	gcc -Wall -o queue.o -c queue.c
+
+submain1: submain1.c ../bin/calorie.o ../bin/saved_route.o
+	gcc -Wall -o submain1.o -c submain1.c
+	gcc submain1.o ../bin/calorie.o ../bin/saved_route.o -lmysqlclient -L/usr/lib64/mysql
+	rm submain1.o
