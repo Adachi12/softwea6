@@ -54,10 +54,7 @@ int main() {
     pthread_t a;
     while() {
         pthread_create(&a, NULL, conn_process, NULL);
-        whlile() {
-            if(flag == 1) {
-                break;
-            }
+        whlile(flag == 0) {
         }
         printf("pthread:main\n");
         continue;
