@@ -51,5 +51,15 @@ void *conn_process(void *arg) {
 }
 
 int main() {
-
+    pthread_t a;
+    while() {
+        pthread_create(&a, NULL, conn_process, NULL);
+        whlile() {
+            if(flag == 1) {
+                break;
+            }
+        }
+        printf("pthread:main\n");
+        continue;
+    }
 }
