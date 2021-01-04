@@ -9,7 +9,7 @@ int flag = 1;
 
 void *conn_process(void *arg) {
     int listendfd, connfd, data_size;
-    char *req_op;
+    char req_op;
     char buf[BUFSIZ];
     struct sockaddr_in servaddr;
 
@@ -22,9 +22,9 @@ void *conn_process(void *arg) {
 
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(10000);
-    servaddrisn_addr.s = htonl(INADDR_ANY);
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
-    if( bind(listendfd, (struct sockaddr*)&server, sizeof(servaddr)) < 0 ) {
+    if( bind(listendfd, (struct sockaddr*)&servaddr, sizeof(servaddr)) < 0 ) {
         perror("listen");
         exit(1);
     }
@@ -32,31 +32,52 @@ void *conn_process(void *arg) {
     if( listen(listendfd, 5) < 0 ) {
         perror("listen");
         exit(1);
-    }
+    } 
 
     while(1) {
-        if ( (connfd = accepf(listendfd, (struct sockaddr*)NULL, NULL)) < 0 ) {
+        if ( (connfd = accept(listendfd, (struct sockaddr*)NULL, NULL)) < 0 ) {
             perror("accept");
             exit(1);
         }
 
+        // フラグをもとに戻す
         flag = 1;
 
-        while( (nbytes = read(connfd, buf, sizeof(buf))) > 0 ) ;
+        // アクセス内容(1byte)を読み取る
+        read(connfd, buf, 1);
+
+        req_op = buf[0];
+
+        // 分岐
+        if ( req_op == 0x00 ) {
+            // CALORIE_TABLE access
+            CALORIE_TABLE resp_data = calorie_select();
+            char *resp_bytes[BUFSIZ];
+            if ( calorie_cast(&resp_bytes, resp_data) ) {
+                perror("Error - CALORIE_TABLE Access\n");
+                buf[0] = 0x01;
+                write(connfd, buf, 1);
+            }
+            snprintf(buf, 260, "%s", resp_data);
+            printf("%s\n", buf);
+            write(connfd, buf, 260);
+        }
 
         close(connfd);
     }
 
-    return 0;
+    pthread_exit(0);
 }
 
 int main() {
     pthread_t a;
-    while() {
+    while(1) {
         pthread_create(&a, NULL, conn_process, NULL);
-        whlile(flag == 0) {
-        }
+        
+        while(flag == 0) ;
+
         printf("pthread:main\n");
+        flag = 0;
         continue;
     }
 }
