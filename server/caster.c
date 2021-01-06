@@ -4,44 +4,95 @@
 #include<time.h>
 #include<mysql/mysql.h>
 #include"DB/src/jogging.h"
+
+//文字列を構造体にキャスト
+CALORIE_TABLE ct_str2tab_select(char * ct_cast) {
+    CALORIE_TABLE ct = {0, -1, "", -1};
+
+    sscanf(ct_cast, "%s\n%d", &ct.food_name[0], &ct.food_calorie);
     
-//snprintf(id_buf, 9, "%08d", ut.id);
-/*    res_data.id = id;
-        res_data.weight = atof(row[0]);
-        res_data.height = atof(row[1]);
-        res_data.age = atoi(row[2]);
-        res_data.sex = atoi(row[3]);
-        sprintf(res_data.birth, "%s", row[4]); 
-        res_data.goal_weight = atof(row[5]);
-        sprintf(res_data.goal_term, "%s", row[6]);
-*/
-int calorie_table_cast(char * ct_cast, CALORIE_TABLE ct) {
-    
-    snprintf(ct_cast, 255, "%s", ct.name);
-    ct[256] = calorie;
-    
-    return ct_cast;
+    return ct;
 }
 
-int usedlog_table_cast(char * ult_cast, USEDLOG_TABLE ult) {
-    
-    //snprintf(ult_cast, 46, "%s,%d,%s,%lf,%s,%d",ult.op, ult.user_id, ult.jog_datetime, ult.jog_distance, ult.jog_time, ult.burned_calorie);
-    ult_cast[0] = アクセス内容;
-    ult_cast[1] = ult.id;
-    snprintf(ult_cast, 5, "%s", ult.jog_datetime);
-    snprintf(ult_cast, 25, "%lf", ult.jog_distance);
-    snprintf(ulr_cast, 33, "%s", ult.jog_time);
-    ult_cast[42] = burned_calorie;
-    
-    return ult_cast;
+//構造体を文字列にキャスト
+int ct_tab2str_select(char * ct_buf, CALORIE_TABLE ct) {
+    sprintf(ct_buf, "%s\n%d", ct.food_name, ct.food_calorie);
+    return 0;
 }
 
-int user_table_cast(char * ut_cast, USER_TABLE ut) {
-    //char ut_cast[390];
-    //snprintf(ut_cast, 390, "%s,%d,%s,%s,%s,%l,%lf,%d,%d,%s,%s,%lf,%s,%s",ut.op, ut.user_id, ut.login_name, ut.pass, ut.name, ut.weight, ut.height, ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
-    snprintf()
-    return ut_cast;
+SAVED_ROUTE_TABLE srt_str2tab_select(char * srt_cast) {
+    SAVED_ROUTE_TABLE srt = {0, 0, "", "", "", "", ""};
+    
+    sscanf(srt_cast, "%d\n%s\n%s", &srt.id, &srt.saved_route1[0],&srt.saved_route2[0]);
+    
+    return srt;
 }
 
-int saved_route_table_cast(SAVED_ROUTE_TABLE, ) {
+int srt_tab2str_select(char * srt_buf, SAVED_ROUTE_TABLE srt) {
+    sprintf(srt_buf, "%d\n%s\n%s", srt.id, srt.saved_route1, srt.saved_route2);
+    return 0;
+}
+
+SAVED_ROUTE_TABLE srt_str2tab_update(char *srt_cast) {
+    SAVED_ROUTE_TABLE srt = {0, 0, "", "", "", "", ""};
+    
+    sscanf(srt_cast, "%d\n%s\n%s", &srt.id, &srt.saved_route1[0],&srt.saved_route2[0]);
+    
+    return srt;
+}
+
+USEDLOG_TABLE ult_str2tab_select(char * ult_cast) {
+    USEDLOG_TABLE ult = {0, 0, "2021-01-07/03:21:52", 2000, "24:21:59", 10000};
+    
+    sscanf(ult_cast,  "%s\n%d\n%s\n%d", &ult.jog_datetime[0], &ult.jog_distance, &ult.jog_time[0], &ult.burned_calorie);
+    
+    return ult;
+}
+
+int ult_tab2str_select(char * ult_buf, USEDLOG_TABLE ult) {
+    sprintf(ult_buf, "%s\n%d\n%s\n%d", ult.jog_datetime, ult.jog_distance, ult.jog_time, ult.burned_calorie);
+    return 0;
+}
+//
+USEDLOG_TABLE ult_str2tab_insert(char * ult_cast) {
+    USEDLOG_TABLE ult = {0, 0, "2021-01-07/03:21:52", 2000, "24:21:59", 10000};
+    
+    int head_buf;
+    
+    sscanf(ult_cast,  "%d\n%d\n%s\n%d\n%s\n%d", &head_buf, &ult.id, &ult.jog_datetime[0], &ult.jog_distance, &ult.jog_time[0], &ult.burned_calorie);
+    
+    return ult;
+}
+
+USER_TABLE ut_str2tab_select(char * ut_cast) {
+    USER_TABLE ut = {0, 0, "loginname", "password", "name", 56.2, 181.1, 21, 1, "1999-12-31", 60.3, "2022-12-31", "mail-address@exaple.ex"};
+    
+    sscanf(ut_cast,  "%s\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%s", &ut.login_name[0], &ut.name[0], &ut.weight, &ut.height, &ut.age, &ut.sex, &ut.birth[0], &ut.goal_weight, &ut.goal_term[0], &ut.mail_address);
+    
+    return ut;
+}
+
+int ut_tab2str_select(char * ut_buf, USER_TABLE ut) {
+    sprintf(ut_buf, "%s\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%s", ut.login_name, ut.name, ut.weight, ut.height, ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
+    return 0;
+}
+
+USER_TABLE ut_str2tab_update(char * ut_cast) {
+    USER_TABLE ut = {0, 0, "loginname", "password", "name", 56.2, 181.1, 21, 1, "1999-12-31", 60.3, "2022-12-31", "mail-address@exaple.ex"};
+    
+    int head_buf;
+    
+    sscanf(ut_cast,  "%s\n%d\n%s\n%s\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%s", &head_buf, &ut.id, &ut.login_name[0], &ut.pass[0], &ut.name[0], &ut.weight, &ut.height, &ut.age, &ut.sex, &ut.birth[0], &ut.goal_weight, &ut.goal_term[0], &ut.mail_address);
+    
+    return ut;
+}
+
+USER_TABLE ut_str2tab_insert(char * ut_cast) {
+    USER_TABLE ut = {0, 0, "loginname", "password", "name", 56.2, 181.1, 21, 1, "1999-12-31", 60.3, "2022-12-31", "mail-address@exaple.ex"};
+    
+    int head_buf;
+    
+    sscanf(ut_cast,  "%d\n%d\n%s\n%s\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%s", &head_buf,  &ut.id, &ut.login_name[0], &ut.pass[0], &ut.name[0], &ut.weight, &ut.height, &ut.age, &ut.sex, &ut.birth[0], &ut.goal_weight, &ut.goal_term[0], &ut.mail_address);
+    
+    return ut;
 }
