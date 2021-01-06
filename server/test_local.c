@@ -11,11 +11,11 @@
 
 int main() {
 
-    int sock; //local socket descriptor
-    struct sockaddr_in servSockAddr; //server internet socket address
-    unsigned short servPort = 8000; //server port number
-    char recvBuffer[BUFSIZE];//receive temporary buffer
-    char sendBuffer[BUFSIZE]; // send temporary buffer
+    int sock;                       //local socket descriptor
+    struct sockaddr_in servSockAddr;//server internet socket address
+    unsigned short servPort = 60000; //server port number
+    char recvBuffer[BUFSIZE];       //receive temporary buffer
+    char sendBuffer[BUFSIZE];       // send temporary buffer
 
     memset(&servSockAddr, 0, sizeof(servSockAddr));
 
@@ -39,7 +39,7 @@ int main() {
 
     printf("connect to %s\n", inet_ntoa(servSockAddr.sin_addr));
 
-    while(1){
+    while(1) {
         printf("please enter the characters:");
         if (fgets(sendBuffer, BUFSIZE, stdin) == NULL){
             fprintf(stderr, "invalid input string.\n");
