@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 //#include <mysql/mysql.h>
 #include "jogging.h"
 
@@ -57,6 +58,25 @@ USER_TABLE user_select(int id) {
     // 後片づけ
     mysql_free_result(resp);
     mysql_close(conn);
+
+    // 誕生日
+    int year, month, day;
+    sscanf(res_data.birth, "%d-%d-%d", &year, &month, &day);
+
+    // 今日
+    int localmonth, localday;
+    time_t timer;
+    struct tm *local;
+
+    timer = time(NULL);
+    local = localtime(&timer);
+    localmonth = local->tm_mon + 1;
+    localday = local->mday;
+
+    if(localmonth == month && localday == day) {
+        res_daga.age++;
+        user_update(res_data);
+    }
     
     return res_data;
 }
