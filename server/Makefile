@@ -1,8 +1,6 @@
-submain1: submain1.c ../bin/calorie.o ../bin/saved_route.o
-	gcc -Wall -o submain1.o -c submain1.c
-	gcc submain1.o -o ../bin/submain1 ../bin/calorie.o ../bin/saved_route.o -lmysqlclient -L/usr/lib64/mysql
-	rm submain1.o
-
-queue.o: queue.c
-	gcc -Wall -o queue.o -c queue.c
-
+all: main.c DB/src/calorie.c DB/src/usedlog.c DB/src/user.c DB/src/saved_route.c 
+	gcc -o DB/bin/calorie.o -c DB/src/calorie.c
+	gcc -o DB/bin/usedlog.o -c DB/src/usedlog.c
+	gcc -o DB/bin/user.o -c DB/src/user.c
+	gcc -o DB/bin/saved_route.o -c DB/src/saved_route.c
+	gcc -o main main.c DB/bin/* -lpthread -lmysqlclient -L/usr/lib64/mysql

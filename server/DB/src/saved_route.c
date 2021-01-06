@@ -1,6 +1,6 @@
 #include "jogging.h"
 
-int saved_route_update(int route_id, char *route[]) {
+int saved_route_update(int user_id, int route_id, char *route_file[]) {
     MYSQL *conn     = NULL;
     char sql_str[511];
     char *sql_serv  = "localhost";
@@ -11,8 +11,8 @@ int saved_route_update(int route_id, char *route[]) {
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
     // SQL発行
-    sprintf(sql_str, "UPDATE SAVED_ROUTE_TABLE SET \
-        saved_route%d='%s'", route_id, &route[0]);
+    sprintf(sql_str, "UPDATE SAVED_ROUTE_TABLE SET saved_route%d='%s' where id = '%d", 
+        route_id, &route_file[0], user_id);
 
     // mysql接続
     conn = mysql_init(NULL);
@@ -32,7 +32,7 @@ int saved_route_update(int route_id, char *route[]) {
     return 0;
 }
 
-int saved_route_insert(SAVED_ROUTE_TABLE srt) {
+int saved_route_insert(int user_id) {
     MYSQL *conn     = NULL;
     char sql_str[511];
     char *sql_serv  = "localhost";
@@ -43,10 +43,9 @@ int saved_route_insert(SAVED_ROUTE_TABLE srt) {
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
     // SQL発行
-    sprintf(sql_str, "INSERT INTO SAVED_ROUTE_TABLE \
-        values('%08d', %s', '%s', '%s', '%s', '%s')",\
-        srt.id, srt.saved_route1, srt.saved_route2,\
-        srt.saved_route3, srt.saved_route4, srt.saved_route5);
+    sprintf(sql_str, 
+        "INSERT INTO SAVED_ROUTE_TABLE values('%08d', "", "", "", "", "")", 
+        user_id);
 
     // mysql接続
     conn = mysql_init(NULL);
@@ -68,7 +67,7 @@ int saved_route_insert(SAVED_ROUTE_TABLE srt) {
 }
 
 
-SAVED_ROUTE_TABLE saved_route_select(int id) {
+FILE *saved_route_select(int user_id, int route_id) {
     MYSQL *conn     = NULL;
     MYSQL_RES *resp = NULL;
     MYSQL_ROW row;
@@ -79,13 +78,13 @@ SAVED_ROUTE_TABLE saved_route_select(int id) {
     char *db_name   = "jogging";
 
     // 返信用のデータ
-    SAVED_ROUTE_TABLE resp_data = \
-        {1, id, "", "", "", "", ""};
+    FILE *fp = NULL;
 
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
     // SQL発行
-    sprintf(sql_str, "SELECT * FROM SAVED_ROUTE_TABLE where id='%08d'", id);
+    sprintf(sql_str, "SELECT saved_route%d FROM SAVED_ROUTE_TABLE where id='%08d'", 
+        user_id, route_id);
 
     // mysql接続
     conn = mysql_init(NULL);
@@ -98,23 +97,17 @@ SAVED_ROUTE_TABLE saved_route_select(int id) {
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
         mysql_close(conn);
-        return resp_data;
+        return fp;
     }
 
     // レスポンス
     resp = mysql_use_result(conn);
     while((row = mysql_fetch_row(resp)) != NULL ){
-        resp_data.error = 0;
-        resp_data.id = atoi(row[0]);
-        sprintf(resp_data.saved_route1, "%s", row[1]);
-        sprintf(resp_data.saved_route2, "%s", row[2]);
-        sprintf(resp_data.saved_route3, "%s", row[3]);
-        sprintf(resp_data.saved_route4, "%s", row[4]);
-        sprintf(resp_data.saved_route5, "%s", row[5]);
+        fp = fopen(row[0], "r");
     }
 
     mysql_free_result(resp);
     mysql_close(conn);
 
-    return resp_data;
+    return fp;
 }

@@ -66,8 +66,7 @@ void print_ult(USEDLOG_TABLE *ult, int n);
 USEDLOG_TABLE *usedlog_select(int id, int *n);
 
 // SAVED_ROUTE_TABLE access
-int saved_route_insert(SAVED_ROUTE_TABLE srt);
-int saved_route_update(SAVED_ROUTE_TABLE srt);
+int saved_route_update(int user_id, int route_id, char *route_file[])
 SAVED_ROUTE_TABLE saved_route_select(int  id);
 
 // CALORIE_TABLE random access
