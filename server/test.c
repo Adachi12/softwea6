@@ -1,67 +1,72 @@
-#include<stdio.h>
-#include<unistd.h>
-#include<string.h>
-#include<sys/socket.h>
-#include<netinet/in.h>
-#include<pthread.h>
+#include <stdio.h> //printf(), fprintf(), perror()
+#include <sys/socket.h> //socket(), bind(), accept(), listen()
+#include <arpa/inet.h> // struct sockaddr_in, struct sockaddr, inet_ntoa()
+#include <stdlib.h> //atoi(), exit(), EXIT_FAILURE, EXIT_SUCCESS
+#include <string.h> //memset()
+#include <unistd.h> //close()
+
+#define QUEUELIMIT 5
+#define MSGSIZE 1024
+#define BUFSIZE (MSGSIZE + 1)
 
 int flag = 0;
 
-void *conn_process(void *arg) {
-    int listendfd, connfd;
-    char buf[BUFSIZ];
-    struct sockaddr_in servaddr;
+int conn_process(int argc, char* argv[]) {
 
-    if( (listendfd = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
-        perror("socket");
-        pthread_exit(0);
+    int servSock; //server socket descriptor
+    int clitSock; //client socket descriptor
+    struct sockaddr_in servSockAddr; //server internet socket address
+    struct sockaddr_in clitSockAddr; //client internet socket address
+    unsigned short servPort = 8000; //server port number
+    unsigned int clitLen; // client internet socket address length
+    char recvBuffer[BUFSIZE];//receive temporary buffer
+    int recvMsgSize, sendMsgSize; // recieve and send buffer size
+
+    memset(&servSockAddr, 0, sizeof(servSockAddr));
+    servSockAddr.sin_family      = AF_INET;
+    servSockAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    servSockAddr.sin_port        = htons(servPort);
+
+    if (bind(servSock, (struct sockaddr *) &servSockAddr, sizeof(servSockAddr) ) < 0 ) {
+        perror("bind() failed.");
+        exit(EXIT_FAILURE);
     }
 
-    memset( &servaddr, 0, sizeof(servaddr) );
-
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_port = htons(8000);
-    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-
-    if( bind(listendfd, (struct sockaddr*)&servaddr, sizeof(servaddr)) < 0 ) {
-        perror("listen");
-        pthread_exit(0);
+    if (listen(servSock, QUEUELIMIT) < 0) {
+        perror("listen() failed.");
+        exit(EXIT_FAILURE);
     }
-
-    if( listen(listendfd, 5) < 0 ) {
-        perror("listen");
-        pthread_exit(0);
-    } 
 
     while(1) {
-        if ( (connfd = accept(listendfd, (struct sockaddr*)NULL, NULL)) < 0 ) {
-            perror("accept");
-            pthread_exit(0);
+        clitLen = sizeof(clitSockAddr);
+        if ((clitSock = accept(servSock, (struct sockaddr *) &clitSockAddr, &clitLen)) < 0) {
+            perror("accept() failed.");
+            exit(EXIT_FAILURE);
+        }
+        printf("connected from %s.\n", inet_ntoa(clitSockAddr.sin_addr));
+
+        while(1) {
+            if ((recvMsgSize = recv(clitSock, recvBuffer, BUFSIZE, 0)) < 0) {
+                perror("recv() failed.");
+                exit(EXIT_FAILURE);
+            } else if(recvMsgSize == 0){
+                fprintf(stderr, "connection closed by foreign host.\n");
+                break;
+            }
+
+            if((sendMsgSize = send(clitSock, recvBuffer, recvMsgSize, 0)) < 0){
+                perror("send() failed.");
+                exit(EXIT_FAILURE);
+            } else if(sendMsgSize == 0){
+                fprintf(stderr, "connection closed by foreign host.\n");
+                break;
+            }
         }
 
-        // アクセス内容(1byte)を読み取る
-        read(connfd, buf, 1);
-        printf("%c", buf[0]);
-
-        // アクセス内容(1byte)を読み取る
-        read(connfd, buf, 1);
-        printf("%c", buf[0]);
-
-        close(connfd);
+        close(clitSock);
     }
 
-    pthread_exit(0);
-}
+    close(servSock);
 
-int main() {
-    pthread_t a;
-    while(1) {
-        pthread_create(&a, NULL, conn_process, NULL);
-
-        while(flag == 0) ;
-
-        printf("pthread:main\n");
-        flag = 0;
-        continue;
-    }
+    return EXIT_SUCCESS;
 }

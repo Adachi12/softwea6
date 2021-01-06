@@ -1,36 +1,81 @@
-#include<stdio.h>
-#include<unistd.h>
-#include<string.h>
-#include<sys/socket.h>
-#include<netinet/in.h>
-#include<arpa/inet.h>
-#include<pthread.h>
+#include <stdio.h> //printf(), fprintf(), perror()
+#include <sys/socket.h> //socket(), bind(), accept(), listen()
+#include <arpa/inet.h> // struct sockaddr_in, struct sockaddr, inet_ntoa(), inet_aton()
+#include <stdlib.h> //atoi(), exit(), EXIT_FAILURE, EXIT_SUCCESS
+#include <string.h> //memset(), strcmp()
+#include <unistd.h> //close()
+
+#define MSGSIZE 1024
+#define BUFSIZE (MSGSIZE + 1)
+
 
 int main() {
-    int sockfd, nbytes;
-    char buf[BUFSIZ];
-    char *mesg = "ab";
-    struct sockaddr_in servaddr;
-    if( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
-        perror("socket");
-        return 1;
+
+    int sock; //local socket descriptor
+    struct sockaddr_in servSockAddr; //server internet socket address
+    unsigned short servPort = 8000; //server port number
+    char recvBuffer[BUFSIZE];//receive temporary buffer
+    char sendBuffer[BUFSIZE]; // send temporary buffer
+
+    memset(&servSockAddr, 0, sizeof(servSockAddr));
+
+    servSockAddr.sin_family = AF_INET;
+
+    if (inet_aton("54.90.205.238", &servSockAddr.sin_addr) == 0) {
+        fprintf(stderr, "Invalid IP Address.\n");
+        exit(EXIT_FAILURE);
+    }
+    servSockAddr.sin_port = htons(servPort);
+
+    if ((sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0 ){
+        perror("socket() failed.");
+        exit(EXIT_FAILURE);
     }
 
-    memset(&servaddr, 0, sizeof(servaddr));
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_port = htons(7);
-    
-    if(inet_pton(AF_INET, "54.90.205.238", &servaddr.sin_addr) < 0) {
-        perror("inet_pton");
-        return 1;
-    }
-    if(connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
-        perror("conneect");
-        return 1;
+    if (connect(sock, (struct sockaddr*) &servSockAddr, sizeof(servSockAddr)) < 0) {
+        perror("connect() failed.");
+        exit(EXIT_FAILURE);
     }
 
-    nbytes = write(sockfd, mesg, strlen(mesg));
-    close(sockfd);
+    printf("connect to %s\n", inet_ntoa(servSockAddr.sin_addr));
 
-    return 0;
+    while(1){
+        printf("please enter the characters:");
+        if (fgets(sendBuffer, BUFSIZE, stdin) == NULL){
+            fprintf(stderr, "invalid input string.\n");
+            exit(EXIT_FAILURE);
+        }
+
+        if (send(sock, sendBuffer, strlen(sendBuffer), 0) <= 0) {
+            perror("send() failed.");
+            exit(EXIT_FAILURE);
+        }
+
+        int byteRcvd  = 0;
+        int byteIndex = 0;
+        while (byteIndex < MSGSIZE) {
+            byteRcvd = recv(sock, &recvBuffer[byteIndex], 1, 0);
+            if (byteRcvd > 0) {
+                if (recvBuffer[byteIndex] == '\n'){
+                    recvBuffer[byteIndex] = '\0';
+                    if (strcmp(recvBuffer, "quit") == 0) {
+                        close(sock);
+                        return EXIT_SUCCESS;
+                    } else {
+                        break;
+                    }
+                }
+                byteIndex += byteRcvd;
+            } else if(byteRcvd == 0){
+                perror("ERR_EMPTY_RESPONSE");
+                exit(EXIT_FAILURE);
+            } else {
+                perror("recv() failed.");
+                exit(EXIT_FAILURE);
+            }
+        }
+        printf("server return: %s\n", recvBuffer);
+    }
+
+    return EXIT_SUCCESS;
 }
