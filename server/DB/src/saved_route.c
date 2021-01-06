@@ -1,6 +1,6 @@
 #include "jogging.h"
 
-int saved_route_update(SAVED_ROUTE_TABLE srt) {
+int saved_route_update(int route_id, char *route[]) {
     MYSQL *conn     = NULL;
     char sql_str[511];
     char *sql_serv  = "localhost";
@@ -12,10 +12,7 @@ int saved_route_update(SAVED_ROUTE_TABLE srt) {
 
     // SQL発行
     sprintf(sql_str, "UPDATE SAVED_ROUTE_TABLE SET \
-        saved_route1='%s', saved_route2='%s', saved_route3='%s', \
-        saved_route4='%s', saved_route5='%s' where id=%08d",\
-        srt.saved_route1, srt.saved_route2, srt.saved_route3, \
-        srt.saved_route4, srt.saved_route5, srt.id);
+        saved_route%d='%s'", route_id, &route[0]);
 
     // mysql接続
     conn = mysql_init(NULL);
