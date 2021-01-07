@@ -2,10 +2,18 @@
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
 #include<mysql/mysql.h>
 
 #ifndef jog_h
 #define jog_h
+
+#define QUEUELIMIT 5
+#define MSGSIZE 1024
+#define BUFSIZE (MSGSIZE + 1)
 
 // 型定義
 typedef struct {
@@ -59,21 +67,45 @@ USER_TABLE user_select(int id);
 
 // USEDLOG_TABLE access
 int usedlog_insert(USEDLOG_TABLE ult);
-int usedlog_update(USEDLOG_TABLE ult);
+USEDLOG_TABLE *usedlog_select(int id, int *n);
 int usedlog_delete(int id);
 void month_ago(char *buf);
 void print_ult(USEDLOG_TABLE *ult, int n);
-USEDLOG_TABLE *usedlog_select(int id, int *n);
 
 // SAVED_ROUTE_TABLE access
-int saved_route_update(int user_id, int route_id, char *route_file[])
-SAVED_ROUTE_TABLE saved_route_select(int  id);
+int saved_route_update(int user_id, int route_id, char route_file[]);
+int saved_route_insert(int user_id);
+FILE *saved_route_select(int user_id, int route_id);
 
 // CALORIE_TABLE random access
 CALORIE_TABLE calorie_select();
 
+//SAVED_ROUTE_TABLE
+//SELECT
+SAVED_ROUTE_TABLE srt_str2tab_select(char *srt_cast);
+int srt_tab2str_select(char *srt_buf, SAVED_ROUTE_TABLE srt);
+//UPDATE
+SAVED_ROUTE_TABLE srt_str2tab_update(char *srt_cast);
 
-// db_access
-MYSQL_RES db_access(char *sql_str[511]);
+//CALORIE_TABLE
+//SELECT
+int ct_tab2str_select(char *ct_buf, CALORIE_TABLE ct);
+//UPDATE
+
+//USEDLOG_TABLE
+//SELECT
+USEDLOG_TABLE ult_str2tab_select(char *ult_cast);
+FILE *ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n);
+//INSERT
+USEDLOG_TABLE ult_str2tab_insert(char *ult_cast);
+
+//USER_TABLE
+//SELECT
+USER_TABLE ut_str2tab_select(char *ut_cast);
+int ut_tab2str_select(char *ut_buf, USER_TABLE ut);
+//UPDATE
+USER_TABLE ut_str2tab_update(char *ut_cast);
+//INSERT
+USER_TABLE ut_str2tab_insert(char *ut_cast);
 
 #endif

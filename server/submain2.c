@@ -39,4 +39,3 @@ int select_test2() {
     
     return error_sum;
 }
-    

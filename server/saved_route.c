@@ -1,6 +1,6 @@
 #include "jogging.h"
 
-int saved_route_update(int user_id, int route_id, char *route_file[]) {
+int saved_route_update(int user_id, int route_id, char route_file[]) {
     MYSQL *conn     = NULL;
     char sql_str[511];
     char *sql_serv  = "localhost";
@@ -90,7 +90,7 @@ FILE *saved_route_select(int user_id, int route_id) {
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
         // error
-        return resp_data;
+        return fp;
     }
 
     // 実行

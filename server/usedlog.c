@@ -1,23 +1,5 @@
-//uselog_get.c
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-//#include <mysql/mysql.h>
 #include "jogging.h"
-//書き換え不要
 
-/*
-int main() {
-    USEDLOG_TABLE insert_data = {1, "2020-02-02 20:30:20", 222, "00:20:20", 222};
-    usedlog_delete(1);
-    usedlog_insert(insert_data);
-    usedlog_select(1);
-    usedlog_delete(1);
-}
-*/
-    
-//追加
 int usedlog_insert(USEDLOG_TABLE ult){
     MYSQL *conn     = NULL;
     char sql_str[511];
@@ -126,7 +108,6 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
     }
     mysql_free_result(resp);
 
-    //print_ult(res_data, n);
     return res_data;
 }
 

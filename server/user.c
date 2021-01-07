@@ -1,9 +1,3 @@
-//user_get.c
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-//#include <mysql/mysql.h>
 #include "jogging.h"
 
 USER_TABLE user_select(int id) {
@@ -60,21 +54,25 @@ USER_TABLE user_select(int id) {
     mysql_close(conn);
 
     // 誕生日
-    int year, month, day;
-    sscanf(res_data.birth, "%d-%d-%d", &year, &month, &day);
+    int birthyear, birthmonth, birthday;
+    sscanf(res_data.birth, "%d-%d-%d", &birthyear, &birthmonth, &birthday);
 
     // 今日
-    int localmonth, localday;
+    int localyear, localmonth, localday;
     time_t timer;
     struct tm *local;
 
     timer = time(NULL);
     local = localtime(&timer);
+    localyear = local->tm_year + 1900;
     localmonth = local->tm_mon + 1;
-    localday = local->mday;
+    localday = local->tm_mday;
 
-    if(localmonth == month && localday == day) {
-        res_daga.age++;
+    if( (localmonth < birthmonth)  || (localmonth == birthmonth && localday < birthday) ) {
+        res_data.age = localyear - birthyear - 1;
+        user_update(res_data);
+    } else {
+        res_data.age = localyear - birthyear;
         user_update(res_data);
     }
     
@@ -102,10 +100,17 @@ int user_update(USER_TABLE ut){
     // クエリ実行
     char id_buf[9];
     snprintf(id_buf, 9, "%08d", ut.id);
-    snprintf( &sql_str[0] , sizeof(sql_str)-1 , "UPDATE USER_TABLE\
-    SET weight = %3.1f, height = %3.1f, age = %d, goal_weight = %3.1f, goal_term = '%s', mail_address = '%s'\
-    where id = '%s'" \
-            , ut.weight, ut.height, ut.age, ut.goal_weight, ut.goal_term, ut.mail_address, id_buf);
+    snprintf( &sql_str[0] , sizeof(sql_str)-1 ,
+        "UPDATE USER_TABLE SET \
+        weight = %3.1f, \
+        height = %3.1f, \
+        age = %d, \
+        goal_weight = %3.1f, \
+        goal_term = '%s', \
+        mail_address = '%s'\
+        where id = '%s'", \
+        ut.weight, ut.height, ut.age, ut.goal_weight, 
+        ut.goal_term, ut.mail_address, id_buf);
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
         mysql_close(conn);
@@ -137,8 +142,11 @@ int user_insert(USER_TABLE ut) {
 
     char id_buf[9];
     snprintf(id_buf, 9, "%08d", ut.id);
-    sprintf(sql_str, "INSERT INTO USER_TABLE VALUES('%08d', '%s', '%s', '%s', %lf, %lf, %d, %d, '%s', %lf, '%s', '%s')"\
-          , ut.id, ut.login_name, ut.pass, ut.name, ut.weight, ut.height, ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
+    sprintf(sql_str, 
+        "INSERT INTO USER_TABLE \
+         VALUES(%d, '%08d', '%s', '%s', '%s', %lf, %lf, %d, %d, '%s', %lf, '%s', '%s')",
+        ut.id, ut.login_name, ut.pass, ut.name, ut.weight, ut.height, 
+        ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
         mysql_close(conn);
@@ -146,16 +154,8 @@ int user_insert(USER_TABLE ut) {
     }
     //後片付け
     mysql_close(conn);
+
+    saved_route_insert(ut.id);
+
     return 0;
 }
-
-/*
-//追加:テスト用
-int main(){
-    // クエリ実行
-    //USER_TABLE ut = {3, "MJ", "makeinu", "マケイヌ・ジャクサン", 64.0, 168.7, 45, 1, "2009-06-25", 45.0, "2021/04/01", "goodloser@goodluck.hg"};
-    USER_TABLE ut = {3, "MJ", "makeinu", "マケイヌ・ジャクサン", 64.0, 168.7, 45, 1, "2009-06-25", 45.0, "2025/12/31", "goodloser@goodluck.hg"};
-    //user_insert(ut, sql_str);
-    user_update(ut);
-}
-*/
