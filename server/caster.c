@@ -75,7 +75,7 @@ FILE *ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
     for (i = 0; i < n; i++) {
         fprintf(
             fp,
-            "[%s\n%d\n%s\n%d\n]\n", 
+            "[%s\n%lf\n%s\n%d\n]\n", 
             ult[i].jog_datetime, 
             ult[i].jog_distance, 
             ult[i].jog_time, 

@@ -8,7 +8,6 @@
 #define MSGSIZE 1024
 #define BUFSIZE (MSGSIZE + 1)
 
-
 int main() {
 
     int sock;                       //local socket descriptor
@@ -50,32 +49,27 @@ int main() {
             perror("send() failed.");
             exit(EXIT_FAILURE);
         }
-
-        int byteRcvd  = 0;
-        int byteIndex = 0;
-        while (byteIndex < MSGSIZE) {
-            byteRcvd = recv(sock, &recvBuffer[byteIndex], 1, 0);
-            if (byteRcvd > 0) {
-                if (recvBuffer[byteIndex] == '\n'){
-                    recvBuffer[byteIndex] = '\0';
-                    if (strcmp(recvBuffer, "quit") == 0) {
-                        close(sock);
-                        return EXIT_SUCCESS;
-                    } else {
-                        break;
-                    }
-                }
-                byteIndex += byteRcvd;
-            } else if(byteRcvd == 0){
-                perror("ERR_EMPTY_RESPONSE");
-                exit(EXIT_FAILURE);
-            } else {
-                perror("recv() failed.");
-                exit(EXIT_FAILURE);
-            }
-        }
-        printf("server return: %s\n", recvBuffer);
     }
 
     return EXIT_SUCCESS;
+}
+
+long int getFileSize(const char* fileName)
+{
+    FILE* fp = fopen(fileName, "rb");
+    if (fp == NULL) {
+        return 0;
+    }
+
+    if (fseek(fp, 0L, SEEK_END) == 0) {
+        fpos_t pos;
+
+        if (fgetpos(fp, &pos) == 0) {
+            fclose(fp);
+            return (long int)pos;
+        }
+    }
+
+    fclose(fp);
+    return 0;
 }

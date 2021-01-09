@@ -1,14 +1,18 @@
 #include"jogging.h"
 
-void print_srt(SAVED_ROUTE_TABLE srt);
-int  select_test();
+int  calorie_select_test();
 
 int main() {
-    int result = select_test();
+    int result1 = calorie_select_test();
+    int result2 = calorie_select_test();
+    int result3 = calorie_select_test();
+    int result4 = calorie_select_test();
+
+    int result = result1 + result2 + result3 + result4;
     printf("select test result : %d\n", result);
 }
 
-int select_test() {
+int calorie_select_test() {
     int error_sum = 0;
 
     // calorie_table access test
@@ -17,13 +21,6 @@ int select_test() {
     printf("id: %d\n", ct.food);
     printf("    food_name    : %s\n", ct.food_name);
     printf("    food_calorie : %d\n", ct.food_calorie);
-
-    error_sum += srt0.error + srt1.error + srt2.error + srt3.error;
-
-    print_srt(srt0);
-    print_srt(srt1);
-    print_srt(srt2);
-    print_srt(srt3);
 
     return error_sum;
 }

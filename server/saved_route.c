@@ -10,6 +10,10 @@ int saved_route_update(int user_id, int route_id, char route_file[]) {
 
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
+    if ( 1 <= route_id && route_id <= 5) {
+        return 1;
+    }
+
     // SQL発行
     sprintf(sql_str, "UPDATE SAVED_ROUTE_TABLE SET saved_route%d='%s' where id = '%d", 
         route_id, &route_file[0], user_id);
@@ -44,7 +48,7 @@ int saved_route_insert(int user_id) {
 
     // SQL発行
     sprintf(sql_str, 
-        "INSERT INTO SAVED_ROUTE_TABLE values('%08d', "", "", "", "", "")", 
+        "INSERT INTO SAVED_ROUTE_TABLE values('%08d', \"\", \"\", \"\", \"\", \"\")", 
         user_id);
 
     // mysql接続
@@ -53,12 +57,12 @@ int saved_route_insert(int user_id) {
         // error
         return 1;
     }
+
     // 実行
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
-        printf("error!\n");
         mysql_close(conn);
-        return 1;
+        return 2;
     }
 
     mysql_close(conn);

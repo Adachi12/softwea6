@@ -16,7 +16,7 @@ CALORIE_TABLE calorie_select() {
     CALORIE_TABLE resp_data = {1, -1, "", -1};
 
     snprintf(&sql_str[0], sizeof(sql_str)-1, \
-        "SELECT * FROM CALORIE_TABLE where food='%08d'", \
+        "SELECT * FROM CALORIE_TABLE where food='%08d'", 
         rand_id);
 
     // mysql接続
