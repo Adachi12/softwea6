@@ -75,7 +75,7 @@ FILE *ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
     for (i = 0; i < n; i++) {
         fprintf(
             fp,
-            "[%s\n%d\n%s\n%d\n]\n", 
+            "[%s\n%lf\n%s\n%d\n]\n", 
             ult[i].jog_datetime, 
             ult[i].jog_distance, 
             ult[i].jog_time, 
@@ -110,9 +110,9 @@ USER_TABLE ut_str2tab_select(char *ut_cast) {
     
     sscanf(
         ut_cast, 
-        "%s\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%s", 
-        &ut.login_name[0], &ut.name[0], &ut.weight, 
-        &ut.height, &ut.age, &ut.sex, &ut.birth[0], 
+        "%d\n%s\n%s\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%s", 
+        &ut.id, &ut.login_name[0], &ut.pass[0], &ut.name[0], 
+        &ut.weight, &ut.height, &ut.age, &ut.sex, &ut.birth[0], 
         &ut.goal_weight, &ut.goal_term[0], &ut.mail_address
     );
     
@@ -122,9 +122,10 @@ USER_TABLE ut_str2tab_select(char *ut_cast) {
 int ut_tab2str_select(char *ut_buf, USER_TABLE ut) {
     sprintf(
         ut_buf, 
-        "%s\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%s", 
-        ut.login_name, ut.name, ut.weight, ut.height, ut.age, 
-        ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address
+        "%d\n%s\n%s\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%s", 
+        ut.id, ut.login_name, ut.pass, ut.name, ut.weight,
+        ut.height, ut.age, ut.sex, ut.birth, ut.goal_weight,
+        ut.goal_term, ut.mail_address
     );
     return 0;
 }
