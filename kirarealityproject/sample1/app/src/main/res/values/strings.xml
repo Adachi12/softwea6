@@ -1,0 +1,8 @@
+<!-- 文字列関連のリソースを管理するファイル -->
+<!-- 文字列を、プログラム外で定義することで、色々良い -->
+<!-- <string name="app_name">Application</string>と記述すると -->
+<!-- アプリ側では、getStrign(R.string.app_name) もしくは
+     context.getString(R.string.app_name) で取得する -->
+<resources>
+    <string name="app_name">sample1</string>
+</resources>
