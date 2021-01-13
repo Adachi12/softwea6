@@ -45,6 +45,11 @@
             android:label="SubMap">
 
         </activity>
+        <activity
+            android:name=".PauseRunningActivity"
+            android:label="SubMap">
+
+        </activity>
     </application>
 
 </manifest>

@@ -8,85 +8,32 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.widget.Button
-import android.view.View
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import java.io.Serializable
 //map
 import android.location.LocationManager
 import android.content.Context
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationProvider
 import android.provider.Settings
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 
-class RunningActivity : AppCompatActivity(), OnMapReadyCallback  {
+class RunningActivity : AppCompatActivity(), OnMapReadyCallback {
     val handler = Handler()                      //
-    var timeValue = 0                              // 秒カウンター
+    var timeValue = 0                              // 秒カウンタ
     private lateinit var mMap: GoogleMap
     private lateinit var locationManager: LocationManager
 
     companion object {
-//        const val EXTRA_MESSAGE = "com.example.Kotlintestactivitydatatrans.MESSAGE"
+        //        const val EXTRA_MESSAGE = "com.example.Kotlintestactivitydatatrans.MESSAGE"
+        val Key_Running = "key"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
-
-        //画面遷移用のボタンの取得
-        val button1 = findViewById<Button>(R.id.stopButton)
-        val button2 = findViewById<Button>(R.id.startButton)
-        //画面遷移
-//        button1.setOnClickListener {
-//            val intent = Intent(this@MapsActivity, SubActivity::class.java)
-//            startActivity(intent)
-//        }
-        //時間
-        val runnable = object : Runnable {
-            // メッセージ受信が有った時かな?
-            override fun run() {
-                timeValue++                      // 秒カウンタ+1
-                timeToText(timeValue)?.let {        // timeToText()で表示データを作り
-                    val timeText = findViewById<TextView>(R.id.timeText)
-                    timeText.text = it            // timeText.textへ代入(表示)
-
-                }
-                handler.postDelayed(this, 1000)  // 1000ｍｓ後に自分にpost
-            }
-        }
-        handler.post(runnable)
-        // startボタン押された時(setOnClickListener)の処理
-//
-//        button2.setOnClickListener {
-//                          // 最初のキュー登録
-//        }
-        // stopボタン押された時の処理
-        button1.setOnClickListener {
-            handler.removeCallbacks(runnable)      // キューキャンセル
-            //画面遷移
-            val intent = Intent(this@RunningActivity, EndRunningActivity::class.java)
-            //値移行
-            val timeText = findViewById<TextView>(R.id.timeText)
-            val state = dataState(timeText.text.toString())
-            intent.putExtra(EndRunningActivity.Key_State, state);
-            startActivity(intent)
-        }
-        // resetボタン押された時の処理
-//            reset.setOnClickListener {
-//                handler.removeCallbacks(runnable)      // キューキャンセル
-//                timeValue = 0                          // 秒カウンタークリア
-//                timeToText()?.let {                  // timeToText()で表示データを作り
-//                    timeText.text = it                // timeText.textに表示
-//                }
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -113,6 +60,9 @@ class RunningActivity : AppCompatActivity(), OnMapReadyCallback  {
 
         }
     }
+
+
+
     //位置測定スタート
     private fun locationStart() {
         Log.d("debug", "locationStart()")
@@ -147,6 +97,7 @@ class RunningActivity : AppCompatActivity(), OnMapReadyCallback  {
                 this)
 
     }
+
     override fun onRequestPermissionsResult(
             requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == 1000) {
@@ -166,10 +117,70 @@ class RunningActivity : AppCompatActivity(), OnMapReadyCallback  {
     }
 
 
+    //実際の動き
+    override fun onStart() {
+        super.onStart()
+        //画面遷移用のボタンの取得
+        val button1 = findViewById<Button>(R.id.stopButton)
+        val button2 = findViewById<Button>(R.id.startButton)
+        //serializableから値取得
+        val state_running = intent.getSerializableExtra(Key_Running)
+
+        //画面遷移
+//        button1.setOnClickListener {
+//            val intent = Intent(this@MapsActivity, SubActivity::class.java)
+//            startActivity(intent)
+//        }
+//        //時間の初期化の有無
+//        if (state_running is dataState) {
+//            if (state_running.key == 1) {
+//                val oma = state_running.time
+//            }
+//        }
+
+        val runnable = object : Runnable {
+            // メッセージ受信が有った時かな?
+            override fun run() {
+                timeValue++                      // 秒カウンタ+1
+                timeToText(timeValue)?.let {        // timeToText()で表示データを作り
+                    val timeText = findViewById<TextView>(R.id.timeText)
+                    timeText.text = it            // timeText.textへ代入(表示)
+
+                }
+                handler.postDelayed(this, 1000)  // 1000ｍｓ後に自分にpost
+            }
+        }
+        handler.post(runnable)
+        // startボタン押された時(setOnClickListener)の処理
+//
+//        button2.setOnClickListener {
+//                          // 最初のキュー登録
+//        }
+        // stopボタン押された時の処理
+        button1.setOnClickListener {
+            handler.removeCallbacks(runnable)      // キューキャンセル
+            //画面遷移
+            val intent = Intent(this@RunningActivity, PauseRunningActivity::class.java)
+            //値移行
+            val timeText = findViewById<TextView>(R.id.timeText)
+            val state_pause = dataState(timeText.text.toString(),timeValue)
+            intent.putExtra(PauseRunningActivity.Key_Pause, state_pause);
+
+            startActivity(intent)
+        }
+        // resetボタン押された時の処理
+//            reset.setOnClickListener {
+//                handler.removeCallbacks(runnable)      // キューキャンセル
+//                timeValue = 0                          // 秒カウンタークリア
+//                timeToText()?.let {                  // timeToText()で表示データを作り
+//                    timeText.text = it                // timeText.textに表示
+//                }
 
 
+    }
 
-    // 時間表示
+
+    // 時間表示メソッド
     private fun timeToText(time: Int = 0): String? {
         return if (time < 0) {
             null                                    // 時刻が0未満の場合 null
