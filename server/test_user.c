@@ -12,6 +12,12 @@ void print_ut(USER_TABLE ut);
 
 
 int main(int argc, char *argv[]) {
+    if ( argc == 1 ) {
+        printf("Please enter a command line argument : \
+            'insert' or 'update' or 'select'\n");
+        return 1;
+    }
+
     if ( strcmp(argv[1], "insert") == 0 ) {
         user_insert_test_start();
     } else if ( strcmp(argv[1], "update") == 0 ) {
@@ -22,6 +28,8 @@ int main(int argc, char *argv[]) {
     } else {
         perror("Invalid command line argument\n");
     }
+
+    return 0;
 }
 
 int user_update_test_start() {

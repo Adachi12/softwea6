@@ -41,7 +41,6 @@ USER_TABLE user_select(int id) {
     while((row = mysql_fetch_row(resp)) != NULL ){
         resp_data.error = 0;
         resp_data.id = atoi(row[0]);
-        sprintf(resp_data.login_name, "%s", row[1]); 
         sprintf(resp_data.pass, "%s", row[2]); 
         sprintf(resp_data.name, "%s", row[3]); 
         resp_data.weight = atof(row[4]);
@@ -147,8 +146,8 @@ int user_insert(USER_TABLE ut) {
 
     sprintf(sql_str, 
         "INSERT INTO USER_TABLE \
-         VALUES('%08d', '%s', '%s', '%s', %lf, %lf, %d, %d, '%s', %lf, '%s', '%s')",
-        ut.id, ut.login_name, ut.pass, ut.name, ut.weight, ut.height, 
+         VALUES('%08d', "", '%s', '%s', %lf, %lf, %d, %d, '%s', %lf, '%s', '%s')",
+        ut.id, ut.pass, ut.name, ut.weight, ut.height, 
         ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
     if( mysql_query( conn , &sql_str[0] ) ){
         // error

@@ -10,13 +10,14 @@ int saved_route_update(int user_id, int route_id, char route_file[]) {
 
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
-    if ( 1 <= route_id && route_id <= 5) {
+    if ( !(1 <= route_id && route_id <= 5) ) {
         return 1;
     }
 
     // SQL発行
-    sprintf(sql_str, "UPDATE SAVED_ROUTE_TABLE SET saved_route%d='%s' where id = '%d", 
+    sprintf(sql_str, "UPDATE SAVED_ROUTE_TABLE SET saved_route%d='%s' where id = '%08d'", 
         route_id, &route_file[0], user_id);
+    printf("RUN : %s\n", sql_str);
 
     // mysql接続
     conn = mysql_init(NULL);
@@ -82,13 +83,15 @@ FILE *saved_route_select(int user_id, int route_id) {
     char *db_name   = "jogging";
 
     // 返信用のデータ
+    char file_name[7];
     FILE *fp = NULL;
 
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
     // SQL発行
     sprintf(sql_str, "SELECT saved_route%d FROM SAVED_ROUTE_TABLE where id='%08d'", 
-        user_id, route_id);
+        route_id, user_id);
+    printf("RUN : %s\n", sql_str);
 
     // mysql接続
     conn = mysql_init(NULL);
@@ -107,7 +110,9 @@ FILE *saved_route_select(int user_id, int route_id) {
     // レスポンス
     resp = mysql_use_result(conn);
     while((row = mysql_fetch_row(resp)) != NULL ){
-        fp = fopen(row[0], "r");
+        snprintf(file_name, 7, "%s", row[0]);
+        printf("Access to %s\n", file_name);
+        fp = fopen(file_name, "r");
     }
 
     mysql_free_result(resp);

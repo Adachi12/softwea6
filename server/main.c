@@ -147,11 +147,10 @@ void *conn_process() {
 }
 
 
-
 int main() {
     pthread_t a;
 
-    int errno; 
+    int errnu; 
 
     memset(&servSockAddr, 0, sizeof(servSockAddr));
     servSockAddr.sin_family      = AF_INET;
@@ -165,12 +164,12 @@ int main() {
         pthread_exit(&servSock);
     }
 
-    if (( errno = bind(servSock, (struct sockaddr *) &servSockAddr, sizeof(servSockAddr)) ) < 0 ) {
+    if (( errnu = bind(servSock, (struct sockaddr *) &servSockAddr, sizeof(servSockAddr)) ) < 0 ) {
         perror("bind() failed.");
         pthread_exit(&errno);
     }
 
-    if (( errno = listen(servSock, QUEUELIMIT) ) < 0) {
+    if (( errnu = listen(servSock, QUEUELIMIT) ) < 0) {
         perror("listen() failed.");
         pthread_exit(&errno);
     }

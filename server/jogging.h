@@ -45,7 +45,6 @@ typedef struct {
 typedef struct {
     int     error;
     int     id;
-    char    login_name[11];
     char    pass[33];
     char    name[256];
     double  weight;

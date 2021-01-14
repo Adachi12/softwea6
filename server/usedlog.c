@@ -42,12 +42,11 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
     char *passwd    = "mariadb";
     char *db_name   = "jogging";
 
-    // レスポンスのループインデックス
-    int i;
+    // ループインデックス
+    int i = 0;
 
     // 返信用のデータ
     USEDLOG_TABLE *res_data;
-    res_data = (USEDLOG_TABLE *)malloc(sizeof(USEDLOG_TABLE));
 
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
@@ -79,7 +78,7 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
     }
     mysql_free_result(resp);
     
-    res_data = (USEDLOG_TABLE *)realloc(res_data, sizeof(USEDLOG_TABLE) * (*n));
+    res_data = (USEDLOG_TABLE *)malloc(sizeof(USEDLOG_TABLE) * (*n));
 
 
     // アクセスSQL文
@@ -96,13 +95,12 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
 
     // レスポンス
     resp = mysql_use_result(conn);
-    i = 0;
     while((row = mysql_fetch_row(resp)) != NULL ) {
         res_data[i].error = 0;
-        res_data[i].id = atoi(row[0]);
-        sprintf(res_data[i].jog_datetime, "%s", row[1]);
+        res_data[i].id = id;
+        sprintf(res_data[i].jog_datetime, "%19s", row[1]);
         res_data[i].jog_distance = atof(row[2]);
-        sprintf(res_data[i].jog_time, "%s", row[3]);
+        sprintf(res_data[i].jog_time, "%9s", row[3]);
         res_data[i].burned_calorie = atoi(row[4]);
         i++;
     }
@@ -120,16 +118,12 @@ int usedlog_delete(int id) {
     char *db_name   = "jogging";
 
     // SQL発行
-    // cast
-    char id_buf[9];
-    snprintf(id_buf, 9, "%08d", id);
-
     char month_ago_buf[20];
     month_ago(month_ago_buf);
     
     // write to buffer
-    sprintf(sql_str, "DELETE from USEDLOG_TABLE \
-        where id ='%s' AND jog_datetime <= '%s'", id_buf, &month_ago_buf[0]);
+    sprintf(sql_str, "DELETE from USEDLOG_TABLE where jog_datetime <= '%s'", 
+        &month_ago_buf[0]);
     printf("%s\n", sql_str);
 
     // mysql接続
@@ -161,26 +155,14 @@ void month_ago(char *buf) {
     int diff = 30 - tm.tm_mday;
     tm.tm_mday = days[tm.tm_mon] - diff;
     if (tm.tm_mon == 0) {
-        tm.tm_mon = 12;
+        tm.tm_mon = 11;
+        tm.tm_year--;
     } else {
         tm.tm_mon--;
     }
 
     // 求めた日付をもとに文字列を生成
     snprintf(buf, 20, "%04d/%02d/%02d %02d:%02d:%02d", \
-        tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, \
+        tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday - 1, \
         tm.tm_hour, tm.tm_min, tm.tm_sec);
-}
-
-void print_ult(USEDLOG_TABLE *ult, int n) {
-    printf("id : %d\n", ult[0].id);
-
-    int i = 0;
-    for(i = 0; i < n; i++) {
-        printf("    datetime : %s\n", ult[i].jog_datetime);
-        printf("    distance : %1.2f\n", ult[i].jog_distance);
-        printf("    jogtime  : %8s\n", ult[i].jog_time);
-        printf("    calorie  : %d\n", ult[i].burned_calorie);
-        printf("\n");
-    }
 }
