@@ -1,5 +1,5 @@
 #include"jogging.h"
-
+​
 /*
 void test() {
     
@@ -58,18 +58,18 @@ void main() {
     printf("USER_TABLE_SELECT:\nログイン名：%s\n氏名：%s\n体重：%lf\n身長：%lf\n年齢：%d\n性別：%d\n生年月日：%s\n目標体重：%lf\n目標期間%s\nメアド：%s\n", ut.login_name, ut.name, ut.weight, ut.height, ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
     */
     //insert用
-    USER_TABLE ut = {0, 1, "loginname", "password", "name", 56.2, 181.1, 21, 1, "1999-12-31", 60.3, "2022-12-31", "mail-address@exaple.ex"};
-    char ut_cast[] = "49\n1\nloginname\npassword\nname\n56.2\n181.1\n21\n1\n1999-12-31\n60.3\n2022-12-31\nmail-address@exaple.ex";
+    USER_TABLE ut = {0, 1, "password", "name", 56.2, 181.1, 21, 1, "1999-12-31", 60.3, "2022-12-31", "mail-address@exaple.ex"};
+    char ut_cast[] = "49\n1\npassword\nname\n56.2\n181.1\n21\n1\n1999-12-31\n60.3\n2022-12-31\nmail-address@exaple.ex";
     
     char ut_buf[BUFSIZE];
     ut_tab2str_select(&ut_buf[0], ut);
     printf("ut_tab2str_select:%s\n", ut_buf);
     
     ut = ut_str2tab_update(ut_cast);
-    printf("USER_TABLE_SELECT_update:ヘッダ：%d\nユーザID%d\nログイン名：%s\nパスワード：%s\n氏名：%s\n体重：%lf\n身長：%lf\n年齢：%d\n性別：%d\n生年月日：%s\n目標体重：%lf\n目標期間%s\nメアド：%s\n", head_buf, ut.id, ut.login_name, ut.pass, ut.name, ut.weight, ut.height, ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
+    printf("USER_TABLE_SELECT_update:ヘッダ：%d\nユーザID%d\nパスワード：%s\n氏名：%s\n体重：%lf\n身長：%lf\n年齢：%d\n性別：%d\n生年月日：%s\n目標体重：%lf\n目標期間%s\nメアド：%s\n", head_buf, ut.id, ut.pass, ut.name, ut.weight, ut.height, ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
     
     ut = ut_str2tab_insert(ut_cast);
-    printf("USER_TABLE_SELECT_insert:ヘッダ：%d\nユーザID%d\nログイン名：%s\nパスワード：%s\n氏名：%s\n体重：%lf\n身長：%lf\n年齢：%d\n性別：%d\n生年月日：%s\n目標体重：%lf\n目標期間%s\nメアド：%s\n", head_buf, ut.id, ut.login_name, ut.pass, ut.name, ut.weight, ut.height, ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
+    printf("USER_TABLE_SELECT_insert:ヘッダ：%d\nユーザID%d\nパスワード：%s\n氏名：%s\n体重：%lf\n身長：%lf\n年齢：%d\n性別：%d\n生年月日：%s\n目標体重：%lf\n目標期間%s\nメアド：%s\n", head_buf, ut.id, ut.pass, ut.name, ut.weight, ut.height, ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
     
     
 }
