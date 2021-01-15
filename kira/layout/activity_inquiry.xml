@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckUserInfo"
+    >
+
+    <TextView
+        android:id="@+id/Zentai_Inquiry_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:autoSizeTextType="uniform"
+        android:background="#B4B4B4"
+        android:gravity="center_horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView android:id="@+id/Inquiry_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textSize="50dp"
+        android:gravity="center_horizontal"
+        android:background="@color/white"
+        android:text="お問い合わせ"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+
+    <TextView
+        android:id="@+id/Explanation_Inquiry_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        android:text="下記フォーマットにご記入いただき、「入力内容確認」ボタンを押して内容をご確認のうえ、送信してください"
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.11" />
+
+    <TextView
+        android:id="@+id/InquiryContent_write_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/white"
+        android:text="お問い合わせ内容"
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38" />
+
+    <TextView android:id="@+id/UserNameInquiry_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:text=" お名前: "
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.652" />
+
+    <TextView
+        android:id="@+id/UserId_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:text=" ID:"
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.71" />
+
+    <TextView
+        android:id="@+id/UserPhoneNumber_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:text=" 電話番号: "
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.768" />
+
+    <TextView
+        android:id="@+id/UserGoalwidth_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:text=" メールアドレス:"
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.826" />
+
+    <Button
+        android:id="@+id/button_ChangeUserInfo_OCE5"
+        android:layout_width="375dp"
+        android:layout_height="75dp"
+        android:autoSizeTextType="uniform"
+        android:text="ユーザ情報を変更する"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/edit_InquiryContent_OCE"
+        android:layout_width="400dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="8dp"
+        android:ems="140"
+
+        app:layout_constraintBottom_toBottomOf="@+id/InquiryContent_write_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/InquiryContent_write_OCE"
+        app:layout_constraintTop_toTopOf="@+id/InquiryContent_write_OCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/edit_UserNameInquiry_OCE"
+        android:layout_width="210dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="88dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserNameInquiry_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/UserNameInquiry_OCE"
+        app:layout_constraintTop_toTopOf="@+id/UserNameInquiry_OCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/edit_UserId_OCE"
+        android:layout_width="210dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="144dp"
+        android:ems="10"
+        android:inputType="text"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserId_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/UserId_OCE"
+        app:layout_constraintTop_toTopOf="@+id/UserId_OCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/edit_UserPhoneNumber_OCE"
+        android:layout_width="210dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="55dp"
+        android:ems="10"
+        android:inputType="phone"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserPhoneNumber_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/UserPhoneNumber_OCE"
+        app:layout_constraintTop_toTopOf="@+id/UserPhoneNumber_OCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/edit_MailAddress_OCE"
+        android:layout_width="210dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="30dp"
+        android:ems="20"
+        android:inputType="textEmailAddress"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserGoalwidth_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/UserGoalwidth_OCE"
+        app:layout_constraintTop_toTopOf="@+id/UserGoalwidth_OCE" />
+
+    <EditText
+        android:id="@+id/edit_UserGoalPeriod_OCE"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="number"
+
+        tools:layout_editor_absoluteX="241dp"
+        tools:layout_editor_absoluteY="588dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
