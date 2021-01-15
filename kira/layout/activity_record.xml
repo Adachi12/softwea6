@@ -100,75 +100,140 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.165" />
 
-    <TextView android:id="@+id/UserSex_OCE1"
+    <TextView
+        android:id="@+id/UserActivity_OCE1"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:autoSizeTextType="uniform"
+        android:layout_height="60dp"
         android:background="@color/white"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
-
-    <TextView android:id="@+id/UserSex_OCE2"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:autoSizeTextType="uniform"
-        android:background="@color/white"
+        android:textSize="20dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.658" />
+        app:layout_constraintVertical_bias="0.605" />
 
     <TextView
-        android:id="@+id/UserSex_OCE3"
+        android:id="@+id/UserActivity_OCE2"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:autoSizeTextType="uniform"
+        android:layout_height="60dp"
         android:background="@color/white"
+        android:textSize="20dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.716" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
-        android:id="@+id/UserSex_OCE4"
+        android:id="@+id/UserActivity_OCE3"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:autoSizeTextType="uniform"
+        android:layout_height="60dp"
         android:background="@color/white"
+        android:text=" 走行距離:10.5km  日付:12/31 \n スタート:16:44  走行時間:32:33  "
+        android:textSize="20dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.774" />
+        app:layout_constraintVertical_bias="0.795" />
 
     <TextView
-        android:id="@+id/UserSex_OCE5"
+        android:id="@+id/UserActivity_OCE4"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:autoSizeTextType="uniform"
+        android:layout_height="60dp"
         android:background="@color/white"
+        android:text=" 走行距離:10.5km  日付:12/31 \n スタート:16:44  走行時間:32:33  "
+        android:textSize="20dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832" />
+        app:layout_constraintVertical_bias="0.891" />
+
+    <TextView
+        android:id="@+id/UserActivity_OCE5"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:text=" 走行距離:10.5km  日付:12/31 \n スタート:16:44  走行時間:32:33  "
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.985" />
 
     <Button
+        android:id="@+id/button_AddActivityManually_record_OCE1"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:text="アクティビティを追加"
+        android:textSize="13dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserActivity_OCE1"
+        app:layout_constraintEnd_toEndOf="@+id/UserActivity_OCE1"
+        app:layout_constraintTop_toTopOf="@+id/UserActivity_OCE1"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button_AddActivityManually_record_OCE2"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:text="アクティビティを追加"
+        android:textSize="13dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserActivity_OCE2"
+        app:layout_constraintEnd_toEndOf="@+id/UserActivity_OCE2"
+        app:layout_constraintTop_toTopOf="@+id/UserActivity_OCE2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_AddActivityManually_record_OCE3"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:text="アクティビティを追加"
+        android:textSize="13dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserActivity_OCE3"
+        app:layout_constraintEnd_toEndOf="@+id/UserActivity_OCE3"
+        app:layout_constraintTop_toTopOf="@+id/UserActivity_OCE3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_AddActivityManually_record_OCE4"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:text="アクティビティを追加"
+        android:textSize="13dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserActivity_OCE4"
+        app:layout_constraintEnd_toEndOf="@+id/UserActivity_OCE4"
+        app:layout_constraintTop_toTopOf="@+id/UserActivity_OCE4"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_AddActivityManually_record_OCE5"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:text="アクティビティを追加"
+        android:textSize="13dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserActivity_OCE5"
+        app:layout_constraintEnd_toEndOf="@+id/UserActivity_OCE5"
+        app:layout_constraintTop_toTopOf="@+id/UserActivity_OCE5"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!--<Button
         android:id="@+id/button_AddActivityManually_record_OCE"
         android:layout_width="375dp"
         android:layout_height="75dp"
@@ -180,6 +245,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.95" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

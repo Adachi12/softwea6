@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddActivityManually" >
+    tools:context=".AddActivityManually1" >
 
     <TextView
         android:id="@+id/Zentai_changeRecord_OCE"
@@ -44,7 +44,7 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:textSize="30dp"
-        android:text="走行距離:                              km"
+        android:text="走行距離:                             km"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -115,6 +115,58 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
+        android:id="@+id/edit_day_OCE"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginEnd="126dp"
+        android:ems="2"
+        android:inputType="number"
+
+        app:layout_constraintBottom_toBottomOf="@+id/day_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/day_OCE"
+        app:layout_constraintTop_toTopOf="@+id/day_OCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/edit_day_OCE2"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginEnd="60dp"
+        android:ems="2"
+        android:inputType="number"
+
+        app:layout_constraintBottom_toBottomOf="@+id/day_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/day_OCE"
+        app:layout_constraintTop_toTopOf="@+id/day_OCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/edit_startTime_OCE"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginEnd="98dp"
+        android:ems="2"
+        android:inputType="number"
+
+        app:layout_constraintBottom_toBottomOf="@+id/startTime_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/startTime_OCE"
+        app:layout_constraintTop_toTopOf="@+id/startTime_OCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/edit_startTime_OCE2"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginEnd="51dp"
+        android:ems="2"
+        android:inputType="number"
+
+        app:layout_constraintBottom_toBottomOf="@+id/startTime_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/startTime_OCE"
+        app:layout_constraintTop_toTopOf="@+id/startTime_OCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
         android:id="@+id/edit_exerciseTime_OCE"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
@@ -151,71 +203,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/exerciseTime_OCE"
         app:layout_constraintEnd_toEndOf="@+id/exerciseTime_OCE"
         app:layout_constraintTop_toTopOf="@+id/exerciseTime_OCE"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/edit_day_OCE"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginEnd="126dp"
-        android:ems="2"
-        android:inputType="number"
-
-        app:layout_constraintBottom_toBottomOf="@+id/day_OCE"
-        app:layout_constraintEnd_toEndOf="@+id/day_OCE"
-        app:layout_constraintTop_toTopOf="@+id/day_OCE"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/edit_day_OCE2"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginEnd="60dp"
-        android:ems="2"
-        android:inputType="number"
-
-        app:layout_constraintBottom_toBottomOf="@+id/day_OCE"
-        app:layout_constraintEnd_toEndOf="@+id/day_OCE"
-        app:layout_constraintTop_toTopOf="@+id/day_OCE"
-        app:layout_constraintVertical_bias="0.0" />
-
-<!--    <EditText
-        android:id="@+id/edit_startTime_OCE"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginEnd="142dp"
-        android:ems="2"
-        android:inputType="number"
-
-        app:layout_constraintBottom_toBottomOf="@+id/startTime_OCE"
-        app:layout_constraintEnd_toEndOf="@+id/startTime_OCE"
-        app:layout_constraintTop_toTopOf="@+id/startTime_OCE"
-        app:layout_constraintVertical_bias="0.0" /> -->
-
-    <EditText
-        android:id="@+id/edit_startTime_OCE"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginEnd="98dp"
-        android:ems="2"
-        android:inputType="number"
-
-        app:layout_constraintBottom_toBottomOf="@+id/startTime_OCE"
-        app:layout_constraintEnd_toEndOf="@+id/startTime_OCE"
-        app:layout_constraintTop_toTopOf="@+id/startTime_OCE"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/edit_startTime_OCE2"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginEnd="51dp"
-        android:ems="2"
-        android:inputType="number"
-
-        app:layout_constraintBottom_toBottomOf="@+id/startTime_OCE"
-        app:layout_constraintEnd_toEndOf="@+id/startTime_OCE"
-        app:layout_constraintTop_toTopOf="@+id/startTime_OCE"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button android:id="@+id/button_confirm_AAM_OCE"
