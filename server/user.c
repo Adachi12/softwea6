@@ -144,15 +144,24 @@ int user_insert(USER_TABLE ut) {
         return 1;
     }
 
-    sprintf(sql_str, 
-        "INSERT INTO USER_TABLE \
-         VALUES('%08d', "", '%s', '%s', %lf, %lf, %d, %d, '%s', %lf, '%s', '%s')",
-        ut.id, ut.pass, ut.name, ut.weight, ut.height, 
-        ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
-    if( mysql_query( conn , &sql_str[0] ) ){
-        // error
-        mysql_close(conn);
-        return 1;
+    while(1) {
+        struct timeval myTime;
+        gettimeofday(&myTime, NULL);
+        unsigned int seed = (unsigned int)myTime.tv_usec;
+        srand(seed);   // random access variable
+        int rand_id = rand() % 99999999;
+
+        sprintf(sql_str, 
+            "INSERT INTO USER_TABLE \
+            VALUES('%08d', \"\", '%s', '%s', %lf, %lf, %d, %d, '%s', %lf, '%s', '%s')",
+            rand_id, ut.pass, ut.name, ut.weight, ut.height, 
+            ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
+        printf("run : %s\n", sql_str);
+        if( mysql_query( conn , &sql_str[0] ) ){
+            perror("Query Error\n");
+            continue;
+        }
+        break;
     }
     //後片付け
     mysql_close(conn);

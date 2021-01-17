@@ -34,22 +34,22 @@ int main(int argc, char *argv[]) {
 
 int user_update_test_start() {
     USER_TABLE test_data1 = 
-        {0, 0, "login_name1", "pass1", "name1", 68.0, 166.0, 
+        {0, 0, "pass1", "name1", 68.0, 166.0, 
         30, 1, "1990-01-01", 60.0, "2021-3-1", "mail-address1@yahoo.co.jp"};
     int result1 = user_update_test(test_data1);
 
     USER_TABLE test_data2 = 
-        {0, 1, "login_name2", "pass2", "name2", 72.0, 156.0, 
+        {0, 1, "pass2", "name2", 72.0, 156.0, 
         27, 0, "1990-02-01", 58.0, "2021-2-1", "mail-address2@yahoo.co.jp"};
     int result2 = user_update_test(test_data2);
 
     USER_TABLE test_data3 = 
-        {0, 2, "login_name3", "pass3", "name3", 85.0, 171.0, 
+        {0, 2, "pass3", "name3", 85.0, 171.0, 
         24, 1, "1990-03-01", 70.0, "2021-2-1", "mail-address3@yahoo.co.jp"};
     int result3 = user_update_test(test_data3);
 
     USER_TABLE test_data4 = 
-        {0, 3, "login_name4", "pass4", "name4", 86.0, 180.0, 
+        {0, 3, "pass4", "name4", 86.0, 180.0, 
         20, 1, "1990-04-01", 77.0, "2021-2-1", "mail-address4@yahoo.co.jp"};
     int result4 = user_update_test(test_data4);
 
@@ -59,22 +59,22 @@ int user_update_test_start() {
 
 int user_insert_test_start() {
     USER_TABLE test_data1 = 
-        {0, 0, "login_name1", "pass1", "name1", 70.0, 165.0, 
+        {0, 0, "pass1", "name1", 70.0, 165.0, 
         30, 1, "1990-01-01", 60.0, "2021-2-1", "mail-address1@yahoo.co.jp"};
     int result1 = user_insert_test(test_data1);
 
     USER_TABLE test_data2 = 
-        {0, 1, "login_name2", "pass2", "name2", 74.0, 155.0, 
+        {0, 1, "pass2", "name2", 74.0, 155.0, 
         27, 0, "1990-02-01", 60.0, "2021-2-1", "mail-address2@yahoo.co.jp"};
     int result2 = user_insert_test(test_data2);
 
     USER_TABLE test_data3 = 
-        {0, 2, "login_name3", "pass3", "name3", 90.0, 172.0, 
+        {0, 2, "pass3", "name3", 90.0, 172.0, 
         24, 1, "1990-03-01", 60.0, "2021-2-1", "mail-address3@yahoo.co.jp"};
     int result3 = user_insert_test(test_data3);
 
     USER_TABLE test_data4 = 
-        {0, 3, "login_name4", "pass4", "name4", 85.0, 179.0, 
+        {0, 3, "pass4", "name4", 85.0, 179.0, 
         20, 1, "1990-04-01", 60.0, "2021-2-1", "mail-address4@yahoo.co.jp"};
     int result4 = user_insert_test(test_data4);
 
@@ -100,7 +100,6 @@ int user_select_test_start() {
 
 void print_ut(USER_TABLE ut) {
     printf("id              : %d\n", ut.id);
-    printf("    login_name  : %s\n", ut.login_name);
     printf("    pass        : %s\n", ut.pass);
     printf("    name        : %s\n", ut.name);
     printf("    weight      : %lf\n", ut.weight);
