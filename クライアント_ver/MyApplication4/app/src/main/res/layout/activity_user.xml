@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:clickable="false"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    tools:context=".CheckUserInfo"
+    >
+
+<!-- *ユーザID: user_id, CHAR(8), NOT NULL
+     *ログイン名: login_name, CHAR(10), NOT NULL
+      パスワード: user_pass, CHAR(32), NOT NULL
+     *氏名: user_name, NCHAR(10)
+     *体重: user_weight, FLOAT
+     *身長: user_height, FLOAT
+     *年齢: user_age, INT
+     性別: user_sex, NCHAR(1)
+     *目標体重(kg): goal_weight, FLOAT
+     目標期間: goal_term, CHAR(10)
+     メールアドレス: mail_address, CHAR(30) -->
+
+    <!-- 1. データの表示
+         2. 「ユーザ情報を変更する場合はこちら」ボタンの表示
+         3. DBにアクセスできない場合は通信エラー -->
+
+    <TextView
+        android:id="@+id/Zentai_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B4B4B4"
+        android:gravity="center_horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView android:id="@+id/DisplayUserInfo_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textSize="50dp"
+        android:gravity="center_horizontal"
+        android:background="@color/white"
+        android:text="ユーザ情報"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+
+    <TextView
+        android:id="@+id/UserSex_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:text="性別: "
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.16" />
+
+    <TextView
+        android:id="@+id/UserHeight_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:text="身長:                            cm"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.245" />
+
+    <TextView
+        android:id="@+id/UserWeight_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:text="体重:                            kg"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.331" />
+
+    <TextView
+        android:id="@+id/UserBMI_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:text="BMI :"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.418" />
+
+    <TextView
+        android:id="@+id/UserGoalMade_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:text="目標まで:                kg"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.682" />
+
+    <TextView
+        android:id="@+id/UserGoalWeight_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:text="目標体重:                kg"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.597" />
+
+    <TextView
+        android:id="@+id/UserGoalPeriod_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:text="目標期間:              日"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.766" />
+
+    <Button
+        android:id="@+id/button_CheckUserInfo_OCE"
+        android:layout_width="375dp"
+        android:layout_height="75dp"
+        android:autoSizeTextType="uniform"
+        android:text="ユーザ情報を変更する場合はこちら"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <TextView android:id="@+id/edit_UserSex_OCE"
+        android:layout_width="210dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="100dp"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserSex_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/UserSex_OCE"
+        app:layout_constraintTop_toTopOf="@+id/UserSex_OCE" />
+
+    <TextView
+        android:id="@+id/edit_UserHeight_OCE"
+        android:layout_width="210dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="100dp"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserHeight_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/UserHeight_OCE"
+        app:layout_constraintTop_toTopOf="@+id/UserHeight_OCE" />
+
+    <TextView
+        android:id="@+id/edit_UserWeight_OCE"
+        android:layout_width="210dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="100dp"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserWeight_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/UserWeight_OCE"
+        app:layout_constraintTop_toTopOf="@+id/UserWeight_OCE" />
+
+    <TextView
+        android:id="@+id/edit_UserBMI_OCE"
+        android:layout_width="210dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="100dp"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserBMI_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/UserBMI_OCE"
+        app:layout_constraintTop_toTopOf="@+id/UserBMI_OCE" />
+
+    <TextView
+        android:id="@+id/edit_UserGoalWeight_OCE"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="128dp"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserGoalWeight_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/UserGoalWeight_OCE"
+        app:layout_constraintTop_toTopOf="@+id/UserGoalWeight_OCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/edit_UserGoalMade_OCE"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="128dp"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserGoalMade_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/UserGoalMade_OCE"
+        app:layout_constraintTop_toTopOf="@+id/UserGoalMade_OCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/edit_UserGoalPeriod_OCE"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="144dp"
+        android:textSize="35dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserGoalPeriod_OCE"
+        app:layout_constraintEnd_toEndOf="@+id/UserGoalPeriod_OCE"
+        app:layout_constraintTop_toTopOf="@+id/UserGoalPeriod_OCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

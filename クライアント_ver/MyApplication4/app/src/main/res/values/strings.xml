@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="title_activity_maps">Home</string>
+    <string name="menu_item1">アイテム1</string>
+    <string name="menu_item2">アイテム2</string>
+    <string name="menu_item3">アイテム3</string>
+    <string name="title_activity_root_mapping">Map</string>
+    <string name="title_activity_root_mapping2">Map</string>
+    <string name="title_activity_maps2">Map</string>
+</resources>

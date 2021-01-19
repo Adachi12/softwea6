@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccountRegister">
+
+
+    <TextView
+        android:id="@+id/textView11_accountregister"
+        android:layout_width="364dp"
+        android:layout_height="58dp"
+        android:background="@drawable/frame_style"
+        android:text="　メールアドレス"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6_accountregister" />
+
+    <TextView
+        android:id="@+id/textView16_accountregister"
+        android:layout_width="364dp"
+        android:layout_height="58dp"
+        android:background="@drawable/frame_style"
+        android:text="　目標期間"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12_accountregister" />
+
+    <TextView
+        android:id="@+id/textView10_AccountRegister"
+        android:layout_width="369dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/frame_style"
+        android:text="　性別"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5_accountregister" />
+
+    <TextView
+        android:id="@+id/textView9_accountregister"
+        android:layout_width="367dp"
+        android:layout_height="62dp"
+        android:background="@drawable/frame_style"
+        android:text="　生年月日"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8_accountregister" />
+
+    <EditText
+        android:id="@+id/editTextNumber_year_accountregister"
+        android:layout_width="257dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:hint="半角数字8文字(例：20000101)"
+        android:inputType="number"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView9_accountregister"
+        app:layout_constraintEnd_toEndOf="@+id/textView9_accountregister"
+        app:layout_constraintTop_toBottomOf="@+id/textView8_accountregister"
+        app:layout_constraintVertical_bias="0.666" />
+
+    <EditText
+        android:id="@+id/editTextNumber_GoalTime_accountregister"
+        android:layout_width="257dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:hint="半角数字8文字(例：20000101)"
+        android:inputType="number"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView16_accountregister"
+        app:layout_constraintEnd_toEndOf="@+id/textView16_accountregister"
+        app:layout_constraintTop_toTopOf="@+id/textView16_accountregister"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView6_accountregister"
+        android:layout_width="364dp"
+        android:layout_height="55dp"
+        android:background="@drawable/frame_style"
+        android:text="　Password"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9_accountregister" />
+
+    <TextView
+        android:id="@+id/textView12_accountregister"
+        android:layout_width="364dp"
+        android:layout_height="55dp"
+        android:background="@drawable/frame_style"
+        android:text="　目標体重"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11_accountregister" />
+
+    <TextView
+        android:id="@+id/textView8_accountregister"
+        android:layout_width="369dp"
+        android:layout_height="56dp"
+        android:background="@drawable/frame_style"
+        android:text="　身長"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7_accountregister" />
+
+    <TextView
+        android:id="@+id/textView7_accountregister"
+        android:layout_width="371dp"
+        android:layout_height="57dp"
+        android:background="@drawable/frame_style"
+        android:text="　体重"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10_AccountRegister" />
+
+    <TextView
+        android:id="@+id/textView13_accountregister"
+        android:layout_width="49dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="28dp"
+        android:text="kg"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8_accountregister"
+        app:layout_constraintEnd_toEndOf="@+id/textView7_accountregister"
+        app:layout_constraintTop_toBottomOf="@+id/textView10_AccountRegister"
+        app:layout_constraintVertical_bias="0.755" />
+
+    <EditText
+        android:id="@+id/editTextEmailAddress_accountregister"
+        android:layout_width="263dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="28dp"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?_+*}`{=~|!#$%',./\;:]()@[-^\"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView12_accountregister"
+        app:layout_constraintEnd_toEndOf="@+id/textView12_accountregister"
+        app:layout_constraintTop_toBottomOf="@+id/textView6_accountregister"
+        app:layout_constraintVertical_bias="0.183" />
+
+    <TextView
+        android:id="@+id/textView5_accountregister"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/frame_style"
+        android:text="アカウント登録"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/button_accountregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登録"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16_accountregister"
+        app:layout_constraintVertical_bias="0.168" />
+
+    <TextView
+        android:id="@+id/textView14_accountregister"
+        android:layout_width="49dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
+        android:text="cm"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView9_accountregister"
+        app:layout_constraintEnd_toEndOf="@+id/textView8_accountregister"
+        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintStart_toStartOf="@+id/textView8_accountregister" />
+
+    <EditText
+        android:id="@+id/editTextPassword_accountregister"
+        android:layout_width="265dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="24dp"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?_+*}`{=~|!#$%',./\;:]()@[-^\"
+        android:ems="10"
+        android:hint="半角英数字記号32文字以内"
+        android:inputType="textPassword"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView6_accountregister"
+        app:layout_constraintEnd_toEndOf="@+id/textView6_accountregister"
+        app:layout_constraintTop_toBottomOf="@+id/textView9_accountregister"
+        app:layout_constraintVertical_bias="0.666" />
+
+    <RadioButton
+        android:id="@+id/sex_man_accountregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="136dp"
+        android:text="男性"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10_AccountRegister"
+        app:layout_constraintEnd_toEndOf="@+id/textView10_AccountRegister"
+        app:layout_constraintTop_toTopOf="@+id/textView10_AccountRegister"
+        app:layout_constraintVertical_bias="0.566" />
+
+    <RadioButton
+        android:id="@+id/sex_woman_accountregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:text="女性"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10_AccountRegister"
+        app:layout_constraintEnd_toEndOf="@+id/textView10_AccountRegister"
+        app:layout_constraintTop_toTopOf="@+id/textView10_AccountRegister"
+        app:layout_constraintVertical_bias="0.566" />
+
+    <EditText
+        android:id="@+id/editTextNumber_GoalWeight_accountregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:ems="10"
+        android:hint="例：71.3"
+        android:inputType="numberDecimal"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/textView16_accountregister"
+        app:layout_constraintEnd_toEndOf="@+id/textView12_accountregister"
+        app:layout_constraintTop_toBottomOf="@+id/textView11_accountregister"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/editTextNumber_height_accountregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="例：172.1"
+        android:inputType="numberDecimal"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/textView8_accountregister"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/textView8_accountregister"
+        app:layout_constraintTop_toTopOf="@+id/textView8_accountregister" />
+
+    <TextView
+        android:id="@+id/textView17_accountregister"
+        android:layout_width="65dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="20dp"
+        android:text="kg"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView12_accountregister"
+        app:layout_constraintHorizontal_bias="0.969"
+        app:layout_constraintStart_toStartOf="@+id/textView12_accountregister"
+        app:layout_constraintTop_toBottomOf="@+id/textView11_accountregister" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
