@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckRecord" >
+
+<!-- サーバ上のDBからユーザ情報をリクエストして、情報を表示 -->
+    <!-- 1. 取得してきたデータ
+         2. 「手動でアクティビティを追加する」と書かれたボタン
+     -->
+    <!-- 日付、走行開始時刻、走行距離、走行時間、消費カロリー -->
+
+    <TextView
+        android:id="@+id/Zentai_CR_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:autoSizeTextType="uniform"
+        android:background="#B4B4B4"
+        android:gravity="center_horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView android:id="@+id/CheckRecord_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textSize="50dp"
+        android:background="#FFFFFFFF"
+        android:gravity="center_horizontal"
+        android:text="記録確認"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView
+        android:id="@+id/recodGraph_OCE"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:autoSizeTextType="uniform"
+        android:background="#FFFFFFFF"
+        android:gravity="center_horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.234" />
+
+    <TextView
+        android:id="@+id/JoggingRecord_OCE"
+        android:layout_width="110dp"
+        android:layout_height="20dp"
+        android:autoSizeTextType="uniform"
+        android:text="ジョギング履歴"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.16" />
+
+    <TextView
+        android:id="@+id/DisplayUserInfo_OCE"
+        android:layout_width="110dp"
+        android:layout_height="30dp"
+        android:text="平均ペース \n合計走行時間"
+        android:textSize="10dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.163" />
+
+    <TextView
+        android:id="@+id/_OCE"
+        android:layout_width="110dp"
+        android:layout_height="15dp"
+        android:textSize="10dp"
+        android:text="合計距離"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.165" />
+
+    <TextView
+        android:id="@+id/UserActivity_OCE1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.605" />
+
+    <TextView
+        android:id="@+id/UserActivity_OCE2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <TextView
+        android:id="@+id/UserActivity_OCE3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:text=" 走行距離:10.5km  日付:12/31 \n スタート:16:44  走行時間:32:33  "
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.795" />
+
+    <TextView
+        android:id="@+id/UserActivity_OCE4"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:text=" 走行距離:10.5km  日付:12/31 \n スタート:16:44  走行時間:32:33  "
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.891" />
+
+    <TextView
+        android:id="@+id/UserActivity_OCE5"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:text=" 走行距離:10.5km  日付:12/31 \n スタート:16:44  走行時間:32:33  "
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.985" />
+
+    <Button
+        android:id="@+id/button_AddActivityManually_record_OCE1"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:text="アクティビティを追加"
+        android:textSize="13dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserActivity_OCE1"
+        app:layout_constraintEnd_toEndOf="@+id/UserActivity_OCE1"
+        app:layout_constraintTop_toTopOf="@+id/UserActivity_OCE1"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button_AddActivityManually_record_OCE2"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:text="アクティビティを追加"
+        android:textSize="13dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserActivity_OCE2"
+        app:layout_constraintEnd_toEndOf="@+id/UserActivity_OCE2"
+        app:layout_constraintTop_toTopOf="@+id/UserActivity_OCE2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_AddActivityManually_record_OCE3"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:text="アクティビティを追加"
+        android:textSize="13dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserActivity_OCE3"
+        app:layout_constraintEnd_toEndOf="@+id/UserActivity_OCE3"
+        app:layout_constraintTop_toTopOf="@+id/UserActivity_OCE3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_AddActivityManually_record_OCE4"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:text="アクティビティを追加"
+        android:textSize="13dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserActivity_OCE4"
+        app:layout_constraintEnd_toEndOf="@+id/UserActivity_OCE4"
+        app:layout_constraintTop_toTopOf="@+id/UserActivity_OCE4"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_AddActivityManually_record_OCE5"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:text="アクティビティを追加"
+        android:textSize="13dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/UserActivity_OCE5"
+        app:layout_constraintEnd_toEndOf="@+id/UserActivity_OCE5"
+        app:layout_constraintTop_toTopOf="@+id/UserActivity_OCE5"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!--<Button
+        android:id="@+id/button_AddActivityManually_record_OCE"
+        android:layout_width="375dp"
+        android:layout_height="75dp"
+        android:autoSizeTextType="uniform"
+        android:text="手動でアクティビティを追加する"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
