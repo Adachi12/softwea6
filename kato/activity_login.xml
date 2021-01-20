@@ -7,7 +7,7 @@
     tools:context=".Login">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView_login"
         android:layout_width="420dp"
         android:layout_height="49dp"
         android:gravity="center_vertical"
@@ -33,8 +33,9 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextPassword_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_login"
+        app:layout_constraintVertical_bias="0.0"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?_+*}`{=~|!#$%',./\;:]()@[-^\"/>
 
     <EditText
         android:id="@+id/editTextPassword_login"
@@ -47,10 +48,11 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?_+*}`{=~|!#$%',./\;:]()@[-^\"/>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView2_login"
         android:layout_width="53dp"
         android:layout_height="30dp"
         android:text="ID"
@@ -60,11 +62,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView_login"
         app:layout_constraintVertical_bias="0.755" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView3_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="49dp"
