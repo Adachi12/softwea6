@@ -18,6 +18,7 @@ USER_TABLE user_select(int id) {
     //SQL発行
     snprintf( &sql_str[0] , sizeof(sql_str)-1 ,\
     "SELECT * from USER_TABLE where id = '%08d'", id);
+    printf("run : %s\n", sql_str);
 
     // mysql接続
     conn = mysql_init(NULL);
@@ -102,8 +103,6 @@ int user_update(USER_TABLE ut){
     }
 
     // クエリ実行
-    char id_buf[9];
-    snprintf(id_buf, 9, "%08d", ut.id);
     snprintf( &sql_str[0] , sizeof(sql_str)-1 ,
         "UPDATE USER_TABLE SET \
         weight = %3.1f, \
@@ -112,9 +111,9 @@ int user_update(USER_TABLE ut){
         goal_weight = %3.1f, \
         goal_term = '%s', \
         mail_address = '%s'\
-        where id = '%s'", \
+        where id = '%08d'", \
         ut.weight, ut.height, ut.age, ut.goal_weight, 
-        ut.goal_term, ut.mail_address, id_buf);
+        ut.goal_term, ut.mail_address, ut.id);
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
         mysql_close(conn);
@@ -134,7 +133,9 @@ int user_insert(USER_TABLE ut) {
     char *user      = "root";
     char *passwd    = "mariadb";
     char *db_name   = "jogging";
-    
+
+    int rand_id;
+
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
     // mysql接続
@@ -149,14 +150,13 @@ int user_insert(USER_TABLE ut) {
         gettimeofday(&myTime, NULL);
         unsigned int seed = (unsigned int)myTime.tv_usec;
         srand(seed);   // random access variable
-        int rand_id = rand() % 99999999;
+        rand_id = rand() % 99999999;
 
         sprintf(sql_str, 
             "INSERT INTO USER_TABLE \
             VALUES('%08d', \"\", '%s', '%s', %lf, %lf, %d, %d, '%s', %lf, '%s', '%s')",
             rand_id, ut.pass, ut.name, ut.weight, ut.height, 
             ut.age, ut.sex, ut.birth, ut.goal_weight, ut.goal_term, ut.mail_address);
-        printf("run : %s\n", sql_str);
         if( mysql_query( conn , &sql_str[0] ) ){
             perror("Query Error\n");
             continue;
@@ -166,7 +166,7 @@ int user_insert(USER_TABLE ut) {
     //後片付け
     mysql_close(conn);
 
-    printf("SAVED_ROUTE_TABLE insert result : %d\n", saved_route_insert(ut.id));
+    printf("SAVED_ROUTE_TABLE insert result : %d\n", saved_route_insert(rand_id));
 
-    return 0;
+    return rand_id;
 }

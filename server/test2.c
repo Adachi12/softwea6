@@ -3,6 +3,10 @@
 char head_buf;
 void main() {
     CALORIE_TABLE ct = {0, 0, "らぁめん", 600};
+    /*
+    char ct_cast[] = "ラーメン\n50";
+    ct = ct_str2tab_select(ct_cast);
+    */
     char ct_buf[BUFSIZE];
     ct_tab2str_select(&ct_buf[0], ct);
 
