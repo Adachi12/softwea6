@@ -68,7 +68,7 @@ int usedlog_insert_test_start() {
     USEDLOG_TABLE test_data19 = {0, 0, "2021-01-05 12:45:00",  4.5, "01:00:00", 400};
     USEDLOG_TABLE test_data20 = {0, 92065983, "2021-01-06 15:00:00",  4.5, "01:00:00", 400};
 
-    result_sum += usedlog83614101_insert(test_data1);
+    result_sum += usedlog_insert(test_data1);
     result_sum += usedlog_insert(test_data2);
     result_sum += usedlog_insert(test_data3);
     result_sum += usedlog_insert(test_data4);
