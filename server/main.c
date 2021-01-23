@@ -65,7 +65,9 @@ void conn_process() {
 
             recv_data = ult_str2tab_insert(recvBuffer);
             errno = usedlog_insert(recv_data);
-            sprintf(sendBuffer, "%d\n", errno);
+
+            if(errno == 0) sprintf(sendBuffer, "true\n");
+            else sprintf(sendBuffer, "false\n");
         } else if ( op == 0xd0 ) {
             // USER_TABLE select
             USER_TABLE resp_data;
