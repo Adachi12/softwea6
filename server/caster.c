@@ -64,18 +64,13 @@ USEDLOG_TABLE ult_str2tab_select(char *ult_cast) {
     return ult;
 }
 
-FILE *ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
-    FILE *fp;
+int *ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
     int i;
-    char file_name[] = "XXXXXX";
-    mkstemp(file_name);
-
-    fp = fopen(file_name, "w");
 
     for (i = 0; i < n; i++) {
-        fprintf(
-            fp,
-            "[%s\n%lf\n%s\n%d\n]\n",
+        sprintf(
+            ult_buf,
+            "[%20s\n%2.2lf\n%9s\n%4d\n]\n",
             ult[i].jog_datetime,
             ult[i].jog_distance,
             ult[i].jog_time,
