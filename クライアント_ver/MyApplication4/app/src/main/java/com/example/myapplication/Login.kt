@@ -37,7 +37,7 @@ class Login : AppCompatActivity() {
                 //正しければジョギング開始モジュールへ
                 if(flag2 == true){
                     //next Activity(現在は仮でLoginに飛ばす)
-                    val intent = Intent(this, HomeMap::class.java)
+                    val intent = Intent(this, HomeMap2::class.java)
                     // 渡したいデータとキーを指定する
                     //intent.putExtra("ID", str1)
                     startActivity(intent)
