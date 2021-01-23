@@ -22,5 +22,9 @@ int calorie_select_test() {
     printf("    food_name    : %s\n", ct.food_name);
     printf("    food_calorie : %d\n", ct.food_calorie);
 
+    char sendBuffer[1024];
+    ct_tab2str_select(sendBuffer, ct);
+    printf("sendBuffer : \n%s\n(finish)\n\n", sendBuffer);
+
     return error_sum;
 }
