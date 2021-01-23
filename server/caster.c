@@ -78,6 +78,8 @@ int ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
         );
     }
 
+    printf("str : %s\n", ult_buf);
+
     return 0;
 }
 
