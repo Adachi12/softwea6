@@ -48,8 +48,8 @@ int usedlog_select_test_start() {
 int usedlog_insert_test_start() {
     int result_sum = 0;
     USEDLOG_TABLE test_data1  = {0, 0, "2020-01-03 13:00:00",  4.5, "01:00:00", 400};
-    USEDLOG_TABLE test_data2  = {0, 3, "2020-01-03 13:00:00",  5.0, "01:00:00", 400};
-    USEDLOG_TABLE test_data3  = {0, 2, "2020-01-04 14:30:00",  2.0, "00:40:00", 400};
+    USEDLOG_TABLE test_data2  = {0, 88567915, "2020-01-03 13:00:00",  5.0, "01:00:00", 400};
+    USEDLOG_TABLE test_data3  = {0, 83614101, "2020-01-04 14:30:00",  2.0, "00:40:00", 400};
     USEDLOG_TABLE test_data4  = {0, 01571225, "2020-01-04 14:45:00", 10.0, "03:00:00", 400};
     USEDLOG_TABLE test_data5  = {0, 0, "2020-01-04 15:00:00",  4.5, "01:00:00", 400};
     USEDLOG_TABLE test_data6  = {0, 01571225, "2020-01-04 16:00:00", 15.5, "04:00:00", 400};
