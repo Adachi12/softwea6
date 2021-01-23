@@ -1,4 +1,5 @@
 package com.example.myapplication
+//package saito
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,11 +7,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog as AlertDialog
 import java.util.*
-
-//import com.example.saito
 
 //入力項目ごとに字数制限とかをつけんと、害悪利用者によって破壊されるかも
 class AccountRegister : AppCompatActivity() {
@@ -49,7 +48,7 @@ class AccountRegister : AppCompatActivity() {
             }
             R.id.button_accountregister -> {
                 try{
-                val editText1 = findViewById<View>(R.id.editTextNumber_GoalWeight_accountregister) as EditText  //体重
+                val editText1 = findViewById<View>(R.id.editTextNumber_weight_accountregister) as EditText  //体重
                 val editText2 = findViewById<View>(R.id.editTextNumber_height_accountregister) as EditText  //身長
                 val editText3 = findViewById<View>(R.id.editTextNumber_year_accountregister) as EditText    //生年月日
                 //val editText4 = findViewById<View>(R.id.editTextID) as EditText             //ID
@@ -87,18 +86,36 @@ class AccountRegister : AppCompatActivity() {
                     val age: String = age1.toString()
                     //birth(生年月日)について
                     val birth: String = str3.substring(0, 4) + "/" + str3.substring(4, 6) + str3.substring(0, 4) + "/" + str3.substring(6, 8)
+                    //GoalTerm(目標期間)
+                    val goalTerm: String = str8.substring(0, 4) + "-" + str8.substring(4, 6) + "-" + str8.substring(6, 8) +"0"
 
-  //                  val dataInsert = db.sendMsg(DataBase.USER_TABLE.id, Operation.Insert.id, "id\nlogin_name\n"+str5
-    //                        +"\nname\n"+str1+"\n"+str2+"\n"+age+"\n"+sex+"\n"+birth+"\n"+str7+"\n"+str8+"\n"+str6)
+                    val db = JogDB()
+                    // 送信データ用意
+                    val sendData = User1().create()
+                        .setPass(str5)
+                        .setName("aaa")
+                        .setWeight(str1)
+                        .setHeight(str2)
+                        .setAge(age)
+                        .setSex(sex)
+                        .setBirth(birth)
+                        .setGoalTerm(goalTerm)
+                        .setGoalWeight(str7)
+                        .setMailAddress(str6)
+
+                    // サーバ接続
+                    // INSERT実行
+                    val userId = db.userInsert(sendData)
+                    db.close()
 
                     //「登録が完了しました」のダイアログを出して
                     AlertDialog.Builder(this) // FragmentではActivityを取得して生成
                         .setTitle("登録完了")
-                        .setMessage("登録が完了しました。\nメールアドレスはパスワード変更の際に利用します。\nあなたのIDは"+"aaa"+"です。\nIDは次回からのログインに利用します。")
+                        .setMessage("登録が完了しました。\nメールアドレスはパスワード変更の際に利用します。\nあなたのIDは"+userId+"です。\nIDは次回からのログインに利用します。")
                         .setPositiveButton("OK", { dialog, which ->
                             // OKが押されたら
-                            //ログインしてジョギング開始モジュールに進む(現在は仮でLoginに飛ばす)
-                            val intent = Intent(this, HomeMap2::class.java)
+                            //ログインしてジョギング開始モジュールに進む
+                            val intent = Intent(this, HomeMap::class.java)
                             // 渡したいデータとキーを指定する
                     //        intent.putExtra("ID", dataInsert);
                             startActivity(intent)
@@ -128,7 +145,7 @@ class AccountRegister : AppCompatActivity() {
                     //エラーを表示する(入力項目に不備有)
                     AlertDialog.Builder(this) // FragmentではActivityを取得して生成
                             .setTitle("Error")
-                            .setMessage("予期せぬエラーが発生しました。製造元にお問い合わせしてください。")
+                            .setMessage("予期せぬエラーが発生しました。")
                             .setPositiveButton("OK", { dialog, which ->
                                 // OKが押された時の挙動
                             })
@@ -138,7 +155,7 @@ class AccountRegister : AppCompatActivity() {
                     //エラーを表示する(入力項目に不備有)
                     AlertDialog.Builder(this) // FragmentではActivityを取得して生成
                         .setTitle("Error")
-                        .setMessage("入力項目に不備があります。")
+                        .setMessage("入力項目に不備があります。/n(または、サーバとの通信に失敗した可能性があります。)")
                         .setPositiveButton("OK", { dialog, which ->
                             // OKが押された時の挙動
                         })
