@@ -98,7 +98,7 @@ class AccountRegister : AppCompatActivity() {
                         .setPositiveButton("OK", { dialog, which ->
                             // OKが押されたら
                             //ログインしてジョギング開始モジュールに進む(現在は仮でLoginに飛ばす)
-                            val intent = Intent(this, HomeMap::class.java)
+                            val intent = Intent(this, HomeMap2::class.java)
                             // 渡したいデータとキーを指定する
                     //        intent.putExtra("ID", dataInsert);
                             startActivity(intent)

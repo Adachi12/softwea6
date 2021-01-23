@@ -180,6 +180,10 @@ class HomeMap2 : AppCompatActivity() {
 
     }
 
+    private fun setupGoogleMapWixthPermissionCheck(googleMap: GoogleMap?) {
+
+    }
+
     @NeedsPermission(Manifest.permission.ACCESS_FINE_LOCATION)
     fun setupGoogleMap(googleMap: GoogleMap) {
         map = googleMap

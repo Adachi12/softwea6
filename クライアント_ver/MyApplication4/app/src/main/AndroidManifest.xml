@@ -10,10 +10,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyCmVMg0z9g6E271VA6qCN7XjZLfI_GUkLA"/>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCmVMg0z9g6E271VA6qCN7XjZLfI_GUkLA"/>
+
 
         <activity android:name=".PassChangeActivity" />
         <activity android:name=".AccountRegister" />
@@ -35,7 +36,6 @@
         <activity android:name=".CheckUserInfo" />
         <activity android:name=".DirectionsParser"
             tools:ignore="Instantiatable" />
-        <activity android:name=".HomeMap" />
         <activity android:name=".HomeMap2" />
         <activity android:name=".Inquiry" />
         <activity android:name=".MainActivityy" />
