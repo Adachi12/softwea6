@@ -1,8 +1,9 @@
 
-import java.net.Socket
-import java.nio.*
 //import saito.*
-import java.io.*
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
+import java.net.Socket
 
 // import com.example.saito
 // (テーブル名, 操作) とか (テーブル名, 操作, データ)

@@ -6,9 +6,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AlertDialog as AlertDialog
 import java.util.*
+
 //import com.example.saito
 
 //入力項目ごとに字数制限とかをつけんと、害悪利用者によって破壊されるかも

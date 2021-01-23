@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.R.id.edit
 import android.content.Intent
 import android.os.Bundle
 import android.view.View

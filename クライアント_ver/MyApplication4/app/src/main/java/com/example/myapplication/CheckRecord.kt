@@ -2,10 +2,8 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.util.Linkify
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 // DisplayRecordメソッドは、DBから取得したデータと
