@@ -31,15 +31,15 @@ int usedlog_select_test_start() {
     print_ult(resp_data0, n0); 
     free(resp_data0);
 
-    resp_data1 = usedlog_select(1, &n1);
+    resp_data1 = usedlog_select(1571225, &n1);
     print_ult(resp_data1, n1); 
     free(resp_data1);
 
-    resp_data2 = usedlog_select(2, &n2);
+    resp_data2 = usedlog_select(83614101, &n2);
     print_ult(resp_data2, n2); 
     free(resp_data2);
 
-    resp_data3 = usedlog_select(3, &n3);
+    resp_data3 = usedlog_select(88567915, &n3);
     print_ult(resp_data3, n3); 
     free(resp_data3);
 
