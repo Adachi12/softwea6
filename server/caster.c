@@ -77,8 +77,6 @@ int *ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
             ult[i].burned_calorie
         );
     }
-    fclose(fp);
-    remove(file_name);
 
     return 0;
 }
