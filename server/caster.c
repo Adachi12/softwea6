@@ -150,7 +150,7 @@ USER_TABLE ut_str2tab_update(char *ut_cast) {
 
 USER_TABLE ut_str2tab_insert(char *ut_cast) {
     USER_TABLE ut = 
-        {0, 0, "password", "name", 56.2, 181.1, 21, 1, 
+        {0, "password", "name", 56.2, 181.1, 21, 1, 
         "1999-12-31", 60.3, "2022-12-31", "mail-address@exaple.ex"};
 
     int head_buf;
@@ -158,7 +158,7 @@ USER_TABLE ut_str2tab_insert(char *ut_cast) {
     sscanf(
         ut_cast, 
         "%d\n%d\n%s\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%s", 
-        &head_buf,  &ut.id, &ut.pass[0], &ut.name[0], 
+        &head_buf, &ut.pass[0], &ut.name[0], 
         &ut.weight, &ut.height, &ut.age, &ut.sex, &ut.birth[0], 
         &ut.goal_weight, &ut.goal_term[0], &ut.mail_address
     );
