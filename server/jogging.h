@@ -95,7 +95,7 @@ int ct_tab2str_select(char *ct_buf, CALORIE_TABLE ct);
 //USEDLOG_TABLE
 //SELECT
 USEDLOG_TABLE ult_str2tab_select(char *ult_cast);
-FILE *ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n);
+int ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n);
 //INSERT
 USEDLOG_TABLE ult_str2tab_insert(char *ult_cast);
 

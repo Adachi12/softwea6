@@ -64,7 +64,7 @@ USEDLOG_TABLE ult_str2tab_select(char *ult_cast) {
     return ult;
 }
 
-int *ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
+int ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
     int i;
 
     for (i = 0; i < n; i++) {
