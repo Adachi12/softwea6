@@ -18,13 +18,13 @@ test1: calorie.c saved_route.c usedlog.c user.c caster.c test1.c
 	-lmysqlclient -L/usr/lib64/mysql -pthread
 	rm *.o
 
-test2: calorie.c saved_route.c usedlog.c user.c caster.c test2.c
+main: calorie.c saved_route.c usedlog.c user.c caster.c main.c
 	gcc -o calorie.o -c calorie.c
 	gcc -o saved_route.o -c saved_route.c
 	gcc -o usedlog.o -c usedlog.c
 	gcc -o user.o -c user.c
 	gcc -o caster.o -c caster.c
-	gcc -o test2 calorie.o saved_route.o usedlog.o user.o caster.o test2.c \
+	gcc -o main calorie.o saved_route.o usedlog.o user.o caster.o main.c \
 	-lmysqlclient -L/usr/lib64/mysql -pthread
 	rm *.o
 
