@@ -1,8 +1,6 @@
-package com.goldrushcomputing.androidlocationstarterkitinkotlin
+package com.example.myapplication
 
-/**
- * Created by Takamitsu Mizutori on 2018/12/08.
- */
+
 class KalmanLatLong(Q_metres_per_second: Float) {
     private val MinAccuracy = 1f
 

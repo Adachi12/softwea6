@@ -21,8 +21,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 import java.util.*
@@ -31,7 +29,7 @@ import kotlin.collections.ArrayList
 
 @RuntimePermissions
 class HomeMap2 : AppCompatActivity() {
-    private val TAG = "MainActivity"
+    private val TAG = "HomeMap2"
 
 
     private lateinit var map: GoogleMap
@@ -101,16 +99,22 @@ class HomeMap2 : AppCompatActivity() {
             override fun onReceive(context: Context, intent: Intent) {
                 val newLocation = intent.getParcelableExtra<Location>("location")
 
-                drawLocationAccuracyCircle(newLocation)
-                drawUserPositionMarker(newLocation)
+                if (newLocation != null) {
+                    drawLocationAccuracyCircle(newLocation)
+                }
+                if (newLocation != null) {
+                    drawUserPositionMarker(newLocation)
+                }
 
-                this@MainActivity.locationService?.let{
+                this@HomeMap2.locationService?.let{
                     if (it.isLogging) {
                         addPolyline()
                     }
                 }
 
-                zoomMapTo(newLocation)
+                if (newLocation != null) {
+                    zoomMapTo(newLocation)
+                }
 
                 /* Filter Visualization */
                 drawMalLocations()
@@ -122,7 +126,9 @@ class HomeMap2 : AppCompatActivity() {
             override fun onReceive(context: Context, intent: Intent) {
                 val predictedLocation = intent.getParcelableExtra<Location>("location")
 
-                drawPredictionRange(predictedLocation)
+                if (predictedLocation != null) {
+                    drawPredictionRange(predictedLocation)
+                }
 
             }
         }

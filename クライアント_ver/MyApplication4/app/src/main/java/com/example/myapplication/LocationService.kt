@@ -17,14 +17,13 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_MIN
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.goldrushcomputing.androidlocationstarterkitinkotlin.KalmanLatLong
 import java.io.FileWriter
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class LocationService: Service(), LocationListener, GpsStatus.Listener {
+abstract class LocationService: Service(), LocationListener, GpsStatus.Listener {
 
     val LOG_TAG = LocationService::class.java.simpleName
 
@@ -135,7 +134,7 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
             get() = this@LocationService
     }
 
-    override fun onLocationChanged(newLocation: Location?) {
+    internal fun onLocationChanged(newLocation: Location?) {
         newLocation?.let{
             Log.d(LOG_TAG, "(" + it.latitude + "," + it.longitude + ")")
 
@@ -164,13 +163,13 @@ class LocationService: Service(), LocationListener, GpsStatus.Listener {
         }
     }
 
-    fun onProviderEnabled(provider: String?) {
+    internal fun onProviderEnabled(provider: String?) {
         if (provider == LocationManager.GPS_PROVIDER) {
             notifyLocationProviderStatusUpdated(true)
         }
     }
 
-    fun onProviderDisabled(provider: String?) {
+    internal fun onProviderDisabled(provider: String?) {
         if (provider == LocationManager.GPS_PROVIDER) {
             notifyLocationProviderStatusUpdated(false)
         }
