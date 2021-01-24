@@ -25,7 +25,8 @@ int usedlog_select_test_start() {
     USEDLOG_TABLE *resp_data1;
     USEDLOG_TABLE *resp_data2;
     USEDLOG_TABLE *resp_data3;
-    int n0 = 0, n1 = 0, n2 = 0, n3 = 0;
+    USEDLOG_TABLE *resp_data4;
+    int n0 = 0, n1 = 0, n2 = 0, n3 = 0; n4 = 0;
 
     resp_data0 = usedlog_select(0, &n0);
     print_ult(resp_data0, n0); 
@@ -42,6 +43,10 @@ int usedlog_select_test_start() {
     resp_data3 = usedlog_select(88567915, &n3);
     print_ult(resp_data3, n3); 
     free(resp_data3);
+
+    resp_data4 = usedlog_select(88567915, &n4);
+    print_ult(resp_data4, n4); 
+    free(resp_data4);
 
 }
 
