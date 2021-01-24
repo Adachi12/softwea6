@@ -26,7 +26,7 @@ int usedlog_select_test_start() {
     USEDLOG_TABLE *resp_data2;
     USEDLOG_TABLE *resp_data3;
     USEDLOG_TABLE *resp_data4;
-    int n0 = 0, n1 = 0, n2 = 0, n3 = 0; n4 = 0;
+    int n0 = 0, n1 = 0, n2 = 0, n3 = 0, n4 = 0;
 
     resp_data0 = usedlog_select(0, &n0);
     print_ult(resp_data0, n0); 
