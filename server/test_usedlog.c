@@ -67,6 +67,12 @@ int usedlog_insert_test_start() {
     USEDLOG_TABLE test_data18 = {0, 83614101, "2021-01-05 09:00:00",  2.5, "00:40:00", 400};
     USEDLOG_TABLE test_data19 = {0, 0, "2021-01-05 12:45:00",  4.5, "01:00:00", 400};
     USEDLOG_TABLE test_data20 = {0, 92065983, "2021-01-06 15:00:00",  4.5, "01:00:00", 400};
+    USEDLOG_TABLE test_data21 = {0, 92065983, "2021-01-06 16:00:00",  4.5, "01:00:00", 400};
+    USEDLOG_TABLE test_data22 = {0, 92065983, "2021-01-06 17:00:00",  4.5, "01:00:00", 400};
+    USEDLOG_TABLE test_data23 = {0, 92065983, "2021-01-06 18:00:00",  4.5, "01:00:00", 400};
+    USEDLOG_TABLE test_data24 = {0, 92065983, "2021-01-06 19:00:00",  4.5, "01:00:00", 400};
+    USEDLOG_TABLE test_data25 = {0, 92065983, "2021-01-06 20:00:00",  4.5, "01:00:00", 400};
+    USEDLOG_TABLE test_data26 = {0, 92065983, "2021-01-06 21:00:00",  4.5, "01:00:00", 400};
 
     result_sum += usedlog_insert(test_data1);
     result_sum += usedlog_insert(test_data2);
@@ -88,6 +94,12 @@ int usedlog_insert_test_start() {
     result_sum += usedlog_insert(test_data18);
     result_sum += usedlog_insert(test_data19);
     result_sum += usedlog_insert(test_data20);
+    result_sum += usedlog_insert(test_data21);
+    result_sum += usedlog_insert(test_data22);
+    result_sum += usedlog_insert(test_data23);
+    result_sum += usedlog_insert(test_data24);
+    result_sum += usedlog_insert(test_data25);
+    result_sum += usedlog_insert(test_data26);
 
     printf("USEDLOG_TABLE select test result : %d\n", result_sum);
 
