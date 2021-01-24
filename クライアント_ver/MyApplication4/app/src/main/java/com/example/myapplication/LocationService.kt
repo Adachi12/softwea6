@@ -22,8 +22,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-abstract class LocationService: Service(), LocationListener, GpsStatus.Listener {
+class LocationService: Service(), LocationListener, GpsStatus.Listener {
 
     val LOG_TAG = LocationService::class.java.simpleName
 
@@ -129,12 +128,13 @@ abstract class LocationService: Service(), LocationListener, GpsStatus.Listener 
 
     }
 
+
     inner class LocationServiceBinder : Binder() {
         val service: LocationService
             get() = this@LocationService
     }
 
-    internal fun onLocationChanged(newLocation: Location?) {
+     override fun onLocationChanged(newLocation: Location) {
         newLocation?.let{
             Log.d(LOG_TAG, "(" + it.latitude + "," + it.longitude + ")")
 
@@ -153,7 +153,7 @@ abstract class LocationService: Service(), LocationListener, GpsStatus.Listener 
 
     }
 
-    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+    override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
         if (provider == LocationManager.GPS_PROVIDER) {
             if (status == LocationProvider.OUT_OF_SERVICE) {
                 notifyLocationProviderStatusUpdated(false)
@@ -163,13 +163,13 @@ abstract class LocationService: Service(), LocationListener, GpsStatus.Listener 
         }
     }
 
-    internal fun onProviderEnabled(provider: String?) {
+    override fun onProviderEnabled(provider: String) {
         if (provider == LocationManager.GPS_PROVIDER) {
             notifyLocationProviderStatusUpdated(true)
         }
     }
 
-    internal fun onProviderDisabled(provider: String?) {
+    override fun onProviderDisabled(provider: String) {
         if (provider == LocationManager.GPS_PROVIDER) {
             notifyLocationProviderStatusUpdated(false)
         }
@@ -204,13 +204,13 @@ abstract class LocationService: Service(), LocationListener, GpsStatus.Listener 
             val batteryLevelScaledEnd = batteryLevelScaledArray[batteryLevelScaledArray.size - 1]
 
             saveLog(
-                elapsedTimeInSeconds,
-                totalDistanceInMeters.toDouble(),
-                gpsCount,
-                batteryLevelStart,
-                batteryLevelEnd,
-                batteryLevelScaledStart,
-                batteryLevelScaledEnd
+                    elapsedTimeInSeconds,
+                    totalDistanceInMeters.toDouble(),
+                    gpsCount,
+                    batteryLevelStart,
+                    batteryLevelEnd,
+                    batteryLevelScaledStart,
+                    batteryLevelScaledEnd
             )
         }
         isLogging = false
@@ -255,11 +255,11 @@ abstract class LocationService: Service(), LocationListener, GpsStatus.Listener 
                 locationManager.addGpsStatusListener(this)
 
                 locationManager.requestLocationUpdates(
-                    gpsFreqInMillis.toLong(),
-                    gpsFreqInDistance.toFloat(),
-                    criteria,
-                    this,
-                    null
+                        gpsFreqInMillis.toLong(),
+                        gpsFreqInDistance.toFloat(),
+                        criteria,
+                        this,
+                        null
                 )
 
                 /* Battery Consumption Measurement */
@@ -380,13 +380,13 @@ abstract class LocationService: Service(), LocationListener, GpsStatus.Listener 
     /* Data Logging */
     @Synchronized
     fun saveLog(
-        timeInSeconds: Long,
-        distanceInMeters: Double,
-        gpsCount: Int,
-        batteryLevelStart: Int,
-        batteryLevelEnd: Int,
-        batteryLevelScaledStart: Float,
-        batteryLevelScaledEnd: Float
+            timeInSeconds: Long,
+            distanceInMeters: Double,
+            gpsCount: Int,
+            batteryLevelStart: Int,
+            batteryLevelEnd: Int,
+            batteryLevelScaledStart: Float,
+            batteryLevelScaledEnd: Float
     ) {
         val fileNameDateTimeFormat = SimpleDateFormat("yyyy_MMdd_HHmm")
         val filePath = (this.getExternalFilesDir(null)!!.absolutePath + "/"
@@ -399,7 +399,7 @@ abstract class LocationService: Service(), LocationListener, GpsStatus.Listener 
             fileWriter = FileWriter(filePath, false)
             fileWriter.append("Time,Distance,GPSCount,BatteryLevelStart,BatteryLevelEnd,BatteryLevelStart(/$batteryScale),BatteryLevelEnd(/$batteryScale)\n")
             val record =
-                "" + timeInSeconds + ','.toString() + distanceInMeters + ','.toString() + gpsCount + ','.toString() + batteryLevelStart + ','.toString() + batteryLevelEnd + ','.toString() + batteryLevelScaledStart + ','.toString() + batteryLevelScaledEnd + '\n'.toString()
+                    "" + timeInSeconds + ','.toString() + distanceInMeters + ','.toString() + gpsCount + ','.toString() + batteryLevelStart + ','.toString() + batteryLevelEnd + ','.toString() + batteryLevelScaledStart + ','.toString() + batteryLevelScaledEnd + '\n'.toString()
             fileWriter.append(record)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -417,27 +417,27 @@ abstract class LocationService: Service(), LocationListener, GpsStatus.Listener 
 
     private fun startForeground() {
         val channelId =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                createNotificationChannel("my_service", "Location Tracking Service")
-            } else {
-                // If earlier version channel ID is not used
-                // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
-                ""
-            }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    createNotificationChannel("my_service", "Location Tracking Service")
+                } else {
+                    // If earlier version channel ID is not used
+                    // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
+                    ""
+                }
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId )
         val notification = notificationBuilder.setOngoing(true)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setPriority(PRIORITY_MIN)
-            .setCategory(Notification.CATEGORY_SERVICE)
-            .build()
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setPriority(PRIORITY_MIN)
+                .setCategory(Notification.CATEGORY_SERVICE)
+                .build()
         startForeground(101, notification)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(channelId: String, channelName: String): String{
         val chan = NotificationChannel(channelId,
-            channelName, NotificationManager.IMPORTANCE_NONE)
+                channelName, NotificationManager.IMPORTANCE_NONE)
         chan.lightColor = Color.BLUE
         chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
         val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

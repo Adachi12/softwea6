@@ -6,13 +6,16 @@ import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.IBinder
+import android.os.*
+import android.os.SystemClock
+import android.text.util.Linkify
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -21,10 +24,10 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import kotlinx.android.synthetic.main.activity_homemap2.*
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 @RuntimePermissions
@@ -77,7 +80,7 @@ class HomeMap2 : AppCompatActivity() {
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+                .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync { googleMap ->
 
             /**
@@ -89,10 +92,10 @@ class HomeMap2 : AppCompatActivity() {
              * it inside the SupportMapFragment. This method will only be triggered once the user has
              * installed Google Play services and returned to the app.
              */
-
-            setupGoogleMapWixthPermissionCheck(googleMap)
+            setupGoogleMapWithPermissionCheck(googleMap)
 
         }
+
 
 
         locationUpdateReceiver = object : BroadcastReceiver() {
@@ -151,20 +154,24 @@ class HomeMap2 : AppCompatActivity() {
         stopButton = this.findViewById(R.id.stop_button) as Button
         stopButton?.visibility = View.INVISIBLE
 
-
+        //スタート処理
+        var stoptime:Long = 0
         startButton?.setOnClickListener {
             startButton?.visibility = View.INVISIBLE
             stopButton?.visibility = View.VISIBLE
 
             clearPolyline()
             clearMalMarkers()
+            chronometer.base = SystemClock.elapsedRealtime()+stoptime
+            chronometer.start()
             this@HomeMap2.locationService?.startLogging()
         }
-
+        //ストップ処理
         stopButton?.setOnClickListener {
             startButton?.visibility = View.VISIBLE
             stopButton?.visibility = View.INVISIBLE
-
+            stoptime = chronometer.base - SystemClock.elapsedRealtime()
+            chronometer.stop()
             this@HomeMap2.locationService?.stopLogging()
         }
 
@@ -180,8 +187,32 @@ class HomeMap2 : AppCompatActivity() {
 
     }
 
-    private fun setupGoogleMapWixthPermissionCheck(googleMap: GoogleMap?) {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    // オプションメニューのアイテムが選択されたときに呼び出されるメソッド
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item1 -> {
+                val intent = Intent(this.application, CheckUserInfo::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.item2 -> {
+                val intent = Intent(this.application, CheckRecord::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.item3 -> {
+                val Inquiry = findViewById<TextView>(R.id.item3)
+                Inquiry.text = "https://docs.google.com/forms/d/e/1FAIpQLSc4HJYQdx2DEvIIF3_GXxixvbdbQ3UKCS_YjPP3PVjP59F_5A/viewform"
+                Linkify.addLinks(Inquiry, Linkify.ALL)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     @NeedsPermission(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -209,6 +240,7 @@ class HomeMap2 : AppCompatActivity() {
         map.uiSettings.isCompassEnabled = true
         map.uiSettings.isMyLocationButtonEnabled = true
 
+        //10秒ごとに追跡
         map.setOnCameraMoveStartedListener { reason ->
             if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
                 Log.d(TAG, "onCameraMoveStarted after user's zoom action")
@@ -474,7 +506,7 @@ class HomeMap2 : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         // NOTE: delegate the permission handling to generated function
-       onRequestPermissionsResult(requestCode, grantResults)
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 
 
