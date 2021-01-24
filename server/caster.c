@@ -66,10 +66,11 @@ USEDLOG_TABLE ult_str2tab_select(char *ult_cast) {
 
 int ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
     int i;
+    char str_arr[5][40];
 
     for (i = 0; i < n; i++) {
         sprintf(
-            ult_buf,
+            str_arr[i],
             "[%20s\n%2.2lf\n%8s\n%4d\n]\n",
             ult[i].jog_datetime,
             ult[i].jog_distance,
@@ -77,6 +78,7 @@ int ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
             ult[i].burned_calorie
         );
     }
+    sprintf(ult_buf, "%s%s%s%s%s", str_arr[0], str_arr[1], str_arr[2], str_arr[3], str_arr[4]);
 
     printf("str : %s\n", ult_buf);
 
