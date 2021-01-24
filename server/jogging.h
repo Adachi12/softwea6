@@ -67,7 +67,7 @@ USER_TABLE user_select(int id);
 
 // USEDLOG_TABLE access
 int usedlog_insert(USEDLOG_TABLE ult);
-USEDLOG_TABLE *usedlog_select(int id);
+USEDLOG_TABLE *usedlog_select(int id, int *n);
 int usedlog_delete(int id);
 void month_ago(char *buf);
 void print_ult(USEDLOG_TABLE *ult, int n);
