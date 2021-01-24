@@ -77,7 +77,7 @@ int ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
             ult[i].jog_time,
             ult[i].burned_calorie
         );
-        printf("%d\n", n);
+        printf("%d\n", i);
     }
     sprintf(ult_buf, "%s%s%s%s%s", str_arr[0], str_arr[1], str_arr[2], str_arr[3], str_arr[4]);
 
