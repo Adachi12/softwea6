@@ -103,6 +103,7 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
         sprintf(res_data[i].jog_time, "%9s", row[3]);
         res_data[i].burned_calorie = atoi(row[4]);
         i++;
+        if(i < 5) break;
     }
     mysql_free_result(resp);
 

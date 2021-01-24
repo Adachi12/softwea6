@@ -99,7 +99,7 @@ void conn_process() {
         }
 
         // 返信データ送信
-        if ( op != 0xb0 || op != 0xb1 || op != 0xc0 ) {
+        if ( op != 0xb0 || op != 0xb1 ) {
             errno = 0;
             printf("send... [%s]\n", sendBuffer);
             while((sendMsgSize = send(clitSock, sendBuffer, BUFSIZE, 0)) > 0){
@@ -111,7 +111,7 @@ void conn_process() {
             }
         }
         // ファイル送信モード
-        if ( op == 0xb0 || op == 0xc0 ) {
+        if ( op == 0xb0 ) {
             while(fread(sendBuffer, BUFSIZE, 1, fp) > 0 ) {
                 if((sendMsgSize = send(clitSock, sendBuffer, BUFSIZE, 0)) < 0){
                     perror("send() failed.");
