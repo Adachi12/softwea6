@@ -78,8 +78,7 @@ USEDLOG_TABLE *usedlog_select(int id, int *n) {
     }
     mysql_free_result(resp);
     
-    res_data = (USEDLOG_TABLE *)malloc(sizeof(USEDLOG_TABLE) * (*n));
-
+    res_data = (USEDLOG_TABLE *)malloc(sizeof(USEDLOG_TABLE) * (5));
 
     // アクセスSQL文
     sprintf(sql_str, "SELECT * FROM USEDLOG_TABLE where id='%08d'", id);
