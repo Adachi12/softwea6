@@ -20,6 +20,20 @@ import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 
 class ChangeUserInfo : AppCompatActivity() {
+    private fun runUserSelect(db: JogDB): User {
+        // サーバ接続
+        try {
+            val recvData = db.userSelect("0") // ユーザデータがrecvDataに
+//            bufferedReader.close()
+            return recvData
+        } catch (e: IOException) {
+            println("IOExceptionだよう。")
+            exitProcess(1)
+        } catch (e: Exception) {
+            println("Exceptionだよ。")
+            exitProcess(0)
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_user)  // レイアウトファイルの読み込み
@@ -96,12 +110,17 @@ class ChangeUserInfo : AppCompatActivity() {
                      val radioButton1 = findViewById<RadioButton>(R.id.radiobutton_UserChange_woman_OCE)
                      val radioButton2 = findViewById<RadioButton>(R.id.radiobutton_UserChange_man_OCE)
                      //
-                     if (radioButton2.isChecked == true) { sex = "2" }
+                     if (radioButton1.isChecked == true) { sex = "2" }
                      val flag: Boolean = isCheckInput(num1, num2, num3, num4, num5, num6)
                          if (flag == true && (radioButton1.isChecked == true || radioButton2.isChecked == true)) {
                              //DataBaseへ送信してから(年齢について...生年月日は必要なく年齢だけでいいのか→年、月、日を送るそう)
 
                              val db = JogDB()
+                             val aa = runUserSelect(db) // どうにか持ってこよう
+                             val Pass = aa.pass
+                             val Age = aa.age
+                             val Birth = aa.birth
+                             val MailAdd = aa.mailAddress
                              // ここに、結果を反映させる処理を書く
                              // 送信データ用意
                              val file = File("strage")
@@ -115,16 +134,16 @@ class ChangeUserInfo : AppCompatActivity() {
                              val ID = id1
                              val sendData = User().create()
                                      .setUserId(ID)
-                                     .setPass("new password")
+                                     .setPass(Pass)         // パスワード
                                      .setName(str0)         // 0 名前
                                      .setWeight(str1)       // 1 体重
                                      .setHeight(str2)       // 2 身長
-                                     .setAge("20")          // 年齢
+                                     .setAge(Age)           // 年齢
                                      .setSex(sex)           // 性別
-                                     .setBirth("2000-02-10")
+                                     .setBirth(Birth)       // 誕生日
                                      .setGoalTerm(str4 +"-"+ str5 +"-"+ str6) // 年-月-日
                                      .setGoalWeight(str3)  // 3 目標体重
-                                     .setMailAddress("220310b@ugs.kothi-tech.ac.jp")
+                                     .setMailAddress(MailAdd) // メアド
 
                              // サーバ接続
                              try {
@@ -138,6 +157,9 @@ class ChangeUserInfo : AppCompatActivity() {
                                                  // OKが押されたら
                                                  // ユーザ情報確認へ飛ぶ(CheckUserInfo)
                                                  val intent = Intent(this, CheckUserInfo::class.java)
+                                                 val id1: String = intent.extras?.getString("ID", "a") ?:""
+                                                 intent.putExtra("ID", id1)
+                                                 //
                                                  startActivity(intent)
                                              })
                                              .show()
@@ -197,7 +219,7 @@ class ChangeUserInfo : AppCompatActivity() {
                              goalTerm_year: Int, goalTerm_month: Int, goalTerm_day: Int): Boolean {
         try {
             if (
-                    0 < weight && weight < 1000                                                  // 体重
+                    0 < weight && weight < 1000                                                     // 体重
                     && 50 < height && height < 300                                                  // 身長
                     && 0 < goalWeight && goalWeight < 1000                                          // 目標体重
                     && 0 <= goalTerm_year && goalTerm_year <= 10000                                 // 目標期間の年

@@ -122,7 +122,8 @@ class CheckUserInfo : AppCompatActivity() {
             R.id.button_CheckUserInfo_OCE -> {
                 val intent = Intent(this, ChangeUserInfo::class.java)
                 // ここに、結果を反映させる処理を書く。
-                intent.putExtra("ID", "aaa")
+                val id1: String = intent.extras?.getString("ID", "a") ?:""
+                intent.putExtra("ID", id1)
                 //
                 startActivity(intent)
             }
