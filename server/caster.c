@@ -68,7 +68,6 @@ int ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
     int i;
     char str_arr[5][40];
 
-    printf("%d\n", n);
     for (i = 0; i < n; i++) {
         sprintf(
             str_arr[i],
@@ -78,6 +77,7 @@ int ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
             ult[i].jog_time,
             ult[i].burned_calorie
         );
+        printf("%d\n", n);
     }
     sprintf(ult_buf, "%s%s%s%s%s", str_arr[0], str_arr[1], str_arr[2], str_arr[3], str_arr[4]);
 
