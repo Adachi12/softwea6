@@ -32,7 +32,7 @@ int usedlog_insert(USEDLOG_TABLE ult){
     return 0;
 }
 
-USEDLOG_TABLE *usedlog_select(int id) {
+USEDLOG_TABLE *usedlog_select(int id, int *n) {
     MYSQL *conn     = NULL;
     MYSQL_RES *resp = NULL;
     MYSQL_ROW row;
@@ -73,11 +73,10 @@ USEDLOG_TABLE *usedlog_select(int id) {
     }
     // レスポンス
     resp = mysql_use_result(conn);
-    int n = 0;
     while((row = mysql_fetch_row(resp)) != NULL ){
-        n = atoi(row[0]);
+        *n = atoi(row[0]);
+        if (*n > 5) *n = 5;
     }
-    if (n > 5) n = 5;
     mysql_free_result(resp);
     
     res_data = (USEDLOG_TABLE *)malloc(sizeof(USEDLOG_TABLE) * (5));
