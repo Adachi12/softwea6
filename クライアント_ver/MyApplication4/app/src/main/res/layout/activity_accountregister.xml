@@ -280,6 +280,19 @@
         app:layout_constraintStart_toStartOf="@+id/textView8_accountregister"
         app:layout_constraintTop_toTopOf="@+id/textView8_accountregister" />
 
+    <EditText
+        android:id="@+id/editTextNumber_weight_accountregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:ems="10"
+        android:hint="例：76.3"
+        android:inputType="numberDecimal"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/textView8_accountregister"
+        app:layout_constraintEnd_toEndOf="@+id/textView7_accountregister"
+        app:layout_constraintTop_toBottomOf="@+id/textView10_AccountRegister" />
+
     <TextView
         android:id="@+id/textView17_accountregister"
         android:layout_width="65dp"

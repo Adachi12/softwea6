@@ -1,14 +1,18 @@
 package com.example.myapplication
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-
-//import com.example.saito
+import java.util.*
+import java.io.IOException
+import java.lang.Math.log
+import java.util.logging.Level
+import kotlin.math.log
+import kotlin.system.exitProcess
 
 class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,16 +34,31 @@ class Login : AppCompatActivity() {
         when (view.id) {
             R.id.button_Login -> {
                 //データベースからIDに対するパスワードを入手して
+                val recvData: JogDB
+                val db = JogDB()
+                try {
+                    // Select実行
+                    recvData = db.userSelect(str1)
+                } catch (e: IOException) {
+                    exitProcess(1)
+                } catch (e: Exception) {
+                    exitProcess(0)
+                }
+                db.close()
 
                 //正しいかチェックして
-                val flag2: Boolean = true    //仮で常に正常に入力されたとする
-
+                val flag2: Boolean
+                if(recvData.id == str1) {
+                     flag2 = true    //仮で常に正常に入力されたとする
+                } else {
+                    flag2 = false
+                }
                 //正しければジョギング開始モジュールへ
                 if(flag2 == true){
-                    //next Activity(現在は仮でLoginに飛ばす)
-                    val intent = Intent(this, HomeMap2::class.java)
+                    //next Activity
+                    val intent = Intent(this, HomeMap::class.java)
                     // 渡したいデータとキーを指定する
-                    //intent.putExtra("ID", str1)
+                    intent.putExtra("ID", str1)
                     startActivity(intent)
 
                 } else if(flag2 == false){
@@ -66,7 +85,7 @@ class Login : AppCompatActivity() {
                 }
             R.id.button_passwasure_login -> {
                 //next Activity
-                val intent = Intent(this, HomeMap2::class.java)
+                val intent = Intent(this, PassChangeActivity::class.java)
                 startActivity(intent)
             }
             }
