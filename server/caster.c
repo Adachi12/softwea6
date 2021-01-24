@@ -68,6 +68,7 @@ int ult_tab2str_select(char *ult_buf, USEDLOG_TABLE *ult, int n) {
     int i;
     char str_arr[5][40];
 
+    printf("%d\n", n);
     for (i = 0; i < n; i++) {
         sprintf(
             str_arr[i],
