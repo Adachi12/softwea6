@@ -141,7 +141,7 @@ USER_TABLE ut_str2tab_update(char *ut_cast) {
     printf("ut_cast = %s\n", ut_cast);
     sscanf(
         ut_cast,
-        "%c\n%8d\n%[^\n]\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%30s\n",
+        "%c\n%8d\n%s\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%30s\n",
         &header, &ut.id, &ut.pass[0], &ut.name[0],
         &ut.weight, &ut.height, &ut.age, &ut.sex, &ut.birth[0],
         &ut.goal_weight, &ut.goal_term[0], &ut.mail_address[0]
