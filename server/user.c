@@ -117,7 +117,7 @@ int user_update(USER_TABLE ut){
         where id = '%08d'", \
         ut.weight, ut.height, ut.age, ut.goal_weight, 
         ut.goal_term, ut.mail_address, ut.id);
-    printf("sql_str = %s\n", sql_str),
+    printf("sql_str = %s\n", sql_str);
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
         mysql_close(conn);
