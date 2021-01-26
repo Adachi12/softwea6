@@ -1,4 +1,4 @@
-package com.example.omanco
+package com.example.myapplication
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -164,7 +164,7 @@ class ChangeUserInfo : AppCompatActivity() {
                                                  .setPositiveButton("OK", { dialog, which ->
                                                      // OKが押されたら
                                                      // ユーザ情報確認へ飛ぶ(CheckUserInfo)
-                                                     val intent = Intent(this, MainActivity::class.java)
+                                                     val intent = Intent(this, HomeMap2::class.java)
                                                      //
                                                      val intent1: Intent = getIntent()
                                                      val id1: String = intent1.extras?.getString("ID", "a")

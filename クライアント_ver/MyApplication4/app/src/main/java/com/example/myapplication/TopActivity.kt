@@ -21,8 +21,8 @@ class TopActivity : AppCompatActivity() {
         when (view.id) {
             R.id.button1 ->{ val intent = Intent(this, AccountRegister::class.java)
                 startActivity(intent)}
-            R.id.button2 -> {val intent = Intent(this, Login::class.java)
-                startActivity(intent)}
+            //R.id.button2 -> {val intent = Intent(this, Login::class.java)
+                //startActivity(intent)}
         }
     }
 }

@@ -91,7 +91,7 @@ class AccountRegister : AppCompatActivity() {
 
                     val db = JogDB()
                     // 送信データ用意
-                    val sendData = User1().create()
+                    val sendData = User().create()
                         .setPass(str5)
                         .setName("aaa")
                         .setWeight(str1)
@@ -115,7 +115,7 @@ class AccountRegister : AppCompatActivity() {
                         .setPositiveButton("OK", { dialog, which ->
                             // OKが押されたら
                             //ログインしてジョギング開始モジュールに進む
-                            val intent = Intent(this, HomeMap::class.java)
+                            val intent = Intent(this, HomeMap2::class.java)
                             // 渡したいデータとキーを指定する
                     //        intent.putExtra("ID", dataInsert);
                             startActivity(intent)

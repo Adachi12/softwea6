@@ -1,5 +1,5 @@
 // 必要に応じてサーバ上のDBからユーザ情報をリクエストし、表示する
-package com.example.omanco
+package com.example.myapplication
 
 // AppCompactActivityは、support library action barの機能を使ったactivityベースのクラス？
 import android.content.Intent
