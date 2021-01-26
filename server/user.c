@@ -1,4 +1,6 @@
 #include "jogging.h"
+#include <sys/wait.h>
+#include <errno.h>
 
 USER_TABLE user_select(int id) {
     MYSQL *conn     = NULL;
@@ -92,6 +94,7 @@ int user_update(USER_TABLE ut){
     char *user      = "root";
     char *passwd    = "mariadb";
     char *db_name   = "jogging";
+    int errno;
     
     memset( &sql_str[0] , 0x00 , sizeof(sql_str) );
 
@@ -99,7 +102,7 @@ int user_update(USER_TABLE ut){
     conn = mysql_init(NULL);
     if( !mysql_real_connect(conn,sql_serv,user,passwd,db_name,0,NULL,0) ){
         // error
-        return 1;
+        return errno;
     }
 
     // クエリ実行
@@ -114,15 +117,16 @@ int user_update(USER_TABLE ut){
         where id = '%08d'", \
         ut.weight, ut.height, ut.age, ut.goal_weight, 
         ut.goal_term, ut.mail_address, ut.id);
+    printf("sql_str = %s\n", sql_str),
     if( mysql_query( conn , &sql_str[0] ) ){
         // error
         mysql_close(conn);
-        return 1;
+        return errno;
     }
     
     // 後片づけ
     mysql_close(conn);
-    return 0;
+    return errno;
 }
 
 //追加
