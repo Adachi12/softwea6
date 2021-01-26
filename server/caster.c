@@ -138,6 +138,7 @@ USER_TABLE ut_str2tab_update(char *ut_cast) {
         {0, 0, "password", "name", 56.2, 181.1, 21, 1,
         "1999-12-31", 60.3, "2022-12-31", "mail-address@exaple.ex"};
 
+    printf("ut_cast = %s\n", ut_cast);
     sscanf(
         ut_cast,
         "%c\n%8d\n%[^\n]\n%s\n%lf\n%lf\n%d\n%d\n%s\n%lf\n%s\n%30s\n",
