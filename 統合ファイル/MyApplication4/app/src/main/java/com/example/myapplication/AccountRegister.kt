@@ -1,8 +1,6 @@
 package com.example.myapplication
 //package saito
 
-import JogDB
-import User
 import android.content.Intent
 import android.os.Bundle
 import android.view.View

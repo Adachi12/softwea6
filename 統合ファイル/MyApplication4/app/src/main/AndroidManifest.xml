@@ -24,8 +24,8 @@
         <activity android:name=".PassChangeActivity" />
         <activity android:name=".AccountRegister" />
         <activity android:name=".Login" />
-        <!-- <activity android:name=".ChangeUserInfo" />
-        <activity android:name=".CheckUserInfo" />-->
+        <activity android:name=".ChangeUserInfo" />
+        <activity android:name=".CheckUserInfo" />
         <activity
             android:name=".DirectionsParser"
             tools:ignore="Instantiatable" />

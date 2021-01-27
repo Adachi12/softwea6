@@ -216,7 +216,7 @@ class HomeMap2 : AppCompatActivity() {
 
             when (item.itemId) {
                 R.id.item1 -> {
-                    val intent = Intent(this.application, ResultActivity::class.java)
+                    val intent = Intent(this.application, CheckUserInfo::class.java)
                     //ID受け渡し
                     intent.putExtra("ID", id1)
                     startActivity(intent)

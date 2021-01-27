@@ -1,26 +1,14 @@
 package com.example.myapplication
 
-import JogDB
-import User
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import java.util.*
-import java.io.IOException
-import java.lang.Math.log
-import java.util.logging.Level
-import kotlin.math.log
-import kotlin.system.exitProcess
+import androidx.appcompat.app.AppCompatActivity
 import java.util.logging.Logger
 import kotlin.concurrent.thread
-import kotlin.system.exitProcess
-import java.net.Socket
-import java.nio.ByteBuffer
-import java.nio.charset.StandardCharsets
 
 class Login : AppCompatActivity() {
     private val logger = Logger.getLogger(JogDB::class.java.name)
@@ -55,7 +43,7 @@ class Login : AppCompatActivity() {
                         logger.info("inputPass = $str2")
                         if (recvData.pass == str2) {
                             logger.info("ログイン成功しました")
-                            val intent = Intent(this, TopActivity::class.java)
+                            val intent = Intent(this, HomeMap2::class.java)
                             intent.putExtra("ID", str1)
                             startActivity(intent)
                             //エラーを表示する(入力項目に不備有)
