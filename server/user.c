@@ -108,7 +108,6 @@ int user_update(USER_TABLE ut){
     // クエリ実行
     snprintf( &sql_str[0] , sizeof(sql_str)-1 ,
         "UPDATE USER_TABLE SET \
-        name = %s, \
         weight = %3.1f, \
         height = %3.1f, \
         age = %d, \
@@ -116,7 +115,7 @@ int user_update(USER_TABLE ut){
         goal_term = '%s', \
         mail_address = '%s'\
         where id = '%08d'", \
-        ut.name, ut.weight, ut.height, ut.age, ut.goal_weight, 
+        ut.weight, ut.height, ut.age, ut.goal_weight, 
         ut.goal_term, ut.mail_address, ut.id);
     printf("sql_str = %s\n", sql_str);
     if( mysql_query( conn , &sql_str[0] ) ){
