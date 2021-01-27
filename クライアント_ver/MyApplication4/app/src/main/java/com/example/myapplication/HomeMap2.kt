@@ -7,13 +7,11 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
 import android.os.*
-import android.os.SystemClock
 import android.text.util.Linkify
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -28,7 +26,6 @@ import kotlinx.android.synthetic.main.activity_homemap2.*
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 import java.util.*
-import kotlin.concurrent.thread
 
 
 @RuntimePermissions
@@ -219,14 +216,14 @@ class HomeMap2 : AppCompatActivity() {
 
             when (item.itemId) {
                 R.id.item1 -> {
-                    val intent = Intent(this.application, CheckUserInfo::class.java)
+                    val intent = Intent(this.application, ResultActivity::class.java)
                     //ID受け渡し
                     intent.putExtra("ID", id1)
                     startActivity(intent)
                     return true
                 }
                 R.id.item2 -> {
-                    val intent = Intent(this.application, CheckRecord::class.java)
+                    val intent = Intent(this.application, ResultActivity::class.java)
                     //ID受け渡し
                     intent.putExtra("ID", id1)
                     startActivity(intent)

@@ -12,7 +12,6 @@
         android:layout_height="49dp"
         android:gravity="center_vertical"
         android:text="ログイン"
-        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,15 +40,16 @@
         android:id="@+id/editTextPassword_login"
         android:layout_width="359dp"
         android:layout_height="69dp"
-        android:layout_marginBottom="324dp"
+        android:layout_marginBottom="252dp"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?_+*}`{=~|!#$%',./\;:]()@[-^\"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?_+*}`{=~|!#$%',./\;:]()@[-^\"/>
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2_login"

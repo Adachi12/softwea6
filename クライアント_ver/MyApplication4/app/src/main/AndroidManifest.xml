@@ -16,37 +16,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResultActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCmVMg0z9g6E271VA6qCN7XjZLfI_GUkLA" />
 
-        <!--<activity android:name=".PassChangeActivity" />-->
+        <activity android:name=".PassChangeActivity" />
         <activity android:name=".AccountRegister" />
-       <!-- <activity android:name=".Login" /> -->
-        <activity android:name=".AddActivityManually1" />
-        <activity android:name=".AddActivityManually2" />
-        <activity android:name=".AddActivityManually3" />
-        <activity android:name=".AddActivityManually4" />
-        <activity android:name=".AddActivityManually5" />
-        <activity android:name=".ChangeUserInfo" />
-        <activity android:name=".CheckRecord" />
-        <activity android:name=".CheckUserInfo" />
+        <activity android:name=".Login" />
+        <!-- <activity android:name=".ChangeUserInfo" />
+        <activity android:name=".CheckUserInfo" />-->
         <activity
             android:name=".DirectionsParser"
             tools:ignore="Instantiatable" />
+        <activity android:name=".ResultActivity"/>
         <activity android:name=".HomeMap2" >
+        </activity>
+        <activity android:name=".RootMapping" />
+        <!-- <activity android:name=".SavedRouteList" /> -->
+        <activity android:name=".TopActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".Inquiry" />
-        <activity android:name=".MainActivityy" />
-        <activity android:name=".RootMapping" /> <!-- <activity android:name=".SavedRouteList" /> -->
-        <activity android:name=".TopActivity">
         </activity>
 
         <service

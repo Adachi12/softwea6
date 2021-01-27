@@ -1,15 +1,16 @@
-package com.example.myapplication
-
-import java.io.*
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 import java.net.Socket
 import java.nio.ByteBuffer
 import java.nio.charset.StandardCharsets
 import java.util.*
-import java.util.logging.Level
 import java.util.logging.Logger
 import kotlin.system.exitProcess
 
+
 internal class JogDB() {
+    private val logger = Logger.getLogger(JogDB::class.java.name)
     private val socket = Socket("54.90.205.238", 60000, null, 0)
     private var sender: OutputStream? = null
     private var receiver: InputStream? = null
@@ -45,11 +46,13 @@ internal class JogDB() {
         try {
             receiver!!.read(recvBuffer, 0, 1024)
         } catch (e: IOException) {
+            logger.warning("Error! CALORIE_TABLE SELECT")
             return Calorie("?", "?")
         }
 
         // analyze message
         recvStr = String(recvBuffer, StandardCharsets.UTF_8)
+        logger.info("receive String = $recvStr")
         recvStr!!.split("\n").toTypedArray().also { recvData = it }
         return Calorie(recvData[0], recvData[1])
     }
@@ -82,6 +85,7 @@ internal class JogDB() {
         }
 
         // analyze message
+        logger.info("receive String = ${String(recvBuffer, StandardCharsets.UTF_8)!!}")
         val recvStrArr: List<String> =
                 String(recvBuffer, StandardCharsets.UTF_8)!!
                         .split("\n")
@@ -110,6 +114,7 @@ internal class JogDB() {
         try {
             receiver!!.read(recvBuffer, 0, 1024)
         } catch (e: IOException) {
+            logger.warning("Error : USER_TABLE INSERT")
             return ""
         }
 
@@ -117,6 +122,7 @@ internal class JogDB() {
         val recvStrArr: List<String> =
                 String(recvBuffer, StandardCharsets.UTF_8)!!
                         .split("\n")
+        logger.info("receive String = ${String(recvBuffer, StandardCharsets.UTF_8)!!}")
         return recvStrArr[0]
     }
 
@@ -149,6 +155,7 @@ internal class JogDB() {
         val recvStrArr: List<String> =
                 String(recvBuffer, StandardCharsets.UTF_8)!!
                         .split("\n")
+        logger.info("receive String = ${String(recvBuffer, StandardCharsets.UTF_8)!!}")
         return User().create()
                 .setUserId(recvStrArr[0])
                 .setPass(recvStrArr[1])
@@ -191,6 +198,7 @@ internal class JogDB() {
         val recvStrArr: List<String> =
                 String(recvBuffer, StandardCharsets.UTF_8)!!
                         .split("\n")
+        logger.info("receive String = ${String(recvBuffer, StandardCharsets.UTF_8)!!}")
         return recvStrArr[0]
     }
 
@@ -239,6 +247,7 @@ internal class JogDB() {
             )
         }
 
+        logger.info("receive String = ${String(recvBuffer, StandardCharsets.UTF_8)!!}")
         return recvDatasArr
     }
 
