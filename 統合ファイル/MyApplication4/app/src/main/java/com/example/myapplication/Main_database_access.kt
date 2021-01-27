@@ -76,6 +76,8 @@ internal class JogDB() {
         joiner.put(dataBytes)
         sendBuffer = joiner.array()
 
+        logger.info("updateData = $updateData")
+
         // send message
         sender!!.write(sendBuffer)
 

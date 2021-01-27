@@ -7,13 +7,18 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import java.io.IOException
+import kotlin.concurrent.thread
+import kotlin.system.exitProcess
 
 class PassChangeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pass_change)
-        val button1 = findViewById<Button>(R.id.button_passchange)
-        button1.setOnClickListener(buttonClick)
+        Thread(Runnable {
+            val button1 = findViewById<Button>(R.id.button_passchange)
+            button1.setOnClickListener(buttonClick)
+        }).start()
     }
 
     private val buttonClick = View.OnClickListener { view ->
@@ -26,85 +31,71 @@ class PassChangeActivity : AppCompatActivity() {
         var recvData: User = User().create()
         var flag2: Boolean
 
-        /*
-        Thread {
-            val db = JogDB()    //データベースアクセス用のインスタンス生成
-            try {
-                // Select実行
-                recvData = db.userSelect(str1)
-            } catch (e: IOException) {
-                exitProcess(1)
-            } catch (e: Exception) {
-                exitProcess(0)
-            }
-            db.close()
-        }
-         */
 
         when (view.id) {
             R.id.button_passchange -> {
-                //idとそれに対応するメアドをデータベースから入手して
-
-                //idとメアドが正しいか調べて
-                if("a09319" == str2){
-                    //正しければ適切なパスワードかチェックして
-                    flag2 = isCheckInput(str3)
-                } else {
-                    flag2 = false
-                    //不適切ならエラー表示
-                    AlertDialog.Builder(this)
-                            .setTitle("Error")
-                            .setMessage("入力されたidが存在しません。\nまたは、メールアドレスが不適切です。")
-                            .setPositiveButton("OK", { dialog, which ->
-                                // OKが押された時の挙動
-                            })
-                            .show()
-                }
-
-                //適切ならデータベースにUPDATEして
-                if (flag2 == true) {
-                    //パスワード更新
-                    /*
-                    Thread {
+                //idとそれに対応するメアドをデータベースから入手して]
+                try {
+                    thread {
                         val db = JogDB()    //データベースアクセス用のインスタンス生成
-                        // 送信データ用意
-                        val sendData = User().create()
-                                .setUserId(str1)
-                                .setPass(str3)
-                                .setName(recvData.name)
-                                .setWeight(recvData.weight)
-                                .setHeight(recvData.height)
-                                .setAge(recvData.age)
-                                .setSex(recvData.sex)
-                                .setBirth(recvData.birth)
-                                .setGoalTerm(recvData.goalTerm)
-                                .setGoalWeight(recvData.goalWeight)
-                                .setMailAddress(recvData.mailAddress)
-                        // サーバ接続
-                        try {
-                            // UPDATE実行
-                            val result = db.userUpdate(sendData)
-                        } catch (e: IOException) {
-                            exitProcess(1)
-                        }
+                        recvData = db.userSelect(str1)
                         db.close()
+
+                        //idとメアドが正しいか調べて
+                        if (recvData.mailAddress == str2) {
+                            //正しければ適切なパスワードかチェックして
+                            flag2 = isCheckInput(str3)
+                        } else {
+                            flag2 = false
+                            //不適切ならエラー表示
+                            AlertDialog.Builder(this)
+                                .setTitle("Error")
+                                .setMessage("入力されたidが存在しません。\nまたは、メールアドレスが不適切です。")
+                                .setPositiveButton("OK", { dialog, which ->
+                                    // OKが押された時の挙動
+                                })
+                                .show()
+                        }
+
+                        //適切ならデータベースにUPDATEして
+                        if (flag2 == true) {
+                            //パスワード更新
+                            thread {
+                                val db = JogDB()    //データベースアクセス用のインスタンス生成
+                                // 送信データ用意
+                                val sendData = User().create()
+                                    .setUserId(str1)
+                                    .setPass(str3)
+                                    .setName(recvData.name)
+                                    .setWeight(recvData.weight)
+                                    .setHeight(recvData.height)
+                                    .setAge(recvData.age)
+                                    .setSex(recvData.sex)
+                                    .setBirth(recvData.birth)
+                                    .setGoalTerm(recvData.goalTerm)
+                                    .setGoalWeight(recvData.goalWeight)
+                                    .setMailAddress(recvData.mailAddress)
+                                db.userUpdate(sendData)
+                                db.close()
+                            }
+                            //ログイン画面へ
+                            val intent = Intent(this, Login::class.java)
+                            startActivity(intent)
+                        } else if (flag2 == false && recvData.mailAddress == str2) {
+                            //不適切ならエラー表示
+                            AlertDialog.Builder(this)
+                                .setTitle("Error")
+                                .setMessage("新しいパスワードが不適切です。")
+                                .setPositiveButton("OK", { dialog, which ->
+                                    // OKが押された時の挙動
+                                })
+                                .show()
+                        }
                     }
-                     */
-                    //ログイン画面へ
-                    val intent = Intent(this, Login::class.java)
-                    startActivity(intent)
-                } else if(flag2 == false && recvData.mailAddress == str2) {
-                    //不適切ならエラー表示
-                    AlertDialog.Builder(this)
-                            .setTitle("Error")
-                            .setMessage("新しいパスワードが不適切です。")
-                            .setPositiveButton("OK", { dialog, which ->
-                                // OKが押された時の挙動
-                            })
-                            .show()
+                } catch (e: Exception) {
+                    exitProcess(1)
                 }
             }
-
         }
     }
 
