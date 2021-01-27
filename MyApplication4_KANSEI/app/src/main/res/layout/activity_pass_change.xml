@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PassChangeActivity">
+
+
+    <Button
+        android:id="@+id/button_passchange"
+        android:layout_width="159dp"
+        android:layout_height="68dp"
+        android:text="パスワード変更"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12_passchange"
+        app:layout_constraintVertical_bias="0.257" />
+
+    <TextView
+        android:id="@+id/textView17_passchange"
+        android:layout_width="371dp"
+        android:layout_height="78dp"
+        android:background="@drawable/frame_style"
+        android:text="　メールアドレス"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16_passchange" />
+
+    <TextView
+        android:id="@+id/textView12_passchange"
+        android:layout_width="371dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="76dp"
+        android:background="@drawable/frame_style"
+        android:text="　新しいパスワード"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16_passchange" />
+
+    <TextView
+        android:id="@+id/textView16_passchange"
+        android:layout_width="371dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/frame_style"
+        android:text="　ID"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15_passchange" />
+
+    <TextView
+        android:id="@+id/textView15_passchange"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/frame_style"
+        android:text="パスワード変更"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextID_passchange"
+        android:layout_width="236dp"
+        android:layout_height="47dp"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?_+*}`{=~|!#$%',./\;:]()@[-^\"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/textView16_passchange"
+        app:layout_constraintEnd_toEndOf="@+id/textView16_passchange"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/textView16_passchange"
+        app:layout_constraintTop_toTopOf="@+id/textView16_passchange"
+        app:layout_constraintVertical_bias="0.741" />
+
+    <EditText
+        android:id="@+id/editTextNewMail_passchange"
+        android:layout_width="241dp"
+        android:layout_height="40dp"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?_+*}`{=~|!#$%',./\;:]()@[-^\"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/textView17_passchange"
+        app:layout_constraintEnd_toEndOf="@+id/textView17_passchange"
+        app:layout_constraintStart_toStartOf="@+id/textView17_passchange"
+        app:layout_constraintTop_toTopOf="@+id/textView17_passchange"
+        app:layout_constraintVertical_bias="0.815" />
+
+    <EditText
+        android:id="@+id/editTextNewPass_passchange"
+        android:layout_width="241dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="60dp"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?_+*}`{=~|!#$%',./\;:]()@[-^\"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/textView12_passchange"
+        app:layout_constraintEnd_toEndOf="@+id/textView12_passchange"
+        app:layout_constraintTop_toBottomOf="@+id/textView17_passchange"
+        app:layout_constraintVertical_bias="0.722" />
+</androidx.constraintlayout.widget.ConstraintLayout>
