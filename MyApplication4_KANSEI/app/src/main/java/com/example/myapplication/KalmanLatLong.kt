@@ -17,14 +17,6 @@ class KalmanLatLong(Q_metres_per_second: Float) {
         this.Q_metres_per_second = Q_metres_per_second
     }
 
-    /*
-    fun KalmanLatLong(Q_metres_per_second: Float): ??? {
-        //this.Q_metres_per_second = Q_metres_per_second
-        variance = -1f
-        consecutiveRejectCount = 0
-    }
-    */
-
     fun get_TimeStamp(): Long {
         return TimeStamp_milliseconds
     }
@@ -51,16 +43,6 @@ class KalmanLatLong(Q_metres_per_second: Float) {
         this.TimeStamp_milliseconds = TimeStamp_milliseconds
     }
 
-    // / <summary>
-    // / Kalman filter processing for lattitude and longitude
-    // / </summary>
-    // / <param name="lat_measurement_degrees">new measurement of
-    // lattidude</param>
-    // / <param name="lng_measurement">new measurement of longitude</param>
-    // / <param name="accuracy">measurement of 1 standard deviation error in
-    // metres</param>
-    // / <param name="TimeStamp_milliseconds">time of measurement</param>
-    // / <returns>new state</returns>
     fun Process(
         lat_measurement: Double, lng_measurement: Double,
         accuracy: Float, TimeStamp_milliseconds: Long, Q_metres_per_second: Float
